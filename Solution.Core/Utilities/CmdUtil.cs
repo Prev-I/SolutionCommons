@@ -82,7 +82,7 @@ namespace Solution.Core.Utilities
                 string commandFullPath = FileUtil.GetFullPath(command);
 
                 // Log command and params as debug
-                log.Debug(commandFullPath + " " + parameter );
+                log.Debug(commandFullPath + " " + parameter);
 
                 // create the ProcessStartInfo using "cmd" as the program to be run,
                 // and "/c " as the parameters.
