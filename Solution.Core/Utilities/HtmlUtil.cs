@@ -15,7 +15,7 @@ using log4net;
 /// 
 namespace Solution.Core.Utilities
 {
-    public static class HttpUtil
+    public static class HtmlUtil
     {
         private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 

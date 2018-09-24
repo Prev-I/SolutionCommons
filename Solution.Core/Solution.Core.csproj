@@ -53,7 +53,7 @@
     <Compile Include="Utilities\CsvUtil.cs" />
     <Compile Include="Utilities\FileUtil.cs" />
     <Compile Include="Utilities\GzipUtil.cs" />
-    <Compile Include="Utilities\HttpUtil.cs" />
+    <Compile Include="Utilities\HtmlUtil.cs" />
     <Compile Include="Utilities\StringUtil.cs" />
     <Compile Include="Utilities\XsltUtil.cs" />
   </ItemGroup>
