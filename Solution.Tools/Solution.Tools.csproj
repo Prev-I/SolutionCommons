@@ -71,6 +71,7 @@
     <Compile Include="Utilities\JsonUtil.cs" />
     <Compile Include="Utilities\NpgsqlUtil.cs" />
     <Compile Include="Utilities\OpenXmlUtil.cs" />
+    <Compile Include="Utilities\PostgreSQLUtil.cs" />
     <Compile Include="Utilities\SqlUtil.cs" />
     <Compile Include="Utilities\ZipUtil.cs" />
   </ItemGroup>

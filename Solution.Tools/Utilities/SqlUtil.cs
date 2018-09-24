@@ -14,7 +14,7 @@ using log4net;
 
 namespace Solution.Tools.Utilities
 {
-    public class SqlUtil
+    public static class SqlUtil
     {
         private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 

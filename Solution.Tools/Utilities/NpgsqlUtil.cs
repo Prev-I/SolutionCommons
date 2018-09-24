@@ -9,18 +9,68 @@ using System.IO;
 using System.Globalization;
 
 using log4net;
-
 using Npgsql;
+using NpgsqlTypes;
 
 
 namespace Solution.Tools.Utilities
 {
-    public class NpgsqlUtil
+    public static class NpgsqlUtil
     {
         private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private const int MaxRetry = 3;
         private const int SleepRetry = 20000; //20 sec
+
+
+
+        #region Data retrival
+
+        public static DataTable GetTableContent(NpgsqlConnection connection, string tableName, int page = 0, int limit = 1000)
+        {
+            //TODO: find a way to really prevent SQL injection
+            tableName = tableName.Replace("'", "").Replace(";", "");
+
+            string sqlCommand = "SELECT * FROM \"" + tableName + "\" ORDER BY 1 LIMIT @limit OFFSET @offset;";
+            NpgsqlParameter[] parameters =
+            {
+                new NpgsqlParameter() { ParameterName = "@limit", NpgsqlDbType = NpgsqlDbType.Integer, NpgsqlValue = limit },
+                new NpgsqlParameter() { ParameterName = "@offset", NpgsqlDbType = NpgsqlDbType.Integer, NpgsqlValue = page * limit }
+            };
+            return ExecuteAdapter(connection, sqlCommand, parameters, null);
+        }
+
+        public static DataTable GetTableColumns(NpgsqlConnection connection, string tableName)
+        {
+            string sqlCommand = "SELECT column_name, data_type FROM information_schema.columns WHERE table_name = @tableName;";
+            NpgsqlParameter[] parameters =
+            {
+                new NpgsqlParameter() { ParameterName = "@tableName", NpgsqlDbType = NpgsqlDbType.Varchar, NpgsqlValue = tableName }
+            };
+            return ExecuteAdapter(connection, sqlCommand, parameters, null);
+        }
+
+        public static DataTable GetTableNamesLike(NpgsqlConnection connection, string tableName)
+        {
+            string sqlCommand = "SELECT table_name FROM information_schema.tables WHERE table_name LIKE @tableName;";
+            NpgsqlParameter[] parameters =
+            {
+                new NpgsqlParameter() { ParameterName = "@tableName", NpgsqlDbType = NpgsqlDbType.Varchar, NpgsqlValue = tableName }
+            };
+            return ExecuteAdapter(connection, sqlCommand, parameters, null);
+        }
+
+        public static DataTable GetDistinctValuesFromColumn(NpgsqlConnection connection, string tableName, string columnName)
+        {
+            //TODO: find a way to really prevent SQL injection
+            columnName = columnName.Replace("'", "").Replace(";", "");
+            tableName = tableName.Replace("'", "").Replace(";", "");
+
+            string sqlCommand = "SELECT DISTINCT \"" + columnName + "\" FROM \"" + tableName + "\";";
+            return ExecuteAdapter(connection, sqlCommand, null, null);
+        }
+
+        #endregion
 
 
         #region single connection per query

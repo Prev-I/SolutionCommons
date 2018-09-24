@@ -62,6 +62,9 @@
       <Name>Solution.Tools</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="MigrateToEntityFramework6.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if $(ConfigurationName) == Release (

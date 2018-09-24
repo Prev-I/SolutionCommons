@@ -1,0 +1,99 @@
+﻿Package install
+	If already installed via nuget, we need to remove and install it again
+	The installer remove reference to System.Data.Entity
+		Uninstall-Package EntityFramework 
+		Install-Package EntityFramework 
+
+Add connection string  in server explorer
+	To use the model wizard the connection string need to be present in server explorer
+	In the app.config will be adde something like this:
+	  <connectionStrings>
+		<add name="TranslationsManagerEntities" connectionString="metadata=res://*/TranslationsManager.csdl|res://*/TranslationsManager.ssdl|res://*/TranslationsManager.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=EPISERVER;initial catalog=TranslationsManager;persist security info=True;user id=givitiweb;password=Z7UNTX997A6XNlEt;multipleactiveresultsets=True;application name=EntityFramework&quot;" providerName="System.Data.EntityClient" />
+	  </connectionStrings>
+
+Add EDMX (database first) to project
+	Remove any .edmx file already existing inside solution
+	Add new ADO.NET Entity Data Model, example:
+		name= TranslationsManager -> next
+		model type: Entity Framework database designer -> next
+		Add all entity from database and save
+	Recompile the project to generate proxy object
+
+Differences from 4.0 to 6.0
+	Debug to SQL no longer work
+		OLD: ((ObjectQuery)query).ToTraceString() -> "SQL STRING OF QUERY BEFORE IS EXECUTED"
+		NEW: context.Database.Log = Console.Write -> "SQL STRING TO CONSOLE AFTER IS EXECUTED"
+	AddObject, DeleteObject are renamed to Add, Remove
+		OLD: context.TABLE.AddObject(Element)
+		NEW: context.TABLE.Add(Element)
+	ExecuteStoreCommand renamed to ExecuteSqlCommand
+		OLD: context.ExecuteStoreCommand(SQL, PARAM)
+		NEW: context.Database.ExecuteSqlCommand(SQL, PARAM)
+	Remove System.Data.Entity and System.Data.Entity.Design Version 4.0.0.0
+		Inside web.config this assemblies are loaded, they need to be removed to prevent clash with new one
+		Morover a new section named entityFramework need to be copied from app.config to web.config with the same parameters
+	Update WCF WebServices
+		If inside a service endpoint is used an entity framework object we need to update it
+			right click -> Update service reference
+	ObjectParameter changed namespace
+		OLD: using System.Data.Objects;
+		NEW: using System.Data.Entity.Core.Objects;
+
+Proxy object and serialization
+	In entity 6.0 all object generated from DB are dynamic proxy object which are not serializzable (cannot be saved to viewstate or send via WCF)
+	To enable old behaviour we must:
+		Disable Proxy creation for context 
+			Inside BaseManager constructor
+				this.translationsManagerContext.Configuration.ProxyCreationEnabled = false;
+		Alter the model.tt to add [Serializable] and [DataContract] tag to objects 
+			Serializable is needed to save query results in viewstate, DataContract to send them via WCF
+			change TranslationsManagerModel.Context.tt, TranslationsManagerModel.tt
+			EntityClassOpening:
+			    public string EntityClassOpening(EntityType entity)
+				{
+					return string.Format(
+						CultureInfo.InvariantCulture,
+						"{0} " + Environment.NewLine + "{1} " + Environment.NewLine + " {2} {3}partial class {4}{5}", 
+						"[Serializable]", 
+						"[DataContract]",
+						Accessibility.ForType(entity),
+						_code.SpaceAfter(_code.AbstractOption(entity)),
+						_code.Escape(entity),
+						_code.StringBefore(" : ", _typeMapper.GetTypeName(entity.BaseType)));
+				}
+			UsingDirectives:
+			    public string UsingDirectives(bool inHeader, bool includeCollections = true)
+				{
+					return inHeader == string.IsNullOrEmpty(_code.VsNamespaceSuggestion())
+						? string.Format(
+							CultureInfo.InvariantCulture,
+							"{0}using System;{1}" +
+							"{2} {3}",
+							inHeader ? Environment.NewLine : "",
+							includeCollections ? (Environment.NewLine + "using System.Collections.Generic;") : "",
+							includeCollections ? (Environment.NewLine + "using System.Runtime.Serialization;") : "",
+							inHeader ? "" : Environment.NewLine)
+						: "";
+				}
+			Property:
+				public string Property(EdmProperty edmProperty)
+				{
+					return string.Format(
+						CultureInfo.InvariantCulture,
+						"{0} {1} {2} {3} {{ {4}get; {5}set; }}",
+						"[DataMember]",
+						Accessibility.ForProperty(edmProperty),
+						_typeMapper.GetTypeName(edmProperty.TypeUsage),
+						_code.Escape(edmProperty),
+						_code.SpaceAfter(Accessibility.ForGetter(edmProperty)),
+						_code.SpaceAfter(Accessibility.ForSetter(edmProperty)));
+				}
+			Set includeCollections: true on complex type generations
+				<#=codeStringGenerator.UsingDirectives(inHeader: false, includeCollections: true)#>
+				[Serializable]
+				[DataContract]
+				<#=Accessibility.ForType(complex)#> partial class <#=code.Escape(complex)#>
+
+	It's possible to not disable proxy generation on whole database (be aware that generated object will not be serializzable)
+	In this way only specified query results will not be proxyes, eg:
+		DbContext.Persons.AsNoTracking().FirstOrDefault();
