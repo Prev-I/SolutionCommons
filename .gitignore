@@ -1,0 +1,11 @@
+/.vs
+/packages
+/Solution.Cli/bin
+/Solution.Cli/obj
+/Solution.Core/bin
+/Solution.Core/obj
+/Solution.Deploy/bin
+/Solution.Deploy/obj
+/Solution.Tools/bin
+/Solution.Tools/obj
+**.user
