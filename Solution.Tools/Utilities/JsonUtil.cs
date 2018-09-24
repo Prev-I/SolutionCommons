@@ -15,7 +15,12 @@ namespace Solution.Tools.Utilities
     {
         private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-
+        /// <summary>
+        /// Serialize an object to JSON stream using Json.Net
+        /// </summary>
+        /// <param name="value">Any DotNet object</param>
+        /// <param name="jsonFormat">Specify if indent when formatting</param>
+        /// <returns>Stream pointing to a valid JSON</returns>
         public static Stream Serialize(object value, Formatting jsonFormat = Formatting.None)
         {
             try
@@ -41,6 +46,13 @@ namespace Solution.Tools.Utilities
             }
         }
 
+        /// <summary>
+        /// Deserialize a JSON stream to a type T object using Json.Net
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="jsonStream">Stream pointing to a valid JSON</param>
+        /// <param name="jsonFormat">Specify if provided JSON is indented</param>
+        /// <returns>DotNet object casted to type T</returns>
         public static T Deserialize<T>(Stream jsonStream, Formatting jsonFormat = Formatting.None)
         {
             try

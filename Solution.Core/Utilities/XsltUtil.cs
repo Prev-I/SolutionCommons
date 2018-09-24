@@ -18,11 +18,11 @@ namespace Solution.Core.Utilities
         private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         /// <summary>
-        /// Load an XML and a transformation from path and return a stream with transformed HTML
+        /// Load XML and transformation from specified path and return a stream with resulting HTML
         /// </summary>
         /// <param name="xslPath">Path where to find XSL transformation</param>
         /// <param name="xmlPath">Path where to find XML data file</param>
-        /// <returns></returns>
+        /// <returns>MemoryStream containing an HTML</returns>
         public static MemoryStream Transform(string xslPath, string xmlPath)
         {
             try
@@ -60,7 +60,7 @@ namespace Solution.Core.Utilities
         }
 
         /// <summary>
-        /// Load an XML and a transformation from path and write the resulting HTML to disk
+        /// Load XML and transformation from specified path and write the resulting HTML to disk
         /// </summary>
         /// <param name="xslPath">Path where to find XSL transformation</param>
         /// <param name="xmlPath">Path where to find XML data file</param>

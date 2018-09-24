@@ -15,7 +15,7 @@ namespace Solution.Core.Utilities
 
 
         /// <summary>
-        /// Executed a command inside an externla instance of CMD
+        /// Executed a command inside an external instance of CMD
         /// </summary>
         /// <param name="command">Command to be executed</param>
         /// <returns>Return the exit code of executed command</returns>
@@ -65,7 +65,7 @@ namespace Solution.Core.Utilities
         }
 
         /// <summary>
-        /// Executed a command registered to the sistem passing specified parameter
+        /// Executed a command registered to the system passing specified parameter
         /// </summary>
         /// <param name="command">Command to be executed</param>
         /// <param name="parameter">Parameter passed to the executed command</param>
