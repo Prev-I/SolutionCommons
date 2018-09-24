@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 using log4net;
 
@@ -33,19 +34,22 @@ namespace Solution.Core.Utilities
                 // and "/c " as the parameters.
                 // Incidentally, /c tells cmd that we want it to execute the command that follows,
                 // and then exit.
-                System.Diagnostics.ProcessStartInfo procStartInfo =
-                    new System.Diagnostics.ProcessStartInfo("cmd", "/c " + commandFullPath);
-
-                // The following commands are needed to redirect the standard output.
-                // This means that it will be redirected to the Process.StandardOutput StreamReader.
-                procStartInfo.RedirectStandardOutput = true;
-                procStartInfo.RedirectStandardError = true;
-                procStartInfo.UseShellExecute = false;
-                // Do not create the black window.
-                procStartInfo.CreateNoWindow = true;
+                ProcessStartInfo procStartInfo =
+                    new ProcessStartInfo("cmd", "/c " + commandFullPath)
+                    {
+                        // The following commands are needed to redirect the standard output.
+                        // This means that it will be redirected to the Process.StandardOutput StreamReader.
+                        RedirectStandardOutput = true,
+                        RedirectStandardError = true,
+                        UseShellExecute = false,
+                        // Do not create the black window.
+                        CreateNoWindow = true
+                    };
                 // Now we create a process, assign its ProcessStartInfo and start it
-                System.Diagnostics.Process proc = new System.Diagnostics.Process();
-                proc.StartInfo = procStartInfo;
+                Process proc = new Process
+                {
+                    StartInfo = procStartInfo
+                };
                 proc.Start();
 
                 // Get the output into a string
@@ -84,19 +88,23 @@ namespace Solution.Core.Utilities
                 // and "/c " as the parameters.
                 // Incidentally, /c tells cmd that we want it to execute the command that follows,
                 // and then exit.
-                System.Diagnostics.ProcessStartInfo procStartInfo =
-                    new System.Diagnostics.ProcessStartInfo(commandFullPath, parameter);
+                ProcessStartInfo procStartInfo =
+                    new ProcessStartInfo(commandFullPath, parameter)
+                    {
 
-                // The following commands are needed to redirect the standard output.
-                // This means that it will be redirected to the Process.StandardOutput StreamReader.
-                procStartInfo.RedirectStandardOutput = true;
-                procStartInfo.RedirectStandardError = true;
-                procStartInfo.UseShellExecute = false;
-                // Do not create the black window.
-                procStartInfo.CreateNoWindow = true;
+                        // The following commands are needed to redirect the standard output.
+                        // This means that it will be redirected to the Process.StandardOutput StreamReader.
+                        RedirectStandardOutput = true,
+                        RedirectStandardError = true,
+                        UseShellExecute = false,
+                        // Do not create the black window.
+                        CreateNoWindow = true
+                    };
                 // Now we create a process, assign its ProcessStartInfo and start it
-                System.Diagnostics.Process proc = new System.Diagnostics.Process();
-                proc.StartInfo = procStartInfo;
+                Process proc = new Process
+                {
+                    StartInfo = procStartInfo
+                };
                 proc.Start();
 
                 // Get the output into a string

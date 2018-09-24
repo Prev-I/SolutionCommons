@@ -63,7 +63,7 @@ namespace Solution.Tools.Utilities
                     FileStream fs = null;
                     try
                     {
-                        fs = File.Open(compressedFile, FileMode.Open, FileAccess.Read, FileShare.None);
+                        fs = File.Open(inputFile, FileMode.Open, FileAccess.Read, FileShare.None);
                         fs.Close();
                         i = 10;
                     }
@@ -92,7 +92,7 @@ namespace Solution.Tools.Utilities
         public bool Extract(string compressedFile, string destinationDir)
         {
             SevenZipExtractor extractor = new SevenZipExtractor(compressedFile);
-            extractor.FileExists += new EventHandler<FileOverwriteEventArgs>(zipExtractor_FileExists);
+            extractor.FileExists += new EventHandler<FileOverwriteEventArgs>(ZipExtractor_FileExists);
             if (extractor.Check())
             {
                 extractor.ExtractArchive(destinationDir);
@@ -101,7 +101,7 @@ namespace Solution.Tools.Utilities
             else return false;
         }
 
-        public void zipExtractor_FileExists(object sender, FileOverwriteEventArgs args)
+        public void ZipExtractor_FileExists(object sender, FileOverwriteEventArgs args)
         {
             FileInfo fi = new FileInfo(args.FileName);
             while (File.Exists(args.FileName))
@@ -115,14 +115,16 @@ namespace Solution.Tools.Utilities
             if (File.Exists(outputfile))
                 File.Delete(outputfile);
 
-            SevenZipCompressor szc = new SevenZipCompressor();
-            szc.CompressionLevel = CompressionLevel.Normal;
-            szc.ArchiveFormat = OutArchiveFormat.SevenZip;
-            szc.CompressionMethod = CompressionMethod.Lzma2;
-            szc.CompressionMode = CompressionMode.Create;
-            szc.DirectoryStructure = true;
-            szc.EncryptHeaders = true;
-            szc.DefaultItemName = outputfile;
+            SevenZipCompressor szc = new SevenZipCompressor
+            {
+                CompressionLevel = CompressionLevel.Normal,
+                ArchiveFormat = OutArchiveFormat.SevenZip,
+                CompressionMethod = CompressionMethod.Lzma2,
+                CompressionMode = CompressionMode.Create,
+                DirectoryStructure = true,
+                EncryptHeaders = true,
+                DefaultItemName = outputfile
+            };
             using (FileStream archive = new FileStream(outputfile, FileMode.Create, FileAccess.ReadWrite))
             {
                 szc.CompressFiles(archive, filesToCompress);

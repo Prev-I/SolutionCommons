@@ -31,8 +31,10 @@ namespace Solution.Tools.Utilities
                 using (var writer = new StreamWriter(jsonStream))
                 using (var jsonWriter = new JsonTextWriter(writer))
                 {
-                    JsonSerializer jsonSerializer = new JsonSerializer();
-                    jsonSerializer.Formatting = jsonFormat;
+                    JsonSerializer jsonSerializer = new JsonSerializer
+                    {
+                        Formatting = jsonFormat
+                    };
                     jsonSerializer.Serialize(jsonWriter, value);
                     jsonWriter.Flush();
                     resultStream = new MemoryStream(jsonStream.ToArray());
@@ -63,8 +65,10 @@ namespace Solution.Tools.Utilities
                 using (var reader = new StreamReader(jsonStream))
                 using (var jsonReader = new JsonTextReader(reader))
                 {
-                    JsonSerializer jsonSerializer = new JsonSerializer();
-                    jsonSerializer.Formatting = jsonFormat;
+                    JsonSerializer jsonSerializer = new JsonSerializer
+                    {
+                        Formatting = jsonFormat
+                    };
                     return jsonSerializer.Deserialize<T>(jsonReader);
                 }
             }
