@@ -116,16 +116,17 @@ namespace Solution.Tools.Utilities
                 File.Delete(outputfile);
 
             SevenZipCompressor szc = new SevenZipCompressor();
-            szc.CompressionLevel = CompressionLevel.Ultra;
-            szc.ArchiveFormat = OutArchiveFormat.Zip;
-            szc.ZipEncryptionMethod = ZipEncryptionMethod.ZipCrypto;
+            szc.CompressionLevel = CompressionLevel.Normal;
+            szc.ArchiveFormat = OutArchiveFormat.SevenZip;
+            szc.CompressionMethod = CompressionMethod.Lzma2;
             szc.CompressionMode = CompressionMode.Create;
-            FileStream archive = new FileStream(outputfile, FileMode.Create, FileAccess.ReadWrite);
             szc.DirectoryStructure = true;
             szc.EncryptHeaders = true;
             szc.DefaultItemName = outputfile;
-            szc.CompressFiles(archive, filesToCompress);
-            archive.Close();
+            using (FileStream archive = new FileStream(outputfile, FileMode.Create, FileAccess.ReadWrite))
+            {
+                szc.CompressFiles(archive, filesToCompress);
+            }
         }
 
     }
