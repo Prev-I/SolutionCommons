@@ -16,6 +16,19 @@ namespace Solution.Core.Utilities
         private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
 
+        public static byte[] Compress(byte[] plainData)
+        {
+            using (var compressedStream = new MemoryStream())
+            using (var compressor = new GZipStream(compressedStream, CompressionMode.Compress))
+            {
+                //Writes compressed byte to the underlying
+                //stream from the specified byte array.
+                compressor.Write(plainData, 0, plainData.Length);
+                compressor.Close();
+                return compressedStream.ToArray();
+            }
+        }
+
         public static Stream Compress(Stream plainStream)
         {
             MemoryStream resultStream;
@@ -30,32 +43,6 @@ namespace Solution.Core.Utilities
             return resultStream;
         }
 
-        public static byte[] Compress(byte[] plainData)
-        {
-            using (var compressedStream = new MemoryStream())
-            using (var compressor = new GZipStream(compressedStream, CompressionMode.Compress))
-            {
-                //Writes compressed byte to the underlying
-                //stream from the specified byte array.
-                compressor.Write(plainData, 0, plainData.Length);
-                compressor.Close();
-                return compressedStream.ToArray();
-            }
-        }
-
-
-        public static Stream Decompress(Stream compressedStream)
-        {
-            MemoryStream resultStream = new MemoryStream();
-
-            using (var decompressor = new GZipStream(compressedStream, CompressionMode.Decompress))
-            {
-                decompressor.CopyTo(resultStream);
-                decompressor.Close();
-                resultStream.Position = 0;
-            }
-            return resultStream;
-        }
 
         public static byte[] Decompress(byte[] compressedData)
         {
@@ -71,6 +58,19 @@ namespace Solution.Core.Utilities
                 decompressor.Close();
                 return resultStream.ToArray();
             }
+        }
+
+        public static Stream Decompress(Stream compressedStream)
+        {
+            MemoryStream resultStream = new MemoryStream();
+
+            using (var decompressor = new GZipStream(compressedStream, CompressionMode.Decompress))
+            {
+                decompressor.CopyTo(resultStream);
+                decompressor.Close();
+                resultStream.Position = 0;
+            }
+            return resultStream;
         }
 
     }
