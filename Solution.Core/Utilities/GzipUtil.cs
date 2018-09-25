@@ -31,7 +31,7 @@ namespace Solution.Core.Utilities
 
         public static Stream Compress(Stream plainStream)
         {
-            MemoryStream resultStream;
+            MemoryStream resultStream = null;
 
             using (var compressedStream = new MemoryStream())
             using (var compressor = new GZipStream(compressedStream, CompressionMode.Compress))
