@@ -29,7 +29,7 @@ namespace Solution.Tools.Utilities
             }
             catch (Exception e)
             {
-                log.Error(e.ToString());
+                log.Error(e.Message, e);
                 throw e;
             }
             finally
@@ -49,7 +49,7 @@ namespace Solution.Tools.Utilities
             }
             catch (Exception e)
             {
-                log.Error(e.ToString());
+                log.Error(e.Message, e);
                 throw e;
             }
             finally

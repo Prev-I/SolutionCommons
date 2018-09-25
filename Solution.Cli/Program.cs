@@ -33,8 +33,8 @@ namespace Solution.Cli
             }
             catch (Exception e)
             {
-                log.Error(e.ToString());
-                emailLog.Error(e.ToString());
+                log.Error(e.Message, e);
+                emailLog.Error(e.Message, e);
             }
             Console.WriteLine("Press a key to exit");
             Console.ReadKey();

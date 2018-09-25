@@ -54,7 +54,7 @@ namespace Solution.Core.Utilities
             }
             catch (Exception e)
             {
-                log.Error(e.ToString());
+                log.Error(e.Message, e);
                 throw new Exception("Escalated exception", e);
             }
         }
@@ -80,7 +80,7 @@ namespace Solution.Core.Utilities
             }
             catch (Exception e)
             {
-                log.Error(e.ToString());
+                log.Error(e.Message, e);
                 throw new Exception("Escalated exception", e);
             }
         }
