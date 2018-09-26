@@ -79,7 +79,11 @@ namespace Solution.Tools.Utilities
             }
         }
 
-
+        /// <summary>
+        /// Support function to serialize json asynchronously
+        /// </summary>
+        /// <param name="stream">JSON stream to be serialized</param>
+        /// <returns>Task with serialized JSON string</returns>
         public static async Task<string> StreamToStringAsync(Stream stream)
         {
             string content = null;

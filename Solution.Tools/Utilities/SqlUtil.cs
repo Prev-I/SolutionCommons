@@ -91,10 +91,6 @@ namespace Solution.Tools.Utilities
                             cmd.CommandText = sqlCommand;
                             log.Debug(QuerySqlToString(sqlCommand, parameters));
                             res = cmd.ExecuteScalar();
-
-                            // Coommit della transazione da fare esternamente se passata
-                            //if (transaction != null)
-                            //    transaction.Commit();
                             break;
                         }
                         catch (Exception e)
@@ -107,8 +103,8 @@ namespace Solution.Tools.Utilities
                 }
                 catch (Exception e)
                 {
-                    log.Error(e);
-
+                    log.Error(e.Message, e);
+                    
                     if (retryQuery && count < MaxRetry)
                     {
                         Thread.Sleep(SleepRetry);
@@ -116,7 +112,7 @@ namespace Solution.Tools.Utilities
                     }
                     else
                     {
-                        throw e;
+                        throw new Exception("Escalated exception", e);
                     }
                 }
             }
@@ -149,10 +145,6 @@ namespace Solution.Tools.Utilities
                             cmd.CommandText = sqlCommand;
                             log.Debug(QuerySqlToString(sqlCommand, parameters));
                             res = cmd.ExecuteNonQuery();
-
-                            // Coommit della transazione da fare esternamente se passata
-                            //if (transaction != null)
-                            //    transaction.Commit();
                             break;
                         }
                         catch (Exception e)
@@ -165,7 +157,7 @@ namespace Solution.Tools.Utilities
                 }
                 catch (Exception e)
                 {
-                    log.Error(e);
+                    log.Error(e.Message, e);
 
                     if (retryQuery && count < MaxRetry)
                     {
@@ -174,7 +166,7 @@ namespace Solution.Tools.Utilities
                     }
                     else
                     {
-                        throw e;
+                        throw new Exception("Escalated exception", e);
                     }
                 }
             }
@@ -210,10 +202,6 @@ namespace Solution.Tools.Utilities
                             {
                                 npgsqlAdapter.Fill(res);
                             }
-
-                            // Coommit della transazione da fare esternamente se passata
-                            //if (transaction != null)
-                            //    transaction.Commit();
                             break;
                         }
                         catch (Exception e)
@@ -226,7 +214,7 @@ namespace Solution.Tools.Utilities
                 }
                 catch (Exception e)
                 {
-                    log.Error(e);
+                    log.Error(e.Message, e);
 
                     if (retryQuery && count < MaxRetry)
                     {
@@ -235,7 +223,7 @@ namespace Solution.Tools.Utilities
                     }
                     else
                     {
-                        throw e;
+                        throw new Exception("Escalated exception", e);
                     }
                 }
             }
@@ -264,8 +252,8 @@ namespace Solution.Tools.Utilities
             }
             catch (Exception e)
             {
-                log.Error(e);
-                throw e;
+                log.Error(e.Message, e);
+                throw new Exception("Escalated exception", e);
             }
         }
 
