@@ -24,15 +24,16 @@ namespace Solution.Core.Utilities
         /// <summary>
         /// Initialize and return the connection object without make the Bind operation
         /// </summary>
-        /// <param name="username"></param>
+        /// <param name="hostname"
+        /// <param name="port"></param>
         /// <param name="domain"></param>
+        /// <param name="username"></param>
         /// <param name="password"></param>
-        /// <param name="url"></param>
         /// <returns></returns>
-        public static LdapConnection CreateClient(string username, string domain, string password, string url)
+        public static LdapConnection CreateClient(string hostname, int port, string domain, string username,  string password)
         {
             var credentials = new NetworkCredential(username, password, domain);
-            var serverId = new LdapDirectoryIdentifier(url);
+            var serverId = new LdapDirectoryIdentifier(hostname, port);
 
             return new LdapConnection(serverId, credentials);
         }
@@ -166,5 +167,6 @@ namespace Solution.Core.Utilities
             conn.Dispose();
             return result;
         } 
+
     }
 }

@@ -25,9 +25,9 @@ namespace Solution.Tools.Utilities
         }
 
 
-        #region Connection Init
+        #region Connection Creation
 
-        private static SftpClient InitSftpClient(string host, string username, string password, int port, string privateKeyFile, string passPhrase)
+        private static SftpClient CreateClient(string hostname, int port, string username, string password, string privateKeyFile, string passPhrase)
         {
             AuthenticationMethod authenticationMethod = null;
             PrivateKeyFile keyFile = null;
@@ -41,7 +41,7 @@ namespace Solution.Tools.Utilities
                 keyFiles = new[] { keyFile };
                 authenticationMethod = new PrivateKeyAuthenticationMethod(username, keyFiles);
             }
-            ConnectionInfo connectionInfo = new ConnectionInfo(host, port, username, new AuthenticationMethod[] { authenticationMethod });
+            ConnectionInfo connectionInfo = new ConnectionInfo(hostname, port, username, new AuthenticationMethod[] { authenticationMethod });
             return new SftpClient(connectionInfo);
         }
 
