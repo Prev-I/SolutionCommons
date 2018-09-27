@@ -12,7 +12,7 @@ using ImageMagick;
 
 namespace Solution.Tools.Utilities
 {
-    public static class ImageMagickUtil
+    public static class ImageUtil
     {
         private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
