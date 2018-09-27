@@ -18,8 +18,8 @@ namespace Solution.Core.Utilities
 
         public static T Parse<T>(this object obj)
         {
-            if (obj == null) return default(T);
-
+            if (obj == null)
+                return default(T);
             return obj.ToString().Parse<T>();
         }
 
@@ -30,9 +30,9 @@ namespace Solution.Core.Utilities
 
         public static T Parse<T>(this string obj, object defaultValue)
         {
-            if (String.IsNullOrEmpty(obj))
+            if (string.IsNullOrEmpty(obj))
             {
-                if (defaultValue == null || String.IsNullOrEmpty(defaultValue.ToString()))
+                if (defaultValue == null || string.IsNullOrEmpty(defaultValue.ToString()))
                 {
                     return (T)default(T);
                 }
@@ -43,7 +43,6 @@ namespace Solution.Core.Utilities
             }
 
             Type t = typeof(T);
-
             if (t.IsGenericType && (t.GetGenericTypeDefinition() == typeof(Nullable<>)))
             {
                 return (T)Convert.ChangeType(obj, Nullable.GetUnderlyingType(typeof(T)));
@@ -72,7 +71,7 @@ namespace Solution.Core.Utilities
             }
             else
             {
-                return String.IsNullOrEmpty(defaultValue) ? defaultValue : String.Empty;
+                return string.IsNullOrEmpty(defaultValue) ? defaultValue : string.Empty;
             }
         }
 
@@ -89,38 +88,34 @@ namespace Solution.Core.Utilities
             }
             else
             {
-                return String.IsNullOrEmpty(defaultValue) ? defaultValue : String.Empty;
-            }
-        }
-
-        #endregion
-
-
-        #region version Parsing and comparing
-
-        public class VersionComparer : IComparer<string>
-        {
-            public int Compare(string a, string b)
-            {
-                return Enumerable.Zip(a.Split('.'), b.Split('.'),
-                                     (x, y) => int.Parse(x).CompareTo(int.Parse(y)))
-                                 .FirstOrDefault(i => i != 0);
-            }
-        }
-
-        public class VerComparer : IComparer<string>
-        {
-            public int Compare(string x, string y)
-            {
-                string[] first = x.Split('.');
-                string[] second = y.Split('.');
-                // a.CompareTo(b)
-                return first.Zip(second, (a, b) => String.CompareOrdinal(a, b))
-                            .FirstOrDefault(c => c != 0);
+                return string.IsNullOrEmpty(defaultValue) ? defaultValue : string.Empty;
             }
         }
 
         #endregion
 
     }
+
+    public class VersionComparer1 : IComparer<string>
+    {
+        public int Compare(string a, string b)
+        {
+            return Enumerable.Zip(a.Split('.'), b.Split('.'),
+                                 (x, y) => int.Parse(x).CompareTo(int.Parse(y)))
+                             .FirstOrDefault(i => i != 0);
+        }
+    }
+
+    public class VersionComparer2 : IComparer<string>
+    {
+        public int Compare(string x, string y)
+        {
+            string[] first = x.Split('.');
+            string[] second = y.Split('.');
+            // a.CompareTo(b)
+            return first.Zip(second, (a, b) => string.CompareOrdinal(a, b))
+                        .FirstOrDefault(c => c != 0);
+        }
+    }
+
 }

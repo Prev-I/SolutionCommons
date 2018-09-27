@@ -231,7 +231,7 @@ namespace Solution.Core.Utilities
 
         #region Downloads
 
-        public static String BytesToString(long byteCount)
+        public static string BytesToString(long byteCount)
         {
             string[] suf = { "B", "KB", "MB", "GB", "TB", "PB", "EB" }; //Longs run out around EB
             if (byteCount == 0)

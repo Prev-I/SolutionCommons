@@ -24,7 +24,7 @@ namespace Solution.Tools.Utilities
 
         #region single connection per query
 
-        public static Object ExecuteScalar(string connectionString, string sqlCommand, SqlParameter[] parameters, bool retryQuery = false)
+        public static object ExecuteScalar(string connectionString, string sqlCommand, SqlParameter[] parameters, bool retryQuery = false)
         {
             using (SqlConnection sqlConn = new SqlConnection(connectionString))
             {
@@ -65,9 +65,9 @@ namespace Solution.Tools.Utilities
 
         #region Shared connection for queries
 
-        public static Object ExecuteScalar(SqlConnection connection, string sqlCommand, SqlParameter[] parameters, SqlTransaction transaction, bool retryQuery = false)
+        public static object ExecuteScalar(SqlConnection connection, string sqlCommand, SqlParameter[] parameters, SqlTransaction transaction, bool retryQuery = false)
         {
-            Object res = null;
+            object res = null;
             int count = 0;
 
             while (!retryQuery || (retryQuery && count < MaxRetry))

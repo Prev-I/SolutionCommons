@@ -15,7 +15,11 @@ namespace Solution.Core.Utilities
     {
         private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-
+        /// <summary>
+        /// Compress a specified byte array using GZIP and return it
+        /// </summary>
+        /// <param name="plainData">Byte array to be compressed</param>
+        /// <returns>Byte array compressed in GZIP format</returns>
         public static byte[] Compress(byte[] plainData)
         {
             using (var compressedStream = new MemoryStream())
@@ -29,6 +33,11 @@ namespace Solution.Core.Utilities
             }
         }
 
+        /// <summary>
+        /// Compress a specified stream using GZIP and return it
+        /// </summary>
+        /// <param name="plainStream">Stream to be compressed</param>
+        /// <returns>Compressed Stream in GZIP format</returns>
         public static Stream Compress(Stream plainStream)
         {
             MemoryStream resultStream = null;
@@ -43,7 +52,11 @@ namespace Solution.Core.Utilities
             return resultStream;
         }
 
-
+        /// <summary>
+        /// Decompress a specified GZIP byte array of data
+        /// </summary>
+        /// <param name="compressedData">Byte array to be decompressed</param>
+        /// <returns>Byte array of resulting plain data</returns>
         public static byte[] Decompress(byte[] compressedData)
         {
             using (MemoryStream compressedStream = new MemoryStream())
@@ -60,6 +73,11 @@ namespace Solution.Core.Utilities
             }
         }
 
+        /// <summary>
+        /// Decompress a specified GZIP stream of data
+        /// </summary>
+        /// <param name="compressedStream">Stream to be decompressed</param>
+        /// <returns>Stream of resulting plain data</returns>
         public static Stream Decompress(Stream compressedStream)
         {
             MemoryStream resultStream = new MemoryStream();

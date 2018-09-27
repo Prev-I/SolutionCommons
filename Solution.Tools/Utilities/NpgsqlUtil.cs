@@ -75,7 +75,7 @@ namespace Solution.Tools.Utilities
 
         #region single connection per query
 
-        public static Object ExecuteScalar(string connectionString, string sqlCommand, NpgsqlParameter[] parameters, bool retryQuery = false)
+        public static object ExecuteScalar(string connectionString, string sqlCommand, NpgsqlParameter[] parameters, bool retryQuery = false)
         {
             using (NpgsqlConnection sqlConn = new NpgsqlConnection(connectionString))
             {
@@ -116,9 +116,9 @@ namespace Solution.Tools.Utilities
 
         #region Shared connection for queries
 
-        public static Object ExecuteScalar(NpgsqlConnection connection, string sqlCommand, NpgsqlParameter[] parameters, NpgsqlTransaction transaction, bool retryQuery = false)
+        public static object ExecuteScalar(NpgsqlConnection connection, string sqlCommand, NpgsqlParameter[] parameters, NpgsqlTransaction transaction, bool retryQuery = false)
         {
-            Object res = null;
+            object res = null;
             int count = 0;
 
             while (!retryQuery || (retryQuery && count < MaxRetry))
