@@ -38,6 +38,7 @@
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.DirectoryServices.Protocols" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -56,6 +57,7 @@
     <Compile Include="Utilities\FileUtil.cs" />
     <Compile Include="Utilities\GzipUtil.cs" />
     <Compile Include="Utilities\HtmlUtil.cs" />
+    <Compile Include="Utilities\LdapUtil.cs" />
     <Compile Include="Utilities\StringUtil.cs" />
     <Compile Include="Utilities\XsltUtil.cs" />
   </ItemGroup>
