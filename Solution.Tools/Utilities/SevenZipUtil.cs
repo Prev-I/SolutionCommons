@@ -89,9 +89,9 @@ namespace Solution.Tools.Utilities
             SevenZipBase.SetLibraryPath(dllPath);
         }
 
-        public bool Extract(string compressedFile, string destinationDir)
+        public bool Extract(string inputFile, string destinationDir)
         {
-            SevenZipExtractor extractor = new SevenZipExtractor(compressedFile);
+            SevenZipExtractor extractor = new SevenZipExtractor(inputFile);
             extractor.FileExists += new EventHandler<FileOverwriteEventArgs>(ZipExtractor_FileExists);
             if (extractor.Check())
             {
@@ -110,7 +110,7 @@ namespace Solution.Tools.Utilities
             }
         }
 
-        public void CompressFiles(string[] filesToCompress, string outputfile)
+        public void CompressFiles(string[] inputFiles, string outputfile)
         {
             if (File.Exists(outputfile))
                 File.Delete(outputfile);
@@ -127,7 +127,7 @@ namespace Solution.Tools.Utilities
             };
             using (FileStream archive = new FileStream(outputfile, FileMode.Create, FileAccess.ReadWrite))
             {
-                szc.CompressFiles(archive, filesToCompress);
+                szc.CompressFiles(archive, inputFiles);
             }
         }
 

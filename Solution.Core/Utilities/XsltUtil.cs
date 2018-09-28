@@ -20,17 +20,17 @@ namespace Solution.Core.Utilities
         /// <summary>
         /// Load XML and transformation from specified path and return a stream with resulting HTML
         /// </summary>
-        /// <param name="xslPath">Path where to find XSL transformation</param>
-        /// <param name="xmlPath">Path where to find XML data file</param>
+        /// <param name="xslFile">Path where to find XSL transformation</param>
+        /// <param name="xmlFile">Path where to find XML data file</param>
         /// <returns>MemoryStream containing an HTML</returns>
-        public static MemoryStream Transform(string xslPath, string xmlPath)
+        public static MemoryStream Transform(string xslFile, string xmlFile)
         {
             try
             {
                 XslCompiledTransform xslt = new XslCompiledTransform();
                 XsltArgumentList xsltArguments = new XsltArgumentList();
                 MemoryStream resStream = new MemoryStream();
-                XPathDocument xmlDoc = new XPathDocument(xmlPath);
+                XPathDocument xmlDoc = new XPathDocument(xmlFile);
 
                 //XmlReaderSettings settings;
                 //XmlUrlResolver resolver;
@@ -39,7 +39,7 @@ namespace Solution.Core.Utilities
                 //settings = new XmlReaderSettings();
                 //settings.XmlResolver = resolver;
 
-                xslt.Load(xslPath);
+                xslt.Load(xslFile);
                 //xsltArguments.AddParam("dataClass", "", crfName);
                 xslt.Transform(xmlDoc, xsltArguments, resStream);
                 resStream.Position = 0;
@@ -62,19 +62,19 @@ namespace Solution.Core.Utilities
         /// <summary>
         /// Load XML and transformation from specified path and write the resulting HTML to disk
         /// </summary>
-        /// <param name="xslPath">Path where to find XSL transformation</param>
-        /// <param name="xmlPath">Path where to find XML data file</param>
-        /// <param name="resultPath">Path where to write the resulting HTML</param>
-        public static void Transform(string xslPath, string xmlPath, string resultPath)
+        /// <param name="xslFile">Path where to find XSL transformation</param>
+        /// <param name="xmlFile">Path where to find XML data file</param>
+        /// <param name="resultFile">Path where to write the resulting HTML</param>
+        public static void Transform(string xslFile, string xmlFile, string resultFile)
         {
             try
             {
                 XslCompiledTransform xslt = new XslCompiledTransform();
                 XsltArgumentList xsltArguments = new XsltArgumentList();
-                XPathDocument xPathDoc = new XPathDocument(xmlPath);
-                using (XmlTextWriter resWriter = new XmlTextWriter(resultPath, null))
+                XPathDocument xPathDoc = new XPathDocument(xmlFile);
+                using (XmlTextWriter resWriter = new XmlTextWriter(resultFile, null))
                 {
-                    xslt.Load(xslPath);
+                    xslt.Load(xslFile);
                     xslt.Transform(xPathDoc, xsltArguments, resWriter);
                 }
             }

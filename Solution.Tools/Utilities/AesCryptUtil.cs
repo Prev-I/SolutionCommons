@@ -39,11 +39,11 @@ namespace Solution.Tools.Utilities
             }
         }
 
-        public static void DecryptFile(string password, string inputFileName, string outputFileName)
+        public static void DecryptFile(string password, string inputFile, string outputFile)
         {
             try
             {
-                SharpAESCrypt.SharpAESCrypt.Decrypt(password, inputFileName, outputFileName);
+                SharpAESCrypt.SharpAESCrypt.Decrypt(password, inputFile, outputFile);
             }
             catch (Exception e)
             {
@@ -93,11 +93,11 @@ namespace Solution.Tools.Utilities
             }
         }
 
-        public static void EncryptFile(string password, string inputFileName, string outputFileName)
+        public static void EncryptFile(string password, string inputFile, string outputFile)
         {
             try
             {
-                SharpAESCrypt.SharpAESCrypt.Encrypt(password, inputFileName, outputFileName);
+                SharpAESCrypt.SharpAESCrypt.Encrypt(password, inputFile, outputFile);
             }
             catch (Exception e)
             {

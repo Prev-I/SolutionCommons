@@ -256,16 +256,16 @@ namespace Solution.Core.Utilities
             return regex.Replace(source, replacement);
         }
 
-        public static string CleanFileName(string filename)
+        public static string CleanFileName(string fileName)
         {
             string fileEnding = null;
-            int index = filename.LastIndexOf(".", StringComparison.InvariantCulture);
+            int index = fileName.LastIndexOf(".", StringComparison.InvariantCulture);
 
             //removes the file ending.
             if (index != -1)
             {
-                fileEnding = filename.Substring(index + 1);
-                filename = filename.Substring(0, index);
+                fileEnding = fileName.Substring(index + 1);
+                fileName = fileName.Substring(0, index);
                 //remove based on the CharacterReplacements list
                 for (int i = 0; i < CharacterReplacements.GetLength(0); i++)
                 {
@@ -277,11 +277,11 @@ namespace Solution.Core.Utilities
             //remove based on the CharacterReplacements list
             for (int i = 0; i < CharacterReplacements.GetLength(0); i++)
             {
-                filename = filename.Replace(CharacterReplacements[i, 0], CharacterReplacements[i, 1]);
+                fileName = fileName.Replace(CharacterReplacements[i, 0], CharacterReplacements[i, 1]);
             }
             //remove everything that is left
-            filename = RemoveNonWordChars(filename);
-            return filename + fileEnding;
+            fileName = RemoveNonWordChars(fileName);
+            return fileName + fileEnding;
         }
 
         private static string[,] CharacterReplacements = {

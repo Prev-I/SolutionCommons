@@ -40,17 +40,17 @@ namespace Solution.Tools.Utilities
             return resultStream;
         }
 
-        public static FileStream CompressOnDisk(byte[] plainData, string workFolderPath, string zipFileName, string fileName)
+        public static FileStream CompressOnDisk(byte[] plainData, string workDirPath, string zipFileName, string fileName)
         {
             using (var plainStream = new MemoryStream(plainData))
             {
-                return CompressOnDisk(plainStream, workFolderPath, zipFileName, fileName);
+                return CompressOnDisk(plainStream, workDirPath, zipFileName, fileName);
             }
         }
 
-        public static FileStream CompressOnDisk(Stream plainStream, string workFolderPath, string zipFileName, string fileName)
+        public static FileStream CompressOnDisk(Stream plainStream, string workDirPath, string zipFileName, string fileName)
         {
-            string zipFilePath = Path.Combine(workFolderPath, zipFileName);
+            string zipFilePath = Path.Combine(workDirPath, zipFileName);
 
             using (ZipFile zip = new ZipFile())
             {
@@ -90,18 +90,18 @@ namespace Solution.Tools.Utilities
             return resultStream;
         }
 
-        public static FileStream DecompressOnDisk(byte[] compressedData, string workFolderPath, string zipFileName, string fileName)
+        public static FileStream DecompressOnDisk(byte[] compressedData, string workDirPath, string zipFileName, string fileName)
         {
             using (MemoryStream compressedStream = new MemoryStream(compressedData))
             {
-                return DecompressOnDisk(compressedStream, workFolderPath, zipFileName, fileName);
+                return DecompressOnDisk(compressedStream, workDirPath, zipFileName, fileName);
             }
         }
 
-        public static FileStream DecompressOnDisk(Stream compressedStream, string workFolderPath, string zipFileName, string fileName)
+        public static FileStream DecompressOnDisk(Stream compressedStream, string workDirPath, string zipFileName, string fileName)
         {
-            string zipFilePath = Path.Combine(workFolderPath, zipFileName);
-            string filePath = Path.Combine(workFolderPath, fileName);
+            string zipFilePath = Path.Combine(workDirPath, zipFileName);
+            string filePath = Path.Combine(workDirPath, fileName);
 
             using (FileStream zipStream = new FileStream(zipFilePath, FileMode.Create, FileAccess.Write))
             {
@@ -113,7 +113,7 @@ namespace Solution.Tools.Utilities
                 {
                     if (fileName == file.FileName)
                     {
-                        file.Extract(workFolderPath, ExtractExistingFileAction.OverwriteSilently);
+                        file.Extract(workDirPath, ExtractExistingFileAction.OverwriteSilently);
                         break;
                     }
                 }
