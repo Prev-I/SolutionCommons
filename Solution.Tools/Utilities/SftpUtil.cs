@@ -50,19 +50,19 @@ namespace Solution.Tools.Utilities
 
         #region Remotes methods
 
-        public static List<string> GetRemoteFileList(SftpClient client, string remotePath, string fileNameFilter)
+        public static List<string> GetRemoteFileList(SftpClient client, string remotePath, string searchFilter = "*")
         {
-            return GetRemoteElementList(client, remotePath, fileNameFilter, SftpElementListType.FILES_ONLY);
+            return GetRemoteElementList(client, remotePath, searchFilter, SftpElementListType.FILES_ONLY);
         }
 
-        public static List<string> GetRemoteFolderList(SftpClient client, string remotePath, string folderNameFilter)
+        public static List<string> GetRemoteFolderList(SftpClient client, string remotePath, string searchFilter = "*")
         {
-            return GetRemoteElementList(client, remotePath, folderNameFilter, SftpElementListType.DIRECTORIES_ONLY);
+            return GetRemoteElementList(client, remotePath, searchFilter, SftpElementListType.DIRECTORIES_ONLY);
         }
 
-        public static List<string> GetRemoteFileAndFolderList(SftpClient client, string remotePath, string nameFilter)
+        public static List<string> GetRemoteFileAndFolderList(SftpClient client, string remotePath, string searchFilter = "*")
         {
-            return GetRemoteElementList(client, remotePath, nameFilter, SftpElementListType.FILES_AND_DIRECTORIES);
+            return GetRemoteElementList(client, remotePath, searchFilter, SftpElementListType.FILES_AND_DIRECTORIES);
         }
 
         public static void DownloadRemoteFile(SftpClient client, string remotePath, string fileName, string outputDir, bool deleteRemoteFileAfterDownload)
@@ -88,20 +88,20 @@ namespace Solution.Tools.Utilities
 
         public static byte[] DownloadRemoteFile(SftpClient client, string remotePath, string fileName, bool deleteRemoteFileAfterDownload)
         {
-            byte[] file;
+            byte[] fileData;
 
             try
             {
                 using (MemoryStream ms = new MemoryStream())
                 {
                     client.DownloadFile(remotePath + "/" + fileName, ms);
-                    file = ms.ToArray();
+                    fileData = ms.ToArray();
                 }
                 if (deleteRemoteFileAfterDownload)
                 {
                     client.DeleteFile(remotePath + "/" + fileName);
                 }
-                return file;
+                return fileData;
             }
             catch (Exception e)
             {
@@ -126,11 +126,11 @@ namespace Solution.Tools.Utilities
             }
         }
 
-        public static void UploadRemoteFile(SftpClient client, string remotePath, string fileName, byte[] fileInput)
+        public static void UploadRemoteFile(SftpClient client, string remotePath, string fileName, byte[] fileData)
         {
             try
             {
-                using (MemoryStream ms = new MemoryStream(fileInput))
+                using (MemoryStream ms = new MemoryStream(fileData))
                 {
                     client.UploadFile(ms, remotePath + "/" + fileName);
                 }
@@ -189,7 +189,7 @@ namespace Solution.Tools.Utilities
         private static List<string> GetRemoteElementList(SftpClient client, string remotePath, string elementFilter, SftpElementListType type)
         {
             List<string> elementList = new List<string>();
-            Regex myRegex = new Regex("^" + elementFilter.Replace("*", ".*") + "$");
+            Regex myRegex = (string.IsNullOrEmpty(elementFilter) || elementFilter == "*") ? new Regex("^*$") : new Regex("^" + elementFilter.Replace("*", ".*") + "$");
 
             try
             {
