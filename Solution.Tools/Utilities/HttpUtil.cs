@@ -19,8 +19,16 @@ namespace Solution.Tools.Utilities
         private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
 
-        #region Serialize object as Stream
+        #region Use stream serialization for content
 
+        /// <summary>
+        /// Execute a GET request as async operation storing the result as a stream before parsing
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="client"></param>
+        /// <param name="uri"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public static async Task<T> GetAsync<T>(HttpClient client, Uri uri, CancellationToken cancellationToken)
         {
             using (var request = new HttpRequestMessage(HttpMethod.Get, uri))
@@ -38,6 +46,14 @@ namespace Solution.Tools.Utilities
             }
         }
 
+        /// <summary>
+        /// Execute a POST request as async operation storing the content inside a stream before sending
+        /// </summary>
+        /// <param name="client"></param>
+        /// <param name="uri"></param>
+        /// <param name="content"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public static async Task PostAsync(HttpClient client, Uri uri, object content, CancellationToken cancellationToken)
         {
             using (var request = new HttpRequestMessage(HttpMethod.Post, uri))
@@ -57,9 +73,17 @@ namespace Solution.Tools.Utilities
         #endregion
 
 
-        #region Serialize object as string
+        #region Use string serialization for content
 
-        private static async Task<T> GetBasicAsync<T>(HttpClient client, Uri uri, CancellationToken cancellationToken)
+        /// <summary>
+        /// Execute a GET request as async operation storing the result in a string before parsing
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="client"></param>
+        /// <param name="uri"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        private static async Task<T> GetAsyncBasic<T>(HttpClient client, Uri uri, CancellationToken cancellationToken)
         {
             using (var request = new HttpRequestMessage(HttpMethod.Get, uri))
             using (var response = await client
@@ -72,7 +96,15 @@ namespace Solution.Tools.Utilities
             }
         }
 
-        private static async Task PostBasicAsync(HttpClient client, Uri uri, object content, CancellationToken cancellationToken)
+        /// <summary>
+        /// Execute a POST request as async operation storing the content inside a string before sending
+        /// </summary>
+        /// <param name="client"></param>
+        /// <param name="uri"></param>
+        /// <param name="content"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        private static async Task PostAsyncBasic(HttpClient client, Uri uri, object content, CancellationToken cancellationToken)
         {
             using (var request = new HttpRequestMessage(HttpMethod.Post, uri))
             {
@@ -96,6 +128,13 @@ namespace Solution.Tools.Utilities
 
         #region support
 
+        /// <summary>
+        /// Parse the querystring, add a new key-value pair and return the result
+        /// </summary>
+        /// <param name="queryString"></param>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static string AddToQueryString(string queryString, string key, string value)
         {
             var parsedQueryString = HttpUtility.ParseQueryString(queryString);
@@ -103,6 +142,11 @@ namespace Solution.Tools.Utilities
             return parsedQueryString.ToString();
         }
 
+        /// <summary>
+        /// Serialize a generic object to JSON inside an HttpContent using a support stream
+        /// </summary>
+        /// <param name="content"></param>
+        /// <returns></returns>
         public static HttpContent CreateHttpContent(object content)
         {
             HttpContent httpContent = null;
