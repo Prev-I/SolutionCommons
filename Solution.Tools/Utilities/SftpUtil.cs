@@ -27,13 +27,13 @@ namespace Solution.Tools.Utilities
 
         #region Connection Creation
 
-        private static SftpClient CreateClient(string hostname, int port, string username, string password, string privateKeyFile, string passPhrase)
+        public static SftpClient CreateClient(string hostname, int port, string username, string password, string privateKeyFile, string passPhrase)
         {
             AuthenticationMethod authenticationMethod = null;
             PrivateKeyFile keyFile = null;
             PrivateKeyFile[] keyFiles = null;
 
-            if (privateKeyFile.Length == 0)
+            if (string.IsNullOrEmpty(privateKeyFile))
                 authenticationMethod = new PasswordAuthenticationMethod(username, password);
             else
             {
