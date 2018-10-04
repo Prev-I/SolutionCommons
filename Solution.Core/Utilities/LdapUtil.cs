@@ -24,7 +24,7 @@ namespace Solution.Core.Utilities
         /// <summary>
         /// Initialize and return the connection object without make the Bind operation
         /// </summary>
-        /// <param name="hostname"
+        /// <param name="hostname"></param>
         /// <param name="port"></param>
         /// <param name="domain"></param>
         /// <param name="username"></param>

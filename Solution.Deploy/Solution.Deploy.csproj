@@ -49,7 +49,9 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Deploy\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Solution.Core\Solution.Core.csproj">
       <Project>{6d836ca1-ba45-48e6-84ba-95c7169c509e}</Project>
@@ -62,14 +64,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Libraries\Solution.Core.dll" />
+    <Content Include="Libraries\Solution.Core.xml" />
     <Content Include="Libraries\Solution.Tools.dll" />
+    <Content Include="Libraries\Solution.Tools.xml" />
     <Content Include="MigrateToEntityFramework6.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if $(ConfigurationName) == Release (
   copy "$(TargetDir)\Solution.Core.dll" "$(ProjectDir)\Libraries"
+  copy "$(TargetDir)\Solution.Core.xml" "$(ProjectDir)\Libraries"
   copy "$(TargetDir)\Solution.Tools.dll" "$(ProjectDir)\Libraries"
+  copy "$(TargetDir)\Solution.Tools.xml" "$(ProjectDir)\Libraries"
 ) ELSE (
   echo Skip deploy in debug.
 )</PostBuildEvent>

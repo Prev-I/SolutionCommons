@@ -10,6 +10,9 @@ using log4net;
 
 namespace Solution.Core.Utilities
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static class FileUtil
     {
         private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
@@ -106,7 +109,7 @@ namespace Solution.Core.Utilities
         /// <param name="target">DirectoryInfo to be initialized</param>
         /// <param name="overwrite">Params to tell if overwrite already existing directory</param>
         /// <returns></returns>
-        public static DirectoryInfo InitDirectory(DirectoryInfo target, bool overwrite = false)
+        public static void InitDirectory(DirectoryInfo target, bool overwrite = false)
         {
             try
             {
@@ -122,7 +125,6 @@ namespace Solution.Core.Utilities
                     target.Create();
                 }
                 target.Refresh();
-                return target;
             }
             catch (Exception e)
             {

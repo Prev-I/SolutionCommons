@@ -14,11 +14,22 @@ using Solution.Core.Utilities;
 
 namespace Solution.Tools.Utilities
 {
+    /// <summary>
+    /// Class to handle compression and decompression of archives supported by 7zip 
+    /// </summary>
+    /// <example>
+    /// /Libraries/SevenZip/ is required in the root directory to load 7z.dll for x86 or x64 arch
+    /// using SevenZip;
+    /// </example>
     public static class SevenZipUtil
     {
         private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="inputFiles"></param>
+        /// <param name="destinationFile"></param>
         public static void Compress(string[] inputFiles, string destinationFile)
         {
             SevenZipWorking wrk = new SevenZipWorking();
@@ -39,6 +50,12 @@ namespace Solution.Tools.Utilities
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="inputFile"></param>
+        /// <param name="destinationDir"></param>
+        /// <returns></returns>
         public static bool Decompress(string inputFile, string destinationDir)
         {
             SevenZipWorking wrk = new SevenZipWorking();

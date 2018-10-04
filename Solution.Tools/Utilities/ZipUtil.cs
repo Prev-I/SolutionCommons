@@ -11,6 +11,9 @@ using Ionic.Zip;
 
 namespace Solution.Tools.Utilities
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static class ZipUtil
     {
         private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);

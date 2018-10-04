@@ -12,6 +12,9 @@ using log4net;
 
 namespace Solution.Core.Utilities
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static class CryptoUtil
     {
         private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
@@ -112,6 +115,7 @@ namespace Solution.Core.Utilities
         /// <param name="inputFile">Input file to be encrypted</param>
         /// <param name="outputFile">Encrypted output file to be created</param>
         /// <param name="password">Password used to derivate symmetric key</param>
+        /// <param name="salt">Salt used in combination with password to create the key</param>
         /// <returns></returns>
         public static void EncryptFile(FileInfo inputFile, FileInfo outputFile, string password, string salt)
         {
@@ -153,6 +157,7 @@ namespace Solution.Core.Utilities
         /// <param name="inputFile">Input file to be decripted</param>
         /// <param name="outputFile">Decripted output file to be created</param>
         /// <param name="password">Password used to derivate symmetric key</param>
+        /// <param name="salt">Salt used in combination with password to create the key</param>
         /// <returns></returns>
         public static void DecryptFile(FileInfo inputFile, FileInfo outputFile, string password, string salt)
         {
@@ -191,7 +196,7 @@ namespace Solution.Core.Utilities
         /// <summary>
         /// Function to hash a file using sha256 algoritm
         /// </summary>
-        /// <param name="inputString">Input file to be hashed</param>
+        /// <param name="inputFile">Input file to be hashed</param>
         /// <returns>Return the file hash encoded in Base64</returns>
         public static string HashFile(FileInfo inputFile)
         {

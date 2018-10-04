@@ -10,6 +10,9 @@ using log4net;
 
 namespace Solution.Core.Utilities
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static class CmdUtil
     {
         private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);

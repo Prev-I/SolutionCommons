@@ -1,0 +1,422 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Solution.Core</name>
+    </assembly>
+    <members>
+        <member name="T:Solution.Core.Utilities.BitmapUtil">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Solution.Core.Utilities.BitmapUtil.ResizeMaxWidth(System.Drawing.Bitmap,System.Int32)">
+            <summary>
+            Ridimensiona un immagine se supera la larghezza massima (proporzionale: si, sgranato: no)
+            </summary>
+            <param name="src"></param>
+            <param name="maxWidth"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Solution.Core.Utilities.BitmapUtil.ResizeFixedWidth(System.Drawing.Bitmap,System.Int32)">
+            <summary>
+            Ridimensiona un immagine secondo la larghezza data (proporzionale: si, sgranato: si)
+            </summary>
+            <param name="src"></param>
+            <param name="newWidth"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Solution.Core.Utilities.BitmapUtil.ResizeMaxHeight(System.Drawing.Bitmap,System.Int32)">
+            <summary>
+            Ridimensiona un immagine se supera l'altezza massima (proporzionale: si, sgranato: no)
+            </summary>
+            <param name="src"></param>
+            <param name="maxHeight"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Solution.Core.Utilities.BitmapUtil.ResizeFixedHeight(System.Drawing.Bitmap,System.Int32)">
+            <summary>
+            Ridimensiona un immagine secondo l'altezza data (proporzionale: si, sgranato: si)
+            </summary>
+            <param name="src"></param>
+            <param name="newHeight"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Solution.Core.Utilities.BitmapUtil.ResizeBoxOverflow(System.Drawing.Bitmap,System.Int32,System.Int32)">
+            <summary>
+            Ridimensiona un immagine in modo che ricopra un box (proporzionale: si, sgranato: si)
+            </summary>
+            <param name="src"></param>
+            <param name="boxWidth"></param>
+            <param name="boxHeight"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Solution.Core.Utilities.BitmapUtil.ResizeBoxContained(System.Drawing.Bitmap,System.Int32,System.Int32)">
+            <summary>
+            Ridimensiona un immagine in modo che possa essere contenuta in un box (proporzionale: si, sgranato: no)
+            </summary>
+            <param name="src"></param>
+            <param name="boxWidth"></param>
+            <param name="boxHeight"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Solution.Core.Utilities.BitmapUtil.ResizeStretched(System.Drawing.Bitmap,System.Int32,System.Int32)">
+            <summary>
+            Ridimensiona e deforma un immagine secondo le dimensioni specificate (proporzionale: no, sgranato: si)
+            </summary>
+            <param name="src"></param>
+            <param name="newWidth"></param>
+            <param name="newHeight"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Solution.Core.Utilities.BitmapUtil.Crop(System.Drawing.Bitmap,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Ritaglia un immagine delle dimensioni specificate a partire dal punto di inizio
+            </summary>
+            <param name="bitmap"></param>
+            <param name="startPointX"></param>
+            <param name="startPointY"></param>
+            <param name="cropWidth"></param>
+            <param name="cropHeight"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Solution.Core.Utilities.BitmapUtil.CropFromTopLeft(System.Drawing.Bitmap,System.Int32,System.Int32)">
+            <summary>
+            Ritaglia un immagine delle dimensioni specificate a partire dall'angolo in alto a sinistra
+            </summary>
+            <param name="bitmap"></param>
+            <param name="cropWidth"></param>
+            <param name="cropHeight"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Solution.Core.Utilities.BitmapUtil.CropSquare(System.Drawing.Bitmap)">
+            <summary>
+            Ritaglia un immagine quadrata a partire dall'angolo in alto a sinistra
+            </summary>
+            <param name="bitmap"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Solution.Core.Utilities.BitmapUtil.ResizeAndCrop(System.Drawing.Bitmap,System.Int32,System.Int32)">
+            <summary>
+            Ridimensiona un immagine in modo che ricopra un box e taglia la parte che ne fuoriesce
+            </summary>
+            <param name="bitmap"></param>
+            <param name="boxWidth"></param>
+            <param name="boxHeight"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Solution.Core.Utilities.CmdUtil">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Solution.Core.Utilities.CmdUtil.ExecuteCommandCmd(System.String)">
+            <summary>
+            Executed a command inside an external instance of CMD
+            </summary>
+            <param name="command">Command to be executed</param>
+            <returns>Return the exit code of executed command</returns>
+        </member>
+        <member name="M:Solution.Core.Utilities.CmdUtil.ExecuteCommand(System.String,System.String)">
+            <summary>
+            Executed a command registered to the system passing specified parameter
+            </summary>
+            <param name="command">Command to be executed</param>
+            <param name="parameter">Parameter passed to the executed command</param>
+            <returns>Return the exit code of executed command</returns>
+        </member>
+        <member name="T:Solution.Core.Utilities.ConfigUtil">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Solution.Core.Utilities.ConfigUtil.UpdateAllSettings(System.Xml.XmlDocument)">
+            <summary>
+            Update the currrent application settings with given confing
+            </summary>
+            <param name="newConfig">XML containing the modified app.config settings</param>
+            <returns></returns>
+        </member>
+        <member name="M:Solution.Core.Utilities.ConfigUtil.UpdateSetting(System.String,System.String)">
+            <summary>
+            Update a single key in current application settings
+            </summary>
+            <param name="key">Key to be updated</param>
+            <param name="value">Value to be inserted in new key</param>
+            <returns></returns>
+        </member>
+        <member name="M:Solution.Core.Utilities.ConfigUtil.RemoveSetting(System.String)">
+            <summary>
+            Remove a single key in current application settings
+            </summary>
+            <param name="key">Key to be removed</param>
+            <returns></returns>
+        </member>
+        <member name="M:Solution.Core.Utilities.ConfigUtil.GetConfigVersion">
+            <summary>
+            Return the current application app.config version
+            </summary>
+            <returns>String containing ConfigVersion</returns>
+        </member>
+        <member name="T:Solution.Core.Utilities.CryptoUtil">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Solution.Core.Utilities.CryptoUtil.EncryptString(System.String,System.Int32,System.String)">
+            <summary>
+            Function to encrypt a string using rsa crypto
+            </summary>
+            <param name="inputString">Input plain text to be encrypted</param>
+            <param name="dwKeySize">RSA key size in bit, 2048</param>
+            <param name="xmlString">xml containing the public/private key</param>
+            <returns>Return the encrypted string encoded in Base64</returns>
+        </member>
+        <member name="M:Solution.Core.Utilities.CryptoUtil.DecryptString(System.String,System.Int32,System.String)">
+            <summary>
+            Function to decrypt a string using rsa crypto
+            </summary>
+            <param name="inputString">Input plain text to be encrypted</param>
+            <param name="dwKeySize">RSA key size in bit, 2048</param>
+            <param name="xmlString">xml containing the public/private key</param>
+            <returns>Return the plain string</returns>
+        </member>
+        <member name="M:Solution.Core.Utilities.CryptoUtil.EncryptFile(System.IO.FileInfo,System.IO.FileInfo,System.String,System.String)">
+            <summary>
+            Function to encrypt a file using aes crypto
+            </summary>
+            <param name="inputFile">Input file to be encrypted</param>
+            <param name="outputFile">Encrypted output file to be created</param>
+            <param name="password">Password used to derivate symmetric key</param>
+            <param name="salt">Salt used in combination with password to create the key</param>
+            <returns></returns>
+        </member>
+        <member name="M:Solution.Core.Utilities.CryptoUtil.DecryptFile(System.IO.FileInfo,System.IO.FileInfo,System.String,System.String)">
+            <summary>
+            Function to decrypt a file using aes crypto
+            </summary>
+            <param name="inputFile">Input file to be decripted</param>
+            <param name="outputFile">Decripted output file to be created</param>
+            <param name="password">Password used to derivate symmetric key</param>
+            <param name="salt">Salt used in combination with password to create the key</param>
+            <returns></returns>
+        </member>
+        <member name="M:Solution.Core.Utilities.CryptoUtil.HashFile(System.IO.FileInfo)">
+            <summary>
+            Function to hash a file using sha256 algoritm
+            </summary>
+            <param name="inputFile">Input file to be hashed</param>
+            <returns>Return the file hash encoded in Base64</returns>
+        </member>
+        <member name="T:Solution.Core.Utilities.CsvUtil">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Solution.Core.Utilities.CsvUtil.SerializeDataTable(System.Data.DataTable,System.String,System.String,System.Boolean)">
+            <summary>
+            Serialize a datatable to a string as a CSV with specified options
+            </summary>
+            <param name="exportTable">Datatable to be serialized</param>
+            <param name="separator">Custom separator, default ;</param>
+            <param name="wrapper">Custom field wrapper, default "</param>
+            <param name="addHeadersFromTable">Specify if the first row serialized has to be the header row</param>
+            <returns></returns>
+        </member>
+        <member name="M:Solution.Core.Utilities.CsvUtil.LoadDataTable(System.IO.FileInfo,System.Char,System.String,System.Boolean)">
+            <summary>
+            Load a CSV file inside a datatable using different format for parsing
+            </summary>
+            <param name="csvFile">FileInfo object that point to CSV file</param>
+            <param name="separator">Custom separator, default ;</param>
+            <param name="wrapper">Custom field wrapper, default "</param>
+            <param name="csvContainHeaders">Specify if the first row contains header or actual table data</param>
+            <returns></returns>
+        </member>
+        <member name="T:Solution.Core.Utilities.FileUtil">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Solution.Core.Utilities.FileUtil.CheckAlreadyRunning">
+            <summary>
+            Check if the current process alredy exist in the system process list
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Solution.Core.Utilities.FileUtil.GetLocalExecutionFullPah(System.String)">
+            <summary>
+            Find the full path for specified file relative to application executable
+            </summary>
+            <param name="fileName">File to found relative to executable</param>
+            <returns></returns>
+        </member>
+        <member name="M:Solution.Core.Utilities.FileUtil.GetFullPath(System.String)">
+            <summary>
+            Find out the full path of a specified folder
+            </summary>
+            <param name="path">Path (relative or full) that will be located in the system</param>
+            <returns>Full path of the specified folder</returns>
+        </member>
+        <member name="M:Solution.Core.Utilities.FileUtil.CopyAll(System.IO.DirectoryInfo,System.IO.DirectoryInfo,System.Boolean)">
+            <summary>
+            Copy all file and subdirectory inside a directory to a target
+            </summary>
+            <param name="source">Selected folder to be copied</param>
+            <param name="target">Destination folder for the copy operation</param>
+            <param name="overwrite">What to do in case a subfolder/file already exist</param>
+            <returns></returns>
+        </member>
+        <member name="M:Solution.Core.Utilities.FileUtil.InitDirectory(System.IO.DirectoryInfo,System.Boolean)">
+            <summary>
+            Create or clean the specified target directory
+            </summary>
+            <param name="target">DirectoryInfo to be initialized</param>
+            <param name="overwrite">Params to tell if overwrite already existing directory</param>
+            <returns></returns>
+        </member>
+        <member name="M:Solution.Core.Utilities.FileUtil.CleanDirectory(System.IO.DirectoryInfo)">
+            <summary>
+            Remove all file and directory inside a specified target
+            </summary>
+            <param name="target">Directory to be cleaned</param>
+            <returns></returns>
+        </member>
+        <member name="M:Solution.Core.Utilities.FileUtil.DeleteFile(System.IO.FileInfo)">
+            <summary>
+            Delete file even if it is a readonly one
+            </summary>
+            <param name="file">FileInfo of file to be removed</param>
+        </member>
+        <member name="T:Solution.Core.Utilities.GZipUtil">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Solution.Core.Utilities.GZipUtil.Compress(System.Byte[])">
+            <summary>
+            Compress a specified byte array using GZIP and return it
+            </summary>
+            <param name="plainData">Byte array to be compressed</param>
+            <returns>Byte array compressed in GZIP format</returns>
+        </member>
+        <member name="M:Solution.Core.Utilities.GZipUtil.Compress(System.IO.Stream)">
+            <summary>
+            Compress a specified stream using GZIP and return it
+            </summary>
+            <param name="plainStream">Stream to be compressed</param>
+            <returns>Compressed Stream in GZIP format</returns>
+        </member>
+        <member name="M:Solution.Core.Utilities.GZipUtil.Decompress(System.Byte[])">
+            <summary>
+            Decompress a specified GZIP byte array of data
+            </summary>
+            <param name="compressedData">Byte array to be decompressed</param>
+            <returns>Byte array of resulting plain data</returns>
+        </member>
+        <member name="M:Solution.Core.Utilities.GZipUtil.Decompress(System.IO.Stream)">
+            <summary>
+            Decompress a specified GZIP stream of data
+            </summary>
+            <param name="compressedStream">Stream to be decompressed</param>
+            <returns>Stream of resulting plain data</returns>
+        </member>
+        <member name="T:Solution.Core.Utilities.HtmlUtil">
+            <summary>
+            Utils to handle some quirks of http mimetypes or special characters 
+            loosely based on http://remy.supertext.ch/2012/08/clean-filenames/
+            </summary>
+        </member>
+        <member name="T:Solution.Core.Utilities.LdapUtil">
+            <summary>
+            A sample LDAP client. For simplicity reasons, this clients only uses synchronous requests.
+            Based on https://auth0.com/blog/using-ldap-with-c-sharp/
+            </summary>
+        </member>
+        <member name="M:Solution.Core.Utilities.LdapUtil.CreateClient(System.String,System.Int32,System.String,System.String,System.String)">
+            <summary>
+            Initialize and return the connection object without make the Bind operation
+            </summary>
+            <param name="hostname"></param>
+            <param name="port"></param>
+            <param name="domain"></param>
+            <param name="username"></param>
+            <param name="password"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Solution.Core.Utilities.LdapUtil.Search(System.DirectoryServices.Protocols.LdapConnection,System.String,System.String)">
+            <summary>
+            Performs a search in the LDAP server. This method is generic in its return value to show the power
+            of searches. A less generic search method could be implemented to only search for users, for instance.
+            </summary>
+            <param name="baseDn">The distinguished name of the base node at which to start the search</param>
+            <param name="ldapFilter">An LDAP filter as defined by RFC4515</param>
+            <returns>A flat list of dictionaries which in turn include attributes and the distinguished name (DN)</returns>
+        </member>
+        <member name="M:Solution.Core.Utilities.LdapUtil.AddUser(System.DirectoryServices.Protocols.LdapConnection,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Adds a user to the LDAP server database. This method is intentionally less generic than the search one to
+            make it easier to add meaningful information to the database.
+            </summary>
+            <param name="user">Dictionary with the informations to be added, keys MUST be ldap fileds name</param>
+        </member>
+        <member name="M:Solution.Core.Utilities.LdapUtil.ChangeUserUid(System.DirectoryServices.Protocols.LdapConnection,System.String,System.String)">
+            <summary>
+            This method shows how to modify an attribute.
+            </summary>
+            <param name="oldUid">Old user UID</param>
+            <param name="newUid">New user UID</param>
+        </member>
+        <member name="M:Solution.Core.Utilities.LdapUtil.Delete(System.DirectoryServices.Protocols.LdapConnection,System.String)">
+            <summary>
+            This method shows how to delete anything by its distinguised name (DN).
+            </summary>
+            <param name="dn">Distinguished name of the entry to delete</param>
+        </member>
+        <member name="M:Solution.Core.Utilities.LdapUtil.ValidateUser(System.DirectoryServices.Protocols.LdapConnection,System.String,System.String)">
+            <summary>
+            Searches for a user and compares the password.
+            We assume all users are at base DN ou=users,dc=example,dc=com and that passwords are
+            hashed using SHA1 (no salt) in OpenLDAP format.
+            </summary>
+            <param name="username">Username</param>
+            <param name="password">Password</param>
+            <returns>true if the credentials are valid, false otherwise</returns>
+        </member>
+        <member name="M:Solution.Core.Utilities.LdapUtil.ValidateUserByBind(System.DirectoryServices.Protocols.LdapConnection,System.String,System.String)">
+            <summary>
+            Another way of validating a user is by performing a bind. In this case the server
+            queries its own database to validate the credentials. It is defined by the server
+            how a user is mapped to its directory.
+            </summary>
+            <param name="username">Username</param>
+            <param name="password">Password</param>
+            <returns>true if the credentials are valid, false otherwise</returns>
+        </member>
+        <member name="T:Solution.Core.Utilities.StringUtil">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Solution.Core.Utilities.XlstUtil">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Solution.Core.Utilities.XlstUtil.Transform(System.String,System.String)">
+            <summary>
+            Load XML and transformation from specified path and return a stream with resulting HTML
+            </summary>
+            <param name="xslFile">Path where to find XSL transformation</param>
+            <param name="xmlFile">Path where to find XML data file</param>
+            <returns>MemoryStream containing an HTML</returns>
+        </member>
+        <member name="M:Solution.Core.Utilities.XlstUtil.Transform(System.String,System.String,System.String)">
+            <summary>
+            Load XML and transformation from specified path and write the resulting HTML to disk
+            </summary>
+            <param name="xslFile">Path where to find XSL transformation</param>
+            <param name="xmlFile">Path where to find XML data file</param>
+            <param name="resultFile">Path where to write the resulting HTML</param>
+        </member>
+    </members>
+</doc>

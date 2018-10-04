@@ -8,13 +8,13 @@ using System.Text.RegularExpressions;
 
 using log4net;
 
-/// <summary>
-/// Utils to handle some quirks of http mimetypes or special characters 
-/// loosely based on http://remy.supertext.ch/2012/08/clean-filenames/
-/// </summary>
-/// 
+
 namespace Solution.Core.Utilities
 {
+    /// <summary>
+    /// Utils to handle some quirks of http mimetypes or special characters 
+    /// loosely based on http://remy.supertext.ch/2012/08/clean-filenames/
+    /// </summary>
     public static class HtmlUtil
     {
         private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);

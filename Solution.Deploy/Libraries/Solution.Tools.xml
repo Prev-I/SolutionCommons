@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Solution.Tools</name>
+    </assembly>
+    <members>
+        <member name="M:Solution.Tools.Utilities.HttpUtil.GetAsync``1(System.Net.Http.HttpClient,System.Uri,System.Threading.CancellationToken)">
+            <summary>
+            Execute a GET request as async operation storing the result as a stream before parsing
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="client"></param>
+            <param name="uri"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Solution.Tools.Utilities.HttpUtil.PostAsync(System.Net.Http.HttpClient,System.Uri,System.Object,System.Threading.CancellationToken)">
+            <summary>
+            Execute a POST request as async operation storing the content inside a stream before sending
+            </summary>
+            <param name="client"></param>
+            <param name="uri"></param>
+            <param name="content"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Solution.Tools.Utilities.HttpUtil.GetAsyncBasic``1(System.Net.Http.HttpClient,System.Uri,System.Threading.CancellationToken)">
+            <summary>
+            Execute a GET request as async operation storing the result in a string before parsing
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="client"></param>
+            <param name="uri"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Solution.Tools.Utilities.HttpUtil.PostAsyncBasic(System.Net.Http.HttpClient,System.Uri,System.Object,System.Threading.CancellationToken)">
+            <summary>
+            Execute a POST request as async operation storing the content inside a string before sending
+            </summary>
+            <param name="client"></param>
+            <param name="uri"></param>
+            <param name="content"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Solution.Tools.Utilities.HttpUtil.AddToQueryString(System.String,System.String,System.String)">
+            <summary>
+            Parse the querystring, add a new key-value pair and return the result
+            </summary>
+            <param name="queryString"></param>
+            <param name="key"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Solution.Tools.Utilities.HttpUtil.CreateHttpContent(System.Object)">
+            <summary>
+            Serialize a generic object to JSON inside an HttpContent using a support stream
+            </summary>
+            <param name="content"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Solution.Tools.Utilities.JsonUtil.Serialize(System.Object,Newtonsoft.Json.Formatting)">
+            <summary>
+            Serialize an object to JSON stream using Json.Net
+            </summary>
+            <param name="value">Any DotNet object</param>
+            <param name="jsonFormat">Specify if indent when formatting</param>
+            <returns>Stream pointing to a valid JSON</returns>
+        </member>
+        <member name="M:Solution.Tools.Utilities.JsonUtil.Deserialize``1(System.IO.Stream,Newtonsoft.Json.Formatting)">
+            <summary>
+            Deserialize a JSON stream to a type T object using Json.Net
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="jsonStream">Stream pointing to a valid JSON</param>
+            <param name="jsonFormat">Specify if provided JSON is indented</param>
+            <returns>DotNet object casted to type T</returns>
+        </member>
+        <member name="M:Solution.Tools.Utilities.JsonUtil.StreamToStringAsync(System.IO.Stream)">
+            <summary>
+            Support function to serialize json asynchronously
+            </summary>
+            <param name="stream">JSON stream to be serialized</param>
+            <returns>Task with serialized JSON string</returns>
+        </member>
+        <member name="T:Solution.Tools.Utilities.SevenZipUtil">
+            <summary>
+            Class to handle compression and decompression of archives supported by 7zip 
+            </summary>
+            <example>
+            /Libraries/SevenZip/ is required in the root directory to load 7z.dll for x86 or x64 arch
+            using SevenZip;
+            </example>
+        </member>
+        <member name="M:Solution.Tools.Utilities.SevenZipUtil.Compress(System.String[],System.String)">
+            <summary>
+            
+            </summary>
+            <param name="inputFiles"></param>
+            <param name="destinationFile"></param>
+        </member>
+        <member name="M:Solution.Tools.Utilities.SevenZipUtil.Decompress(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="inputFile"></param>
+            <param name="destinationDir"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Solution.Tools.Utilities.ZipUtil">
+            <summary>
+            
+            </summary>
+        </member>
+    </members>
+</doc>
