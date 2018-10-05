@@ -42,6 +42,7 @@ namespace Solution.Core.Utilities
         /// Performs a search in the LDAP server. This method is generic in its return value to show the power
         /// of searches. A less generic search method could be implemented to only search for users, for instance.
         /// </summary>
+        /// <param name="connection">An OPEN connection to LDAP server</param>
         /// <param name="baseDn">The distinguished name of the base node at which to start the search</param>
         /// <param name="ldapFilter">An LDAP filter as defined by RFC4515</param>
         /// <returns>A flat list of dictionaries which in turn include attributes and the distinguished name (DN)</returns>
@@ -73,6 +74,7 @@ namespace Solution.Core.Utilities
         /// Adds a user to the LDAP server database. This method is intentionally less generic than the search one to
         /// make it easier to add meaningful information to the database.
         /// </summary>
+        /// <param name="connection">An OPEN connection to LDAP server</param>
         /// <param name="user">Dictionary with the informations to be added, keys MUST be ldap fileds name</param>
         public static void AddUser(LdapConnection connection, Dictionary<string,string> user)
         {
@@ -99,6 +101,7 @@ namespace Solution.Core.Utilities
         /// <summary>
         /// This method shows how to modify an attribute.
         /// </summary>
+        /// <param name="connection">An OPEN connection to LDAP server</param>
         /// <param name="oldUid">Old user UID</param>
         /// <param name="newUid">New user UID</param>
         public static void ChangeUserUid(LdapConnection connection, string oldUid, string newUid)
@@ -116,6 +119,7 @@ namespace Solution.Core.Utilities
         /// <summary>
         /// This method shows how to delete anything by its distinguised name (DN).
         /// </summary>
+        /// <param name="connection">An OPEN connection to LDAP server</param>
         /// <param name="dn">Distinguished name of the entry to delete</param>
         public static void Delete(LdapConnection connection, string dn)
         {
@@ -128,6 +132,7 @@ namespace Solution.Core.Utilities
         /// We assume all users are at base DN ou=users,dc=example,dc=com and that passwords are
         /// hashed using SHA1 (no salt) in OpenLDAP format.
         /// </summary>
+        /// <param name="connection">An OPEN connection to LDAP server</param>
         /// <param name="username">Username</param>
         /// <param name="password">Password</param>
         /// <returns>true if the credentials are valid, false otherwise</returns>
@@ -146,6 +151,7 @@ namespace Solution.Core.Utilities
         /// queries its own database to validate the credentials. It is defined by the server
         /// how a user is mapped to its directory.
         /// </summary>
+        /// <param name="connection">An OPEN connection to LDAP server</param>
         /// <param name="username">Username</param>
         /// <param name="password">Password</param>
         /// <returns>true if the credentials are valid, false otherwise</returns>
