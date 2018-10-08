@@ -22,6 +22,11 @@ namespace Solution.Core.Utilities
 
         #region mimetype
 
+        /// <summary>
+        /// Check the file extension to find the corrisponding mimetype
+        /// </summary>
+        /// <param name="fileName">Filename containing the extension part</param>
+        /// <returns>Associated mimetype</returns>
         public static string GetMIMEType(string fileName)
         {
             string extension = Path.GetExtension(fileName).ToLowerInvariant();
@@ -231,6 +236,11 @@ namespace Solution.Core.Utilities
 
         #region Downloads
 
+        /// <summary>
+        /// Convert file size in byte to a friendly text equivalent
+        /// </summary>
+        /// <param name="byteCount">File lenght</param>
+        /// <returns>File size as readable string</returns>
         public static string BytesToString(long byteCount)
         {
             string[] suf = { "B", "KB", "MB", "GB", "TB", "PB", "EB" }; //Longs run out around EB
@@ -242,13 +252,24 @@ namespace Solution.Core.Utilities
             return Convert.ToString(Math.Sign(byteCount) * num) + suf[place];
         }
 
-        //http://stackoverflow.com/questions/3885964/regex-to-replace-invalid-characters
+        /// <summary>
+        /// 
+        /// http://stackoverflow.com/questions/3885964/regex-to-replace-invalid-characters
+        /// </summary>
+        /// <param name="source">String to be stripped</param>
+        /// <returns>Cleaned string</returns>
         public static string RemoveNonWordChars(string source)
         {
             return RemoveNonWordChars(source, "");
         }
 
-        //http://stackoverflow.com/questions/3885964/regex-to-replace-invalid-characters
+        /// <summary>
+        /// Remove non basic characters (Latin alphabet and number) and replace them with provide replacement
+        /// http://stackoverflow.com/questions/3885964/regex-to-replace-invalid-characters
+        /// </summary>
+        /// <param name="source">String to be stripped</param>
+        /// <param name="replacement">String to be placed in uncommon characters</param>
+        /// <returns>Cleaned string</returns>
         public static string RemoveNonWordChars(string source, string replacement)
         {
             //\W is any non-word character (not [^a-zA-Z0-9_]).
@@ -256,6 +277,12 @@ namespace Solution.Core.Utilities
             return regex.Replace(source, replacement);
         }
 
+        /// <summary>
+        /// Remove non basic characters (Latin alphabet and number) from given filename
+        /// Usefull when you need to handle filename inside non UTF8 context
+        /// </summary>
+        /// <param name="fileName">String to be cleaned out</param>
+        /// <returns>Cleaned filename</returns>
         public static string CleanFileName(string fileName)
         {
             string fileEnding = null;
@@ -373,18 +400,33 @@ namespace Solution.Core.Utilities
 
         #region Base64
 
+        /// <summary>
+        /// Encode UTF8 string to a Base64 one
+        /// </summary>
+        /// <param name="plainText">UTF8 string</param>
+        /// <returns>Base64 string</returns>
         public static string Base64Encode(string plainText)
         {
             var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
             return System.Convert.ToBase64String(plainTextBytes);
         }
 
+        /// <summary>
+        /// Decode Base64 string to a UTF8 one
+        /// </summary>
+        /// <param name="base64EncodedData">Base64 string</param>
+        /// <returns>UTF8 string</returns>
         public static string Base64Decode(string base64EncodedData)
         {
             var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);
             return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
         }
 
+        /// <summary>
+        /// Check if inside a Base64 string not legal character are present
+        /// </summary>
+        /// <param name="base64EncodedData">Base64 string</param>
+        /// <returns>True if no illegal character are found</returns>
         public static bool IsBase64String(string base64EncodedData)
         {
             base64EncodedData = base64EncodedData.Trim();

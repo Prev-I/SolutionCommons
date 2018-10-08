@@ -165,7 +165,7 @@ namespace Solution.Core.Utilities
         /// <summary>
         /// Calculates the size of the directory
         /// </summary>
-        /// <param DirectoryInfo="target">DirectoryInfo targheting folder whose size must be retrieved</param>
+        /// <param name="target">DirectoryInfo targheting folder whose size must be retrieved</param>
         /// <param name="searchPattern">Filter file to be included in size calculation</param>
         /// <returns></returns>
         /// <exception cref="DirectoryNotFoundException">Thrown when directory path doesn't exist</exception>

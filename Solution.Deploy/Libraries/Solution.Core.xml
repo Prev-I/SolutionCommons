@@ -285,7 +285,7 @@
             <summary>
             Calculates the size of the directory
             </summary>
-            <param DirectoryInfo="target">DirectoryInfo targheting folder whose size must be retrieved</param>
+            <param name="target">DirectoryInfo targheting folder whose size must be retrieved</param>
             <param name="searchPattern">Filter file to be included in size calculation</param>
             <returns></returns>
             <exception cref="T:System.IO.DirectoryNotFoundException">Thrown when directory path doesn't exist</exception>
@@ -360,6 +360,66 @@
             Utils to handle some quirks of http mimetypes or special characters 
             loosely based on http://remy.supertext.ch/2012/08/clean-filenames/
             </summary>
+        </member>
+        <member name="M:Solution.Core.Utilities.HtmlUtil.GetMIMEType(System.String)">
+            <summary>
+            Check the file extension to find the corrisponding mimetype
+            </summary>
+            <param name="fileName">Filename containing the extension part</param>
+            <returns>Associated mimetype</returns>
+        </member>
+        <member name="M:Solution.Core.Utilities.HtmlUtil.BytesToString(System.Int64)">
+            <summary>
+            Convert file size in byte to a friendly text equivalent
+            </summary>
+            <param name="byteCount">File lenght</param>
+            <returns>File size as readable string</returns>
+        </member>
+        <member name="M:Solution.Core.Utilities.HtmlUtil.RemoveNonWordChars(System.String)">
+            <summary>
+            
+            http://stackoverflow.com/questions/3885964/regex-to-replace-invalid-characters
+            </summary>
+            <param name="source">String to be stripped</param>
+            <returns>Cleaned string</returns>
+        </member>
+        <member name="M:Solution.Core.Utilities.HtmlUtil.RemoveNonWordChars(System.String,System.String)">
+            <summary>
+            Remove non basic characters (Latin alphabet and number) and replace them with provide replacement
+            http://stackoverflow.com/questions/3885964/regex-to-replace-invalid-characters
+            </summary>
+            <param name="source">String to be stripped</param>
+            <param name="replacement">String to be placed in uncommon characters</param>
+            <returns>Cleaned string</returns>
+        </member>
+        <member name="M:Solution.Core.Utilities.HtmlUtil.CleanFileName(System.String)">
+            <summary>
+            Remove non basic characters (Latin alphabet and number) from given filename
+            Usefull when you need to handle filename inside non UTF8 context
+            </summary>
+            <param name="fileName">String to be cleaned out</param>
+            <returns>Cleaned filename</returns>
+        </member>
+        <member name="M:Solution.Core.Utilities.HtmlUtil.Base64Encode(System.String)">
+            <summary>
+            Encode UTF8 string to a Base64 one
+            </summary>
+            <param name="plainText">UTF8 string</param>
+            <returns>Base64 string</returns>
+        </member>
+        <member name="M:Solution.Core.Utilities.HtmlUtil.Base64Decode(System.String)">
+            <summary>
+            Decode Base64 string to a UTF8 one
+            </summary>
+            <param name="base64EncodedData">Base64 string</param>
+            <returns>UTF8 string</returns>
+        </member>
+        <member name="M:Solution.Core.Utilities.HtmlUtil.IsBase64String(System.String)">
+            <summary>
+            Check if inside a Base64 string not legal character are present
+            </summary>
+            <param name="base64EncodedData">Base64 string</param>
+            <returns>True if no illegal character are found</returns>
         </member>
         <member name="T:Solution.Core.Utilities.LdapUtil">
             <summary>
