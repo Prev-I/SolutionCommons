@@ -281,6 +281,15 @@
             <param name="target">Directory to be cleaned</param>
             <returns></returns>
         </member>
+        <member name="M:Solution.Core.Utilities.FileUtil.GetDirectorySize(System.IO.DirectoryInfo,System.String)">
+            <summary>
+            Calculates the size of the directory
+            </summary>
+            <param DirectoryInfo="target">DirectoryInfo targheting folder whose size must be retrieved</param>
+            <param name="searchPattern">Filter file to be included in size calculation</param>
+            <returns></returns>
+            <exception cref="T:System.IO.DirectoryNotFoundException">Thrown when directory path doesn't exist</exception>
+        </member>
         <member name="M:Solution.Core.Utilities.FileUtil.DeleteFile(System.IO.FileInfo)">
             <summary>
             Delete file even if it is a readonly one

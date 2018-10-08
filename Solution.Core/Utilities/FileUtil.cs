@@ -163,6 +163,21 @@ namespace Solution.Core.Utilities
         }
 
         /// <summary>
+        /// Calculates the size of the directory
+        /// </summary>
+        /// <param DirectoryInfo="target">DirectoryInfo targheting folder whose size must be retrieved</param>
+        /// <param name="searchPattern">Filter file to be included in size calculation</param>
+        /// <returns></returns>
+        /// <exception cref="DirectoryNotFoundException">Thrown when directory path doesn't exist</exception>
+        public static long GetDirectorySize(DirectoryInfo target, string searchPattern = "*")
+        {
+            if (!target.Exists)
+                throw new DirectoryNotFoundException();
+
+            return target.GetFiles(searchPattern, SearchOption.AllDirectories).Sum(t => t.Length);
+        }
+
+        /// <summary>
         /// Delete file even if it is a readonly one
         /// </summary>
         /// <param name="file">FileInfo of file to be removed</param>
