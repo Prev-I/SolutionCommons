@@ -287,6 +287,32 @@
             </summary>
             <param name="file">FileInfo of file to be removed</param>
         </member>
+        <member name="M:Solution.Core.Utilities.FileUtil.Lock(System.IO.FileInfo,System.IO.FileStream@,System.Int32,System.IO.FileAccess)">
+            <summary>
+            Lock a file if its length is not changing during specified interval and the file is not already in use.
+            </summary>
+            <param name="file">FileInfo that point to file to be locked</param>
+            <param name="lockedFileStream">FileStream handle to the locked file</param>
+            <param name="mSecIntervalChecBeforeLocking">Window interval to check for file length changes</param>     
+            <param name="access">Specify how to access the locked file</param>
+            <returns>true if success or false if the file length is changing or the file is already locked.</returns>
+            <exception cref="T:System.IO.FileNotFoundException">Thrown when file doesn't exist</exception>
+        </member>
+        <member name="M:Solution.Core.Utilities.FileUtil.UnLock(System.IO.FileStream)">
+            <summary>
+            Unlock the fileStream
+            </summary>
+            <param name="fileStream">FileStream handle to the locked file</param>
+        </member>
+        <member name="M:Solution.Core.Utilities.FileUtil.IsFileSizeChanging(System.IO.FileInfo,System.Int32)">
+            <summary>
+            Check if the file size is changing during specified interval 
+            </summary>
+            <param name="file">FileInfo that point to file to be checked</param>
+            <param name="mSecInterval">how many milliseconds wait before picking the file length again</param>
+            <exception cref="T:System.IO.FileNotFoundException">Thrown when file doesn't exist</exception>
+            <returns>true if the file size is chaning, false otherwise</returns>
+        </member>
         <member name="T:Solution.Core.Utilities.GZipUtil">
             <summary>
             
