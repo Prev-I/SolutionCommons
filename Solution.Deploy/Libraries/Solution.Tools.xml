@@ -4,6 +4,67 @@
         <name>Solution.Tools</name>
     </assembly>
     <members>
+        <member name="T:Solution.Tools.Utilities.AesCryptUtil">
+            <summary>
+            Class to handle the load and save from AES Crypt file format
+            https://www.aescrypt.com/
+            REQUIRE: SharpAESCrypt
+            </summary>
+        </member>
+        <member name="M:Solution.Tools.Utilities.AesCryptUtil.EncryptFile(System.String,System.Byte[])">
+            <summary>
+            Encrypt input data to AES Crypt format using the provided password
+            </summary>
+            <param name="password">String used to encrypt data</param>
+            <param name="inputData">Byte array of the plain data</param>
+            <returns>Encrypted byte array</returns>
+        </member>
+        <member name="M:Solution.Tools.Utilities.AesCryptUtil.EncryptFile(System.String,System.String,System.String)">
+            <summary>
+            Encrypt input data to AES Crypt format using the provided password and save it to disk
+            </summary>
+            <param name="password">String used to encrypt data</param>
+            <param name="inputFile">Full path of plain file</param>
+            <param name="outputFile">Full path where to create encrypted file</param>
+        </member>
+        <member name="M:Solution.Tools.Utilities.AesCryptUtil.EncryptFile(System.String,System.IO.Stream)">
+            <summary>
+            Encrypt input data to AES Crypt format using the provided password and return it as stream
+            </summary>
+            <param name="password">String used to encrypt data</param>
+            <param name="inputFileStream">Stream of plain content</param>
+            <returns>Stream of encrypted data</returns>
+        </member>
+        <member name="M:Solution.Tools.Utilities.AesCryptUtil.DecryptFile(System.String,System.Byte[])">
+            <summary>
+            Decrypt input data in AES Crypt format using the provided password
+            </summary>
+            <param name="password">String used to decrypt data</param>
+            <param name="inputData">Byte array of the encrypted file</param>
+            <returns>Decrypted byte array</returns>
+        </member>
+        <member name="M:Solution.Tools.Utilities.AesCryptUtil.DecryptFile(System.String,System.String,System.String)">
+            <summary>
+            Decrypt input data in AES Crypt format using the provided password and save it on disk
+            </summary>
+            <param name="password">String used to decrypt data</param>
+            <param name="inputFile">Full path of encrypted file</param>
+            <param name="outputFile">Full path where to create decrypted file</param>
+        </member>
+        <member name="M:Solution.Tools.Utilities.AesCryptUtil.DecryptFile(System.String,System.IO.Stream)">
+            <summary>
+            Decrypt input data in AES Crypt format using the provided password and return as stream
+            </summary>
+            <param name="password">String used to decrypt data</param>
+            <param name="inputFileStream">Stream of the encrypted content</param>
+            <returns>Stream of decrypted data</returns>
+        </member>
+        <member name="T:Solution.Tools.Utilities.HttpUtil">
+            <summary>
+            Utility class to use Dot.Net HttpClient in memory efficient way
+            REQUIRE: Newtonsoft.Json
+            </summary>
+        </member>
         <member name="M:Solution.Tools.Utilities.HttpUtil.GetAsync``1(System.Net.Http.HttpClient,System.Uri,System.Threading.CancellationToken)">
             <summary>
             Execute a GET request as async operation storing the result as a stream before parsing
@@ -60,6 +121,33 @@
             <param name="content"></param>
             <returns></returns>
         </member>
+        <member name="T:Solution.Tools.Utilities.ApiException">
+            <summary>
+            Exception on remote endpoint failed operations
+            </summary>
+        </member>
+        <member name="P:Solution.Tools.Utilities.ApiException.StatusCode">
+            <summary>
+            HTTP status code
+            </summary>
+        </member>
+        <member name="P:Solution.Tools.Utilities.ApiException.Content">
+            <summary>
+            Content of the failed method
+            </summary>
+        </member>
+        <member name="T:Solution.Tools.Utilities.ImageUtil">
+            <summary>
+            Utility for image manipulations using ImageMagick as backend
+            REQUIRED: ImageMagick
+            </summary>
+        </member>
+        <member name="T:Solution.Tools.Utilities.JsonUtil">
+            <summary>
+            Utility to handle serializzation and deserializzation of JSON from Stream
+            REQUIRE: Newtonsoft.Json
+            </summary>
+        </member>
         <member name="M:Solution.Tools.Utilities.JsonUtil.Serialize(System.Object,Newtonsoft.Json.Formatting)">
             <summary>
             Serialize an object to JSON stream using Json.Net
@@ -84,33 +172,61 @@
             <param name="stream">JSON stream to be serialized</param>
             <returns>Task with serialized JSON string</returns>
         </member>
+        <member name="T:Solution.Tools.Utilities.NpgsqlUtil">
+            <summary>
+            Utility to execute SQL command on PostgreSQL DBMS
+            REQUIRE: Npgsql
+            </summary>
+        </member>
+        <member name="T:Solution.Tools.Utilities.OpenXmlUtil">
+            <summary>
+            Utility class to help common operations on Office files
+            REQUIRE: DocumentFormat.OpenXml
+            </summary>
+        </member>
+        <member name="T:Solution.Tools.Utilities.PostgreSQLUtil">
+            <summary>
+            Utility generate SQL statements (compatible with PostgreSQL) from CLR objects
+            REQUIRE: Npgsql
+            </summary>
+        </member>
         <member name="T:Solution.Tools.Utilities.SevenZipUtil">
             <summary>
             Class to handle compression and decompression of archives supported by 7zip 
+            REQUIRE: SevenZip
+            REQUIRE: /Libraries/SevenZip/ in the root directory to load 7z.dll for x86 or x64 arch
             </summary>
-            <example>
-            /Libraries/SevenZip/ is required in the root directory to load 7z.dll for x86 or x64 arch
-            using SevenZip;
-            </example>
         </member>
         <member name="M:Solution.Tools.Utilities.SevenZipUtil.Compress(System.String[],System.String)">
             <summary>
-            
+            Compress al inputFiles to destination sevenZip archive
             </summary>
-            <param name="inputFiles"></param>
-            <param name="destinationFile"></param>
+            <param name="inputFiles">Array of full path of input files</param>
+            <param name="destinationFile">Path of where to create 7z archive</param>
         </member>
         <member name="M:Solution.Tools.Utilities.SevenZipUtil.Decompress(System.String,System.String)">
             <summary>
-            
+            Decompress file contained in inputFile inside a destinationDir
             </summary>
-            <param name="inputFile"></param>
-            <param name="destinationDir"></param>
-            <returns></returns>
+            <param name="inputFile">Path to 7z archive</param>
+            <param name="destinationDir">Directory where to put the archive content</param>
+            <returns>Return true if extraction is succeded, false otherwise</returns>
+        </member>
+        <member name="T:Solution.Tools.Utilities.SftpUtil">
+            <summary>
+            Utility to initialize and manage operations on SFTP server
+            REQUIRE: SSH.NET
+            </summary>
+        </member>
+        <member name="T:Solution.Tools.Utilities.SqlUtil">
+            <summary>
+            Utility to execute SQL command on SQLServer DBMS
+            </summary>
         </member>
         <member name="T:Solution.Tools.Utilities.ZipUtil">
             <summary>
-            
+            Utility class to compress/decompress data in zip format
+            REQUIRE: Ionic.Zip
             </summary>
         </member>
     </members>

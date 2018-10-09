@@ -6,7 +6,7 @@
     <members>
         <member name="T:Solution.Core.Utilities.BitmapUtil">
             <summary>
-            
+            Utility to resize and crop BMP image format
             </summary>
         </member>
         <member name="M:Solution.Core.Utilities.BitmapUtil.ResizeMaxWidth(System.Drawing.Bitmap,System.Int32)">
@@ -106,7 +106,7 @@
         </member>
         <member name="T:Solution.Core.Utilities.CmdUtil">
             <summary>
-            
+            Utility to launch external command inside a CMD 
             </summary>
         </member>
         <member name="M:Solution.Core.Utilities.CmdUtil.ExecuteCommandCmd(System.String)">
@@ -126,7 +126,7 @@
         </member>
         <member name="T:Solution.Core.Utilities.ConfigUtil">
             <summary>
-            
+            Utility to help manage the update of appsetting value in .config files
             </summary>
         </member>
         <member name="M:Solution.Core.Utilities.ConfigUtil.UpdateAllSettings(System.Xml.XmlDocument)">
@@ -159,7 +159,7 @@
         </member>
         <member name="T:Solution.Core.Utilities.CryptoUtil">
             <summary>
-            
+            Utility to encrypt/decrypt using AES and generate hash using SHA256
             </summary>
         </member>
         <member name="M:Solution.Core.Utilities.CryptoUtil.EncryptString(System.String,System.Int32,System.String)">
@@ -202,14 +202,14 @@
         </member>
         <member name="M:Solution.Core.Utilities.CryptoUtil.HashFile(System.IO.FileInfo)">
             <summary>
-            Function to hash a file using sha256 algoritm
+            Function to hash a file using SHA256 algoritm
             </summary>
             <param name="inputFile">Input file to be hashed</param>
             <returns>Return the file hash encoded in Base64</returns>
         </member>
         <member name="T:Solution.Core.Utilities.CsvUtil">
             <summary>
-            
+            Utility to load and save CSV files between Disk and DataTable
             </summary>
         </member>
         <member name="M:Solution.Core.Utilities.CsvUtil.SerializeDataTable(System.Data.DataTable,System.String,System.String,System.Boolean)">
@@ -220,7 +220,7 @@
             <param name="separator">Custom separator, default ;</param>
             <param name="wrapper">Custom field wrapper, default "</param>
             <param name="addHeadersFromTable">Specify if the first row serialized has to be the header row</param>
-            <returns></returns>
+            <returns>String containing the CSV file</returns>
         </member>
         <member name="M:Solution.Core.Utilities.CsvUtil.LoadDataTable(System.IO.FileInfo,System.Char,System.String,System.Boolean)">
             <summary>
@@ -230,25 +230,25 @@
             <param name="separator">Custom separator, default ;</param>
             <param name="wrapper">Custom field wrapper, default "</param>
             <param name="csvContainHeaders">Specify if the first row contains header or actual table data</param>
-            <returns></returns>
+            <returns>DataTable of the loaded CSV</returns>
         </member>
         <member name="T:Solution.Core.Utilities.FileUtil">
             <summary>
-            
+            Common operations on filesysten 
             </summary>
         </member>
         <member name="M:Solution.Core.Utilities.FileUtil.CheckAlreadyRunning">
             <summary>
             Check if the current process alredy exist in the system process list
             </summary>
-            <returns></returns>
+            <returns>True if another process with the same name is found</returns>
         </member>
         <member name="M:Solution.Core.Utilities.FileUtil.GetLocalExecutionFullPah(System.String)">
             <summary>
             Find the full path for specified file relative to application executable
             </summary>
             <param name="fileName">File to found relative to executable</param>
-            <returns></returns>
+            <returns>Full path of the specified file</returns>
         </member>
         <member name="M:Solution.Core.Utilities.FileUtil.GetFullPath(System.String)">
             <summary>
@@ -264,7 +264,6 @@
             <param name="source">Selected folder to be copied</param>
             <param name="target">Destination folder for the copy operation</param>
             <param name="overwrite">What to do in case a subfolder/file already exist</param>
-            <returns></returns>
         </member>
         <member name="M:Solution.Core.Utilities.FileUtil.InitDirectory(System.IO.DirectoryInfo,System.Boolean)">
             <summary>
@@ -272,14 +271,12 @@
             </summary>
             <param name="target">DirectoryInfo to be initialized</param>
             <param name="overwrite">Params to tell if overwrite already existing directory</param>
-            <returns></returns>
         </member>
         <member name="M:Solution.Core.Utilities.FileUtil.CleanDirectory(System.IO.DirectoryInfo)">
             <summary>
             Remove all file and directory inside a specified target
             </summary>
             <param name="target">Directory to be cleaned</param>
-            <returns></returns>
         </member>
         <member name="M:Solution.Core.Utilities.FileUtil.GetDirectorySize(System.IO.DirectoryInfo,System.String)">
             <summary>
@@ -287,7 +284,7 @@
             </summary>
             <param name="target">DirectoryInfo targheting folder whose size must be retrieved</param>
             <param name="searchPattern">Filter file to be included in size calculation</param>
-            <returns></returns>
+            <returns>Cumulative size in byte as long</returns>
             <exception cref="T:System.IO.DirectoryNotFoundException">Thrown when directory path doesn't exist</exception>
         </member>
         <member name="M:Solution.Core.Utilities.FileUtil.DeleteFile(System.IO.FileInfo)">
@@ -304,7 +301,7 @@
             <param name="lockedFileStream">FileStream handle to the locked file</param>
             <param name="mSecIntervalChecBeforeLocking">Window interval to check for file length changes</param>     
             <param name="access">Specify how to access the locked file</param>
-            <returns>true if success or false if the file length is changing or the file is already locked.</returns>
+            <returns>True if success or false if the file length is changing or the file is already locked.</returns>
             <exception cref="T:System.IO.FileNotFoundException">Thrown when file doesn't exist</exception>
         </member>
         <member name="M:Solution.Core.Utilities.FileUtil.UnLock(System.IO.FileStream)">
@@ -320,11 +317,26 @@
             <param name="file">FileInfo that point to file to be checked</param>
             <param name="mSecInterval">how many milliseconds wait before picking the file length again</param>
             <exception cref="T:System.IO.FileNotFoundException">Thrown when file doesn't exist</exception>
-            <returns>true if the file size is chaning, false otherwise</returns>
+            <returns>True if the file size is chaning, false otherwise</returns>
+        </member>
+        <member name="M:Solution.Core.Utilities.FileUtil.AddNetworkShare(System.String,System.String,System.String,System.String)">
+            <summary>
+            Connect remote share to local machine with provided authentication
+            </summary>
+            <param name="remoteShare">Remote UNC path with optional network drive letter</param>
+            <param name="domain">RemoteShare user domain</param>
+            <param name="username">Used to login on remoteShare</param>
+            <param name="password">Used to login on remoteShare</param>
+        </member>
+        <member name="M:Solution.Core.Utilities.FileUtil.RemoveNetworkShare(System.String)">
+            <summary>
+            Disconnect remote share from local machine
+            </summary>
+            <param name="remoteShare">Remote UNC path or network drive letter</param>
         </member>
         <member name="T:Solution.Core.Utilities.GZipUtil">
             <summary>
-            
+            Utility to compress and decompress zip file using native framework libraries
             </summary>
         </member>
         <member name="M:Solution.Core.Utilities.GZipUtil.Compress(System.Byte[])">
@@ -436,7 +448,7 @@
             <param name="domain"></param>
             <param name="username"></param>
             <param name="password"></param>
-            <returns></returns>
+            <returns>Initialized connection to LDAP to be binded by external code</returns>
         </member>
         <member name="M:Solution.Core.Utilities.LdapUtil.Search(System.DirectoryServices.Protocols.LdapConnection,System.String,System.String)">
             <summary>
@@ -480,7 +492,7 @@
             <param name="connection">An OPEN connection to LDAP server</param>
             <param name="username">Username</param>
             <param name="password">Password</param>
-            <returns>true if the credentials are valid, false otherwise</returns>
+            <returns>True if the credentials are valid, false otherwise</returns>
         </member>
         <member name="M:Solution.Core.Utilities.LdapUtil.ValidateUserByBind(System.DirectoryServices.Protocols.LdapConnection,System.String,System.String)">
             <summary>
@@ -491,16 +503,101 @@
             <param name="connection">An OPEN connection to LDAP server</param>
             <param name="username">Username</param>
             <param name="password">Password</param>
-            <returns>true if the credentials are valid, false otherwise</returns>
+            <returns>True if the credentials are valid, false otherwise</returns>
         </member>
         <member name="T:Solution.Core.Utilities.StringUtil">
             <summary>
+            Additional operation on string values used in compare and parsing
+            </summary>
+        </member>
+        <member name="M:Solution.Core.Utilities.StringUtil.Parse``1(System.Object)">
+            <summary>
             
             </summary>
+            <typeparam name="T"></typeparam>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Solution.Core.Utilities.StringUtil.Parse``1(System.String)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Solution.Core.Utilities.StringUtil.Parse``1(System.String,System.Object)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="obj"></param>
+            <param name="defaultValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Solution.Core.Utilities.StringUtil.ToStringOrDefault(System.Nullable{System.Decimal},System.String)">
+            <summary>
+            
+            </summary>
+            <param name="source"></param>
+            <param name="format"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Solution.Core.Utilities.StringUtil.ToStringOrDefault(System.Nullable{System.Decimal},System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="source"></param>
+            <param name="format"></param>
+            <param name="defaultValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Solution.Core.Utilities.StringUtil.ToStringOrDefault(System.Nullable{System.DateTime},System.String)">
+            <summary>
+            
+            </summary>
+            <param name="source"></param>
+            <param name="format"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Solution.Core.Utilities.StringUtil.ToStringOrDefault(System.Nullable{System.DateTime},System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="source"></param>
+            <param name="format"></param>
+            <param name="defaultValue"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Solution.Core.Utilities.VersionComparerNumber">
+            <summary>
+            Comparer for dot separated versions with integer values
+            </summary>
+        </member>
+        <member name="M:Solution.Core.Utilities.VersionComparerNumber.Compare(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Solution.Core.Utilities.VersionComparerString">
+            <summary>
+            Comparer for dot separated versions with string values
+            </summary>
+        </member>
+        <member name="M:Solution.Core.Utilities.VersionComparerString.Compare(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <returns></returns>
         </member>
         <member name="T:Solution.Core.Utilities.XlstUtil">
             <summary>
-            
+            Utility to execute XSLT 1.0 transformations 
             </summary>
         </member>
         <member name="M:Solution.Core.Utilities.XlstUtil.Transform(System.String,System.String)">
