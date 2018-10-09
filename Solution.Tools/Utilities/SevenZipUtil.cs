@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using System.IO;
-using SevenZip;
 
 using log4net;
+using SevenZip;
 
 using Solution.Core.Utilities;
 
@@ -16,20 +16,18 @@ namespace Solution.Tools.Utilities
 {
     /// <summary>
     /// Class to handle compression and decompression of archives supported by 7zip 
+    /// REQUIRE: SevenZip
+    /// REQUIRE: /Libraries/SevenZip/ in the root directory to load 7z.dll for x86 or x64 arch
     /// </summary>
-    /// <example>
-    /// /Libraries/SevenZip/ is required in the root directory to load 7z.dll for x86 or x64 arch
-    /// using SevenZip;
-    /// </example>
     public static class SevenZipUtil
     {
         private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         /// <summary>
-        /// 
+        /// Compress al inputFiles to destination sevenZip archive
         /// </summary>
-        /// <param name="inputFiles"></param>
-        /// <param name="destinationFile"></param>
+        /// <param name="inputFiles">Array of full path of input files</param>
+        /// <param name="destinationFile">Path of where to create 7z archive</param>
         public static void Compress(string[] inputFiles, string destinationFile)
         {
             SevenZipWorking wrk = new SevenZipWorking();
@@ -51,11 +49,11 @@ namespace Solution.Tools.Utilities
         }
 
         /// <summary>
-        /// 
+        /// Decompress file contained in inputFile inside a destinationDir
         /// </summary>
-        /// <param name="inputFile"></param>
-        /// <param name="destinationDir"></param>
-        /// <returns></returns>
+        /// <param name="inputFile">Path to 7z archive</param>
+        /// <param name="destinationDir">Directory where to put the archive content</param>
+        /// <returns>Return true if extraction is succeded, false otherwise</returns>
         public static bool Decompress(string inputFile, string destinationDir)
         {
             SevenZipWorking wrk = new SevenZipWorking();

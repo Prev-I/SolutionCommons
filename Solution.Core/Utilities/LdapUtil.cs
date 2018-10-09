@@ -29,7 +29,7 @@ namespace Solution.Core.Utilities
         /// <param name="domain"></param>
         /// <param name="username"></param>
         /// <param name="password"></param>
-        /// <returns></returns>
+        /// <returns>Initialized connection to LDAP to be binded by external code</returns>
         public static LdapConnection CreateClient(string hostname, int port, string domain, string username,  string password)
         {
             var credentials = new NetworkCredential(username, password, domain);
@@ -135,7 +135,7 @@ namespace Solution.Core.Utilities
         /// <param name="connection">An OPEN connection to LDAP server</param>
         /// <param name="username">Username</param>
         /// <param name="password">Password</param>
-        /// <returns>true if the credentials are valid, false otherwise</returns>
+        /// <returns>True if the credentials are valid, false otherwise</returns>
         public static bool ValidateUser(LdapConnection connection, string username, string password)
         {
             var sha1 = new SHA1Managed();
@@ -154,7 +154,7 @@ namespace Solution.Core.Utilities
         /// <param name="connection">An OPEN connection to LDAP server</param>
         /// <param name="username">Username</param>
         /// <param name="password">Password</param>
-        /// <returns>true if the credentials are valid, false otherwise</returns>
+        /// <returns>True if the credentials are valid, false otherwise</returns>
         public static bool ValidateUserByBind(LdapConnection connection, string username, string password)
         {
             bool result = true;

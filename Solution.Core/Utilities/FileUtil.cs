@@ -12,7 +12,7 @@ using log4net;
 namespace Solution.Core.Utilities
 {
     /// <summary>
-    /// 
+    /// Common operations on filesysten 
     /// </summary>
     public static class FileUtil
     {
@@ -22,7 +22,7 @@ namespace Solution.Core.Utilities
         /// <summary>
         /// Check if the current process alredy exist in the system process list
         /// </summary>
-        /// <returns></returns>
+        /// <returns>True if another process with the same name is found</returns>
         public static bool CheckAlreadyRunning()
         {
             if (System.Diagnostics.Process.GetProcessesByName(
@@ -39,7 +39,7 @@ namespace Solution.Core.Utilities
         /// Find the full path for specified file relative to application executable
         /// </summary>
         /// <param name="fileName">File to found relative to executable</param>
-        /// <returns></returns>
+        /// <returns>Full path of the specified file</returns>
         public static string GetLocalExecutionFullPah(string fileName = "")
         {
             try
@@ -76,7 +76,6 @@ namespace Solution.Core.Utilities
         /// <param name="source">Selected folder to be copied</param>
         /// <param name="target">Destination folder for the copy operation</param>
         /// <param name="overwrite">What to do in case a subfolder/file already exist</param>
-        /// <returns></returns>
         public static void CopyAll(DirectoryInfo source, DirectoryInfo target, bool overwrite = false)
         {
             try
@@ -109,7 +108,6 @@ namespace Solution.Core.Utilities
         /// </summary>
         /// <param name="target">DirectoryInfo to be initialized</param>
         /// <param name="overwrite">Params to tell if overwrite already existing directory</param>
-        /// <returns></returns>
         public static void InitDirectory(DirectoryInfo target, bool overwrite = false)
         {
             try
@@ -138,7 +136,6 @@ namespace Solution.Core.Utilities
         /// Remove all file and directory inside a specified target
         /// </summary>
         /// <param name="target">Directory to be cleaned</param>
-        /// <returns></returns>
         public static void CleanDirectory(DirectoryInfo target)
         {
             try
@@ -167,7 +164,7 @@ namespace Solution.Core.Utilities
         /// </summary>
         /// <param name="target">DirectoryInfo targheting folder whose size must be retrieved</param>
         /// <param name="searchPattern">Filter file to be included in size calculation</param>
-        /// <returns></returns>
+        /// <returns>Cumulative size in byte as long</returns>
         /// <exception cref="DirectoryNotFoundException">Thrown when directory path doesn't exist</exception>
         public static long GetDirectorySize(DirectoryInfo target, string searchPattern = "*")
         {
@@ -207,7 +204,7 @@ namespace Solution.Core.Utilities
         /// <param name="lockedFileStream">FileStream handle to the locked file</param>
         /// <param name="mSecIntervalChecBeforeLocking">Window interval to check for file length changes</param>     
         /// <param name="access">Specify how to access the locked file</param>
-        /// <returns>true if success or false if the file length is changing or the file is already locked.</returns>
+        /// <returns>True if success or false if the file length is changing or the file is already locked.</returns>
         /// <exception cref="FileNotFoundException">Thrown when file doesn't exist</exception>
         public static bool Lock(FileInfo file, out FileStream lockedFileStream, int mSecIntervalChecBeforeLocking = 1000, FileAccess access = FileAccess.Read)
         {
@@ -253,7 +250,7 @@ namespace Solution.Core.Utilities
         /// <param name="file">FileInfo that point to file to be checked</param>
         /// <param name="mSecInterval">how many milliseconds wait before picking the file length again</param>
         /// <exception cref="FileNotFoundException">Thrown when file doesn't exist</exception>
-        /// <returns>true if the file size is chaning, false otherwise</returns>
+        /// <returns>True if the file size is chaning, false otherwise</returns>
         public static bool IsFileSizeChanging(FileInfo file, int mSecInterval = 1000)
         {
             if (!file.Exists)

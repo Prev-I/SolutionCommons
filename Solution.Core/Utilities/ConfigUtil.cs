@@ -12,7 +12,7 @@ using log4net;
 namespace Solution.Core.Utilities
 {
     /// <summary>
-    /// 
+    /// Utility to help manage the update of appsetting value in .config files
     /// </summary>
     public static class ConfigUtil
     {

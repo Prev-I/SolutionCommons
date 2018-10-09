@@ -11,7 +11,7 @@ using log4net;
 namespace Solution.Core.Utilities
 {
     /// <summary>
-    /// 
+    /// Utility to resize and crop BMP image format
     /// </summary>
     public static class BitmapUtil
     {

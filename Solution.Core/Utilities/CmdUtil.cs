@@ -11,7 +11,7 @@ using log4net;
 namespace Solution.Core.Utilities
 {
     /// <summary>
-    /// 
+    /// Utility to launch external command inside a CMD 
     /// </summary>
     public static class CmdUtil
     {

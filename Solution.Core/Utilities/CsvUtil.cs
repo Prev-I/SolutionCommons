@@ -12,7 +12,7 @@ using log4net;
 namespace Solution.Core.Utilities
 {
     /// <summary>
-    /// 
+    /// Utility to load and save CSV files between Disk and DataTable
     /// </summary>
     public static class CsvUtil
     {
@@ -25,7 +25,7 @@ namespace Solution.Core.Utilities
         /// <param name="separator">Custom separator, default ;</param>
         /// <param name="wrapper">Custom field wrapper, default "</param>
         /// <param name="addHeadersFromTable">Specify if the first row serialized has to be the header row</param>
-        /// <returns></returns>
+        /// <returns>String containing the CSV file</returns>
         public static string SerializeDataTable(DataTable exportTable, string separator = ";", string wrapper = "\"", bool addHeadersFromTable = true)
         {
             try
@@ -64,7 +64,7 @@ namespace Solution.Core.Utilities
         /// <param name="separator">Custom separator, default ;</param>
         /// <param name="wrapper">Custom field wrapper, default "</param>
         /// <param name="csvContainHeaders">Specify if the first row contains header or actual table data</param>
-        /// <returns></returns>
+        /// <returns>DataTable of the loaded CSV</returns>
         public static DataTable LoadDataTable(FileInfo csvFile, char separator = ';', string wrapper = "\"", bool csvContainHeaders = true)
         {
             try

@@ -12,7 +12,7 @@ using log4net;
 namespace Solution.Core.Utilities
 {
     /// <summary>
-    /// 
+    /// Utility to compress and decompress zip file using native framework libraries
     /// </summary>
     public static class GZipUtil
     {

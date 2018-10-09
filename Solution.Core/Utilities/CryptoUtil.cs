@@ -13,7 +13,7 @@ using log4net;
 namespace Solution.Core.Utilities
 {
     /// <summary>
-    /// 
+    /// Utility to encrypt/decrypt using AES and generate hash using SHA256
     /// </summary>
     public static class CryptoUtil
     {
@@ -194,7 +194,7 @@ namespace Solution.Core.Utilities
         }
 
         /// <summary>
-        /// Function to hash a file using sha256 algoritm
+        /// Function to hash a file using SHA256 algoritm
         /// </summary>
         /// <param name="inputFile">Input file to be hashed</param>
         /// <returns>Return the file hash encoded in Base64</returns>

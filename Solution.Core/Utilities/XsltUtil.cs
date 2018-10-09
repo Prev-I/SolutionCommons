@@ -14,7 +14,7 @@ using log4net;
 namespace Solution.Core.Utilities
 {
     /// <summary>
-    /// 
+    /// Utility to execute XSLT 1.0 transformations 
     /// </summary>
     public static class XlstUtil
     {
