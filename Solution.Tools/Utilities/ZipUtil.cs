@@ -12,7 +12,8 @@ using Ionic.Zip;
 namespace Solution.Tools.Utilities
 {
     /// <summary>
-    /// 
+    /// Utility class to compress/decompress data in zip format
+    /// REQUIRE: Ionic.Zip
     /// </summary>
     public static class ZipUtil
     {

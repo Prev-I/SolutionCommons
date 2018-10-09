@@ -13,6 +13,10 @@ using Renci.SshNet.Sftp;
 
 namespace Solution.Tools.Utilities
 {
+    /// <summary>
+    /// Utility to initialize and manage operations on SFTP server
+    /// REQUIRE: SSH.NET
+    /// </summary>
     public static class SftpUtil
     {
         private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);

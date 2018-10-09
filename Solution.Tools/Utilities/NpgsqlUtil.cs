@@ -15,6 +15,10 @@ using NpgsqlTypes;
 
 namespace Solution.Tools.Utilities
 {
+    /// <summary>
+    /// Utility to execute SQL command on PostgreSQL DBMS
+    /// REQUIRE: Npgsql
+    /// </summary>
     public static class NpgsqlUtil
     {
         private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);

@@ -14,6 +14,9 @@ using log4net;
 
 namespace Solution.Tools.Utilities
 {
+    /// <summary>
+    /// Utility to execute SQL command on SQLServer DBMS
+    /// </summary>
     public static class SqlUtil
     {
         private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);

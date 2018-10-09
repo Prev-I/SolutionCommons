@@ -9,8 +9,14 @@ using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
 
 
+
+
 namespace Solution.Tools.Utilities
 {
+    /// <summary>
+    /// Utility class to help common operations on Office files
+    /// REQUIRE: DocumentFormat.OpenXml
+    /// </summary>
     public static class OpenXmlUtil
     {
         private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);

@@ -12,6 +12,10 @@ using ImageMagick;
 
 namespace Solution.Tools.Utilities
 {
+    /// <summary>
+    /// Utility for image manipulations using ImageMagick as backend
+    /// REQUIRED: ImageMagick
+    /// </summary>
     public static class ImageUtil
     {
         private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);

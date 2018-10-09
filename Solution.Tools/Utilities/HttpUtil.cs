@@ -14,6 +14,10 @@ using Newtonsoft.Json;
 
 namespace Solution.Tools.Utilities
 {
+    /// <summary>
+    /// Utility class to use Dot.Net HttpClient in memory efficient way
+    /// REQUIRE: Newtonsoft.Json
+    /// </summary>
     public static class HttpUtil
     {
         private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
@@ -165,10 +169,19 @@ namespace Solution.Tools.Utilities
 
     }
 
+    /// <summary>
+    /// Exception on remote endpoint failed operations
+    /// </summary>
     public class ApiException : Exception
     {
+        /// <summary>
+        /// HTTP status code
+        /// </summary>
         public int StatusCode { get; set; }
 
+        /// <summary>
+        /// Content of the failed method
+        /// </summary>
         public string Content { get; set; }
     }
 }

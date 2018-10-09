@@ -262,5 +262,26 @@ namespace Solution.Core.Utilities
             return !((file.Length - lenght) == 0);
         }
 
+        /// <summary>
+        /// Connect remote share to local machine with provided authentication
+        /// </summary>
+        /// <param name="remoteShare">Remote UNC path with optional network drive letter</param>
+        /// <param name="domain">RemoteShare user domain</param>
+        /// <param name="username">Used to login on remoteShare</param>
+        /// <param name="password">Used to login on remoteShare</param>
+        public static void AddNetworkShare(string remoteShare, string domain, string username, string password)
+        {
+            CmdUtil.ExecuteCommandCmd($"net use {remoteShare} /user:{domain}\\{username} {password}");
+        }
+
+        /// <summary>
+        /// Disconnect remote share from local machine
+        /// </summary>
+        /// <param name="remoteShare">Remote UNC path or network drive letter</param>
+        public static void RemoveNetworkShare(string remoteShare)
+        {
+            CmdUtil.ExecuteCommandCmd($"net use /delete /y {remoteShare}");
+        }
+
     }
 }

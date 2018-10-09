@@ -11,6 +11,10 @@ using Npgsql;
 
 namespace Solution.Tools.Utilities
 {
+    /// <summary>
+    /// Utility generate SQL statements (compatible with PostgreSQL) from CLR objects
+    /// REQUIRE: Npgsql
+    /// </summary>
     public static class PostgreSQLUtil
     {
         private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);

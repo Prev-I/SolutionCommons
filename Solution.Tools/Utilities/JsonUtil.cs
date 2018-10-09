@@ -11,6 +11,10 @@ using Newtonsoft.Json;
 
 namespace Solution.Tools.Utilities
 {
+    /// <summary>
+    /// Utility to handle serializzation and deserializzation of JSON from Stream
+    /// REQUIRE: Newtonsoft.Json
+    /// </summary>
     public static class JsonUtil
     {
         private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
