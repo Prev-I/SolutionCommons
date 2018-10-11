@@ -91,7 +91,6 @@ namespace Solution.Tools.Utilities
             }
         }
 
-
         /// <summary>
         /// Decrypt input data in AES Crypt format using the provided password
         /// </summary>

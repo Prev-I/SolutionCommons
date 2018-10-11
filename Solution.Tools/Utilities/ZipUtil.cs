@@ -20,6 +20,12 @@ namespace Solution.Tools.Utilities
         private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
 
+        /// <summary>
+        /// Compress a byte[] of data from a single file to a ZIP stored inside a memory stream
+        /// </summary>
+        /// <param name="plainData"></param>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
         public static MemoryStream CompressInMemory(byte[] plainData, string fileName)
         {
             using (var plainStream = new MemoryStream(plainData))
@@ -28,6 +34,12 @@ namespace Solution.Tools.Utilities
             }
         }
 
+        /// <summary>
+        /// Compress a Stream of data from a single file to a ZIP inside a memory stream
+        /// </summary>
+        /// <param name="plainStream"></param>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
         public static MemoryStream CompressInMemory(Stream plainStream, string fileName)
         {
             MemoryStream resultStream = new MemoryStream();
@@ -44,27 +56,44 @@ namespace Solution.Tools.Utilities
             return resultStream;
         }
 
-        public static FileStream CompressOnDisk(byte[] plainData, string workDirPath, string zipFileName, string fileName)
+        /// <summary>
+        /// Compress a byte[] of data from a single file to a ZIP file on disk
+        /// </summary>
+        /// <param name="plainData"></param>
+        /// <param name="zipFile"></param>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
+        public static FileStream CompressOnDisk(byte[] plainData, string zipFile, string fileName)
         {
             using (var plainStream = new MemoryStream(plainData))
             {
-                return CompressOnDisk(plainStream, workDirPath, zipFileName, fileName);
+                return CompressOnDisk(plainStream, zipFile, fileName);
             }
         }
 
-        public static FileStream CompressOnDisk(Stream plainStream, string workDirPath, string zipFileName, string fileName)
+        /// <summary>
+        /// Compress a Stream of data from a single file to a ZIP file on disk
+        /// </summary>
+        /// <param name="plainStream"></param>
+        /// <param name="zipFile"></param>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
+        public static FileStream CompressOnDisk(Stream plainStream, string zipFile, string fileName)
         {
-            string zipFilePath = Path.Combine(workDirPath, zipFileName);
-
             using (ZipFile zip = new ZipFile())
             {
                 zip.AddEntry(fileName, plainStream);
-                zip.Save(zipFilePath);
+                zip.Save(zipFile);
             }
-            return new FileStream(zipFilePath, FileMode.Open);
+            return new FileStream(zipFile, FileMode.Open);
         }
 
-
+        /// <summary>
+        /// Decompress a single file from a zip archive passed as byte[]
+        /// </summary>
+        /// <param name="compressedData"></param>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
         public static MemoryStream DecompressInMemory(byte[] compressedData, string fileName)
         {
             using (MemoryStream compressedStream = new MemoryStream(compressedData))
@@ -73,6 +102,12 @@ namespace Solution.Tools.Utilities
             }
         }
 
+        /// <summary>
+        /// Decompress a single file from a zip archive passed as Stream
+        /// </summary>
+        /// <param name="compressedStream"></param>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
         public static MemoryStream DecompressInMemory(Stream compressedStream, string fileName)
         {
             MemoryStream resultStream = new MemoryStream();
@@ -94,30 +129,45 @@ namespace Solution.Tools.Utilities
             return resultStream;
         }
 
-        public static FileStream DecompressOnDisk(byte[] compressedData, string workDirPath, string zipFileName, string fileName)
+        /// <summary>
+        /// Decompress a single file from a zip archive passed as byte[] saving it on disk
+        /// </summary>
+        /// <param name="compressedData"></param>
+        /// <param name="destinationDir"></param>
+        /// <param name="zipFile"></param>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
+        public static FileStream DecompressOnDisk(byte[] compressedData, string destinationDir, string zipFile, string fileName)
         {
             using (MemoryStream compressedStream = new MemoryStream(compressedData))
             {
-                return DecompressOnDisk(compressedStream, workDirPath, zipFileName, fileName);
+                return DecompressOnDisk(compressedStream, destinationDir, zipFile, fileName);
             }
         }
 
-        public static FileStream DecompressOnDisk(Stream compressedStream, string workDirPath, string zipFileName, string fileName)
+        /// <summary>
+        /// Decompress a single file from a zip archive passed as Stream saving it on disk
+        /// </summary>
+        /// <param name="compressedStream"></param>
+        /// <param name="destinationDir"></param>
+        /// <param name="zipFile"></param>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
+        public static FileStream DecompressOnDisk(Stream compressedStream, string destinationDir, string zipFile, string fileName)
         {
-            string zipFilePath = Path.Combine(workDirPath, zipFileName);
-            string filePath = Path.Combine(workDirPath, fileName);
+            string filePath = Path.Combine(destinationDir, fileName);
 
-            using (FileStream zipStream = new FileStream(zipFilePath, FileMode.Create, FileAccess.Write))
+            using (FileStream zipStream = new FileStream(zipFile, FileMode.Create, FileAccess.Write))
             {
                 compressedStream.CopyTo(zipStream);
             }
-            using (ZipFile zip = ZipFile.Read(zipFilePath))
+            using (ZipFile zip = ZipFile.Read(zipFile))
             {
                 foreach (ZipEntry file in zip)
                 {
                     if (fileName == file.FileName)
                     {
-                        file.Extract(workDirPath, ExtractExistingFileAction.OverwriteSilently);
+                        file.Extract(destinationDir, ExtractExistingFileAction.OverwriteSilently);
                         break;
                     }
                 }

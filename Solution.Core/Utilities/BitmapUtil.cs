@@ -19,7 +19,7 @@ namespace Solution.Core.Utilities
 
 
         /// <summary>
-        /// Ridimensiona un immagine se supera la larghezza massima (proporzionale: si, sgranato: no)
+        /// Resize an image if it's over the maxWitdth (proportional: yes, grainy: no)
         /// </summary>
         /// <param name="src"></param>
         /// <param name="maxWidth"></param>
@@ -65,7 +65,7 @@ namespace Solution.Core.Utilities
         }
 
         /// <summary>
-        /// Ridimensiona un immagine secondo la larghezza data (proporzionale: si, sgranato: si)
+        /// Resize an image to the newWidth (proportional: yes, grainy: yes)
         /// </summary>
         /// <param name="src"></param>
         /// <param name="newWidth"></param>
@@ -104,7 +104,7 @@ namespace Solution.Core.Utilities
         }
 
         /// <summary>
-        /// Ridimensiona un immagine se supera l'altezza massima (proporzionale: si, sgranato: no)
+        /// Resize an image if it's over the maxHeight (proportional: yes, grainy: no)
         /// </summary>
         /// <param name="src"></param>
         /// <param name="maxHeight"></param>
@@ -150,7 +150,7 @@ namespace Solution.Core.Utilities
         }
 
         /// <summary>
-        /// Ridimensiona un immagine secondo l'altezza data (proporzionale: si, sgranato: si)
+        /// Resize an image to the newHeight (proportional: yes, grainy: yes)
         /// </summary>
         /// <param name="src"></param>
         /// <param name="newHeight"></param>
@@ -189,7 +189,7 @@ namespace Solution.Core.Utilities
         }
 
         /// <summary>
-        /// Ridimensiona un immagine in modo che ricopra un box (proporzionale: si, sgranato: si)
+        /// Stretch an image to a provided box size (proportional: yes, grainy: yes)
         /// </summary>
         /// <param name="src"></param>
         /// <param name="boxWidth"></param>
@@ -209,7 +209,7 @@ namespace Solution.Core.Utilities
         }
 
         /// <summary>
-        /// Ridimensiona un immagine in modo che possa essere contenuta in un box (proporzionale: si, sgranato: no)
+        /// Reduce an image to a provided box size (proportional: yes, grainy: no)
         /// </summary>
         /// <param name="src"></param>
         /// <param name="boxWidth"></param>
@@ -229,7 +229,7 @@ namespace Solution.Core.Utilities
         }
 
         /// <summary>
-        /// Ridimensiona e deforma un immagine secondo le dimensioni specificate (proporzionale: no, sgranato: si)
+        /// Stretch an image to a new size (proportional: no, grainy: yes)
         /// </summary>
         /// <param name="src"></param>
         /// <param name="newWidth"></param>
@@ -245,7 +245,7 @@ namespace Solution.Core.Utilities
             {
                 // Create new Bitmap at new dimensions
                 Bitmap result = new Bitmap(newWidth, newHeight);
-                using (Graphics g = Graphics.FromImage((System.Drawing.Image)result))
+                using (Graphics g = Graphics.FromImage(result))
                 {
                     g.DrawImage(src, 0, 0, newWidth, newHeight);
                 }
@@ -254,7 +254,7 @@ namespace Solution.Core.Utilities
         }
 
         /// <summary>
-        /// Ritaglia un immagine delle dimensioni specificate a partire dal punto di inizio
+        /// Crop an image to specified size from start point
         /// </summary>
         /// <param name="bitmap"></param>
         /// <param name="startPointX"></param>
@@ -274,7 +274,7 @@ namespace Solution.Core.Utilities
         }
 
         /// <summary>
-        /// Ritaglia un immagine delle dimensioni specificate a partire dall'angolo in alto a sinistra
+        /// Crop an image to specified size starting from top left corner
         /// </summary>
         /// <param name="bitmap"></param>
         /// <param name="cropWidth"></param>
@@ -286,7 +286,7 @@ namespace Solution.Core.Utilities
         }
 
         /// <summary>
-        /// Ritaglia un immagine quadrata a partire dall'angolo in alto a sinistra
+        /// Crop image to a square size starting from top left corner
         /// </summary>
         /// <param name="bitmap"></param>
         /// <returns></returns>
@@ -303,7 +303,7 @@ namespace Solution.Core.Utilities
         }
 
         /// <summary>
-        /// Ridimensiona un immagine in modo che ricopra un box e taglia la parte che ne fuoriesce
+        /// Resize an image to be fitted in specified box and crop it if something is outside 
         /// </summary>
         /// <param name="bitmap"></param>
         /// <param name="boxWidth"></param>
