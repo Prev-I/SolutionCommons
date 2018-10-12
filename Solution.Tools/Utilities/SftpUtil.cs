@@ -15,19 +15,45 @@ namespace Solution.Tools.Utilities
 {
     public static class SftpUtil
     {
+        /// <summary>
+        /// Utility to provide wrapper around common SFTP operations from the SSH.NET library
+        /// REQUIRE SSH.NET
+        /// </summary>
         private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
+        /// <summary>
+        /// Enum to indicate files / folders / both 
+        /// </summary>
         public enum SftpElementListType
         {
+            /// <summary>
+            /// Only files
+            /// </summary>
             FILES_ONLY = 0,
+            /// <summary>
+            /// Only folders
+            /// </summary>
             DIRECTORIES_ONLY = 1,
+            /// <summary>
+            /// Both files and folders
+            /// </summary>
             FILES_AND_DIRECTORIES = 2
         }
 
 
         #region Connection Creation
 
-        public static SftpClient CreateClient(string hostname, int port, string username, string password, string privateKeyFile, string passPhrase)
+        /// <summary>
+        /// Initialize and return an SftpClient object without connecting to remote host
+        /// </summary>
+        /// <param name="hostname"></param>
+        /// <param name="port"></param>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="privateKeyFile"></param>
+        /// <param name="passPhrase"></param>
+        /// <returns>Initialized object to SFTP host to be connected by external code</returns>
+        public static SftpClient CreateClient(string hostname, int port, string username, string password = null, string privateKeyFile = null, string passPhrase = null)
         {
             AuthenticationMethod authenticationMethod = null;
             PrivateKeyFile keyFile = null;

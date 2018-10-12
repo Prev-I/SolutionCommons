@@ -29,7 +29,7 @@ namespace Solution.Core.Utilities
         /// <param name="domain"></param>
         /// <param name="username"></param>
         /// <param name="password"></param>
-        /// <returns>Initialized connection to LDAP to be binded by external code</returns>
+        /// <returns>Initialized object to LDAP server to be binded by external code</returns>
         public static LdapConnection CreateClient(string hostname, int port, string domain, string username,  string password)
         {
             var credentials = new NetworkCredential(username, password, domain);
