@@ -13,10 +13,6 @@ using Renci.SshNet.Sftp;
 
 namespace Solution.Tools.Utilities
 {
-    /// <summary>
-    /// Utility to initialize and manage operations on SFTP server
-    /// REQUIRE: SSH.NET
-    /// </summary>
     public static class SftpUtil
     {
         private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
@@ -69,28 +65,28 @@ namespace Solution.Tools.Utilities
             return GetRemoteElementList(client, remotePath, searchFilter, SftpElementListType.FILES_AND_DIRECTORIES);
         }
 
-        public static void DownloadRemoteFile(SftpClient client, string remotePath, string fileName, string outputDir, bool deleteRemoteFileAfterDownload)
+        public static void DownloadRemoteFile(SftpClient client, string remotePath, string remoteFileName, string localDir, string localFileName, bool deleteRemoteFileAfterDownload)
         {
             try
             {
-                using (FileStream fs = new FileStream(Path.Combine(outputDir, fileName), FileMode.Create))
+                using (FileStream fs = new FileStream(Path.Combine(localDir, localFileName), FileMode.Create))
                 {
-                    client.DownloadFile(remotePath + "/" + fileName, fs);
+                    client.DownloadFile(remotePath + "/" + remoteFileName, fs);
                 }
                 if (deleteRemoteFileAfterDownload)
                 {
-                    client.DeleteFile(remotePath + "/" + fileName);
+                    client.DeleteFile(remotePath + "/" + remoteFileName);
                 }
             }
             catch (Exception e)
             {
-                File.Delete(Path.Combine(outputDir, fileName));
+                File.Delete(Path.Combine(localDir, localFileName));
                 log.Error(e.Message, e);
                 throw new Exception("Escalated exception", e);
             }
         }
 
-        public static byte[] DownloadRemoteFile(SftpClient client, string remotePath, string fileName, bool deleteRemoteFileAfterDownload)
+        public static byte[] DownloadRemoteFile(SftpClient client, string remotePath, string remoteFileName, bool deleteRemoteFileAfterDownload)
         {
             byte[] fileData;
 
@@ -98,12 +94,12 @@ namespace Solution.Tools.Utilities
             {
                 using (MemoryStream ms = new MemoryStream())
                 {
-                    client.DownloadFile(remotePath + "/" + fileName, ms);
+                    client.DownloadFile(remotePath + "/" + remoteFileName, ms);
                     fileData = ms.ToArray();
                 }
                 if (deleteRemoteFileAfterDownload)
                 {
-                    client.DeleteFile(remotePath + "/" + fileName);
+                    client.DeleteFile(remotePath + "/" + remoteFileName);
                 }
                 return fileData;
             }
@@ -114,13 +110,13 @@ namespace Solution.Tools.Utilities
             }
         }
 
-        public static void UploadRemoteFile(SftpClient client, string remotePath, string fileName, string inputDir)
+        public static void UploadRemoteFile(SftpClient client, string remotePath, string remoteFileName, string localDir, string localFileName)
         {
             try
             {
-                using (FileStream fs = new FileStream(Path.Combine(inputDir, fileName), FileMode.Open))
+                using (FileStream fs = new FileStream(Path.Combine(localDir, localFileName), FileMode.Open))
                 {
-                    client.UploadFile(fs, remotePath + "/" + fileName);
+                    client.UploadFile(fs, remotePath + "/" + remoteFileName);
                 }
             }
             catch (Exception e)
@@ -130,13 +126,13 @@ namespace Solution.Tools.Utilities
             }
         }
 
-        public static void UploadRemoteFile(SftpClient client, string remotePath, string fileName, byte[] fileData)
+        public static void UploadRemoteFile(SftpClient client, string remotePath, string remoteFileName, byte[] fileData)
         {
             try
             {
                 using (MemoryStream ms = new MemoryStream(fileData))
                 {
-                    client.UploadFile(ms, remotePath + "/" + fileName);
+                    client.UploadFile(ms, remotePath + "/" + remoteFileName);
                 }
             }
             catch (Exception e)
@@ -159,11 +155,11 @@ namespace Solution.Tools.Utilities
             }
         }
 
-        public static void DeleteRemoteFile(SftpClient client, string remotePath, string fileName)
+        public static void DeleteRemoteFile(SftpClient client, string remotePath, string remoteFileName)
         {
             try
             {
-                client.DeleteFile(remotePath + "/" + fileName);
+                client.DeleteFile(remotePath + "/" + remoteFileName);
             }
             catch (Exception e)
             {
@@ -172,11 +168,11 @@ namespace Solution.Tools.Utilities
             }
         }
 
-        public static void DeleteRemoteFolderIfEmpty(SftpClient client, string remotePath, string folderName)
+        public static void DeleteRemoteFolderIfEmpty(SftpClient client, string remotePath, string remoteFolderName)
         {
             try
             {
-                client.DeleteDirectory(remotePath + "/" + folderName);
+                client.DeleteDirectory(remotePath + "/" + remoteFolderName);
             }
             catch (Exception e)
             {

@@ -212,12 +212,6 @@
             <param name="destinationDir">Directory where to put the archive content</param>
             <returns>Return true if extraction is succeded, false otherwise</returns>
         </member>
-        <member name="T:Solution.Tools.Utilities.SftpUtil">
-            <summary>
-            Utility to initialize and manage operations on SFTP server
-            REQUIRE: SSH.NET
-            </summary>
-        </member>
         <member name="T:Solution.Tools.Utilities.SqlUtil">
             <summary>
             Utility to execute SQL command on SQLServer DBMS
