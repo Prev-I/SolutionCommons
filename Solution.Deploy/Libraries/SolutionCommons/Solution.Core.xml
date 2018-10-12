@@ -448,7 +448,7 @@
             <param name="domain"></param>
             <param name="username"></param>
             <param name="password"></param>
-            <returns>Initialized connection to LDAP to be binded by external code</returns>
+            <returns>Initialized object to LDAP server to be binded by external code</returns>
         </member>
         <member name="M:Solution.Core.Utilities.LdapUtil.Search(System.DirectoryServices.Protocols.LdapConnection,System.String,System.String)">
             <summary>

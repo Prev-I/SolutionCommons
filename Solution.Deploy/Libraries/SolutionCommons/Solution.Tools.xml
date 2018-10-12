@@ -212,6 +212,44 @@
             <param name="destinationDir">Directory where to put the archive content</param>
             <returns>Return true if extraction is succeded, false otherwise</returns>
         </member>
+        <member name="F:Solution.Tools.Utilities.SftpUtil.log">
+            <summary>
+            Utility to provide wrapper around common SFTP operations from the SSH.NET library
+            REQUIRE SSH.NET
+            </summary>
+        </member>
+        <member name="T:Solution.Tools.Utilities.SftpUtil.SftpElementListType">
+            <summary>
+            Enum to indicate files / folders / both 
+            </summary>
+        </member>
+        <member name="F:Solution.Tools.Utilities.SftpUtil.SftpElementListType.FILES_ONLY">
+            <summary>
+            Only files
+            </summary>
+        </member>
+        <member name="F:Solution.Tools.Utilities.SftpUtil.SftpElementListType.DIRECTORIES_ONLY">
+            <summary>
+            Only folders
+            </summary>
+        </member>
+        <member name="F:Solution.Tools.Utilities.SftpUtil.SftpElementListType.FILES_AND_DIRECTORIES">
+            <summary>
+            Both files and folders
+            </summary>
+        </member>
+        <member name="M:Solution.Tools.Utilities.SftpUtil.CreateClient(System.String,System.Int32,System.String,System.String,System.String,System.String)">
+            <summary>
+            Initialize and return an SftpClient object without connecting to remote host
+            </summary>
+            <param name="hostname"></param>
+            <param name="port"></param>
+            <param name="username"></param>
+            <param name="password"></param>
+            <param name="privateKeyFile"></param>
+            <param name="passPhrase"></param>
+            <returns>Initialized object to SFTP host to be connected by external code</returns>
+        </member>
         <member name="T:Solution.Tools.Utilities.SqlUtil">
             <summary>
             Utility to execute SQL command on SQLServer DBMS
