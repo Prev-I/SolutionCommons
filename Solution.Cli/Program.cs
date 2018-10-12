@@ -22,7 +22,7 @@ namespace Solution.Cli
         {
             if (FileUtil.CheckAlreadyRunning())
             {
-                log.Warn("Programma già avviato!");
+                log.Warn("Program with the same name is already running!");
                 return;
             }
 
