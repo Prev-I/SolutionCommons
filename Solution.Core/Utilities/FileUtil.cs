@@ -111,7 +111,13 @@ namespace Solution.Core.Utilities
                     }
                     foreach (FileInfo file in tmpFiles)
                     {
-                        file.MoveTo(Path.Combine(target.FullName, file.Name.Replace(".tmp", "")));
+                        FileInfo destFile = new FileInfo(Path.Combine(target.FullName, file.Name.Replace(".tmp", "")));
+
+                        if (destFile.Exists && overwrite)
+                        {
+                            DeleteFile(destFile);
+                        }
+                        file.MoveTo(destFile.FullName);
                     }
                 }
                 else
