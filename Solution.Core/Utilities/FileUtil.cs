@@ -116,9 +116,9 @@ namespace Solution.Core.Utilities
                 }
                 else
                 {
-                    foreach (FileInfo fi in source.GetFiles())
+                    foreach (FileInfo file in source.GetFiles(searchPattern))
                     {
-                        fi.CopyTo(Path.Combine(target.ToString(), fi.Name), overwrite);
+                        file.CopyTo(Path.Combine(target.ToString(), file.Name), overwrite);
                     }
                 }
                 // Copy each subdirectory using recursion.
