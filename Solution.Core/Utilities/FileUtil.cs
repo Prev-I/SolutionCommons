@@ -76,7 +76,23 @@ namespace Solution.Core.Utilities
         /// <param name="source">Selected folder to be copied</param>
         /// <param name="target">Destination folder for the copy operation</param>
         /// <param name="overwrite">What to do in case a subfolder/file already exist</param>
-        public static void CopyAll(DirectoryInfo source, DirectoryInfo target, bool overwrite = false)
+        /// <param name="useTmpFile">Copy all file whith .tmp then remame them after all copies are finished</param>
+        /// <returns></returns>
+        public static void CopyAll(DirectoryInfo source, DirectoryInfo target, bool overwrite = false, bool useTmpFile = false)
+        {
+            CopyMatch(source, target, "*", overwrite, useTmpFile);
+        }
+
+        /// <summary>
+        /// Copy matching files inside a directory to a target directory
+        /// </summary>
+        /// <param name="source">Selected folder to be copied</param>
+        /// <param name="target">Destination folder for the copy operation</param>
+        /// <param name="searchPattern">Search pattern for file to be copied</param>
+        /// <param name="overwrite">What to do in case a subfolder/file already exist</param>
+        /// <param name="useTmpFile">Copy all file whith .tmp then remame them after all copies are finished</param>
+        /// <returns></returns>
+        public static void CopyMatch(DirectoryInfo source, DirectoryInfo target, string searchPattern, bool overwrite = false, bool useTmpFile = false)
         {
             try
             {
@@ -85,9 +101,25 @@ namespace Solution.Core.Utilities
                     Directory.CreateDirectory(target.FullName);
                 }
                 // Copy each file into it’s new directory.
-                foreach (FileInfo fi in source.GetFiles())
+                if (useTmpFile)
                 {
-                    fi.CopyTo(Path.Combine(target.ToString(), fi.Name), overwrite);
+                    List<FileInfo> tmpFiles = new List<FileInfo>();
+
+                    foreach (FileInfo file in source.GetFiles(searchPattern))
+                    {
+                        tmpFiles.Add(file.CopyTo(Path.Combine(target.FullName, file.Name + ".tmp"), overwrite));
+                    }
+                    foreach (FileInfo file in tmpFiles)
+                    {
+                        file.MoveTo(Path.Combine(target.FullName, file.Name.Replace(".tmp", "")));
+                    }
+                }
+                else
+                {
+                    foreach (FileInfo fi in source.GetFiles())
+                    {
+                        fi.CopyTo(Path.Combine(target.ToString(), fi.Name), overwrite);
+                    }
                 }
                 // Copy each subdirectory using recursion.
                 foreach (DirectoryInfo diSourceSubDir in source.GetDirectories())

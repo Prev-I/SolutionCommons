@@ -257,13 +257,26 @@
             <param name="path">Path (relative or full) that will be located in the system</param>
             <returns>Full path of the specified folder</returns>
         </member>
-        <member name="M:Solution.Core.Utilities.FileUtil.CopyAll(System.IO.DirectoryInfo,System.IO.DirectoryInfo,System.Boolean)">
+        <member name="M:Solution.Core.Utilities.FileUtil.CopyAll(System.IO.DirectoryInfo,System.IO.DirectoryInfo,System.Boolean,System.Boolean)">
             <summary>
             Copy all file and subdirectory inside a directory to a target
             </summary>
             <param name="source">Selected folder to be copied</param>
             <param name="target">Destination folder for the copy operation</param>
             <param name="overwrite">What to do in case a subfolder/file already exist</param>
+            <param name="useTmpFile">Copy all file whith .tmp then remame them after all copies are finished</param>
+            <returns></returns>
+        </member>
+        <member name="M:Solution.Core.Utilities.FileUtil.CopyMatch(System.IO.DirectoryInfo,System.IO.DirectoryInfo,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Copy matching files inside a directory to a target directory
+            </summary>
+            <param name="source">Selected folder to be copied</param>
+            <param name="target">Destination folder for the copy operation</param>
+            <param name="searchPattern">Search pattern for file to be copied</param>
+            <param name="overwrite">What to do in case a subfolder/file already exist</param>
+            <param name="useTmpFile">Copy all file whith .tmp then remame them after all copies are finished</param>
+            <returns></returns>
         </member>
         <member name="M:Solution.Core.Utilities.FileUtil.InitDirectory(System.IO.DirectoryInfo,System.Boolean)">
             <summary>
