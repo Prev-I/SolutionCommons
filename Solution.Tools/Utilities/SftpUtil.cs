@@ -13,12 +13,12 @@ using Renci.SshNet.Sftp;
 
 namespace Solution.Tools.Utilities
 {
+    /// <summary>
+    /// Utility to provide wrapper around common SFTP operations from the SSH.NET library
+    /// REQUIRE SSH.NET
+    /// </summary>
     public static class SftpUtil
     {
-        /// <summary>
-        /// Utility to provide wrapper around common SFTP operations from the SSH.NET library
-        /// REQUIRE SSH.NET
-        /// </summary>
         private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         /// <summary>

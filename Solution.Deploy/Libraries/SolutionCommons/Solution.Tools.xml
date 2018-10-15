@@ -212,7 +212,7 @@
             <param name="destinationDir">Directory where to put the archive content</param>
             <returns>Return true if extraction is succeded, false otherwise</returns>
         </member>
-        <member name="F:Solution.Tools.Utilities.SftpUtil.log">
+        <member name="T:Solution.Tools.Utilities.SftpUtil">
             <summary>
             Utility to provide wrapper around common SFTP operations from the SSH.NET library
             REQUIRE SSH.NET
