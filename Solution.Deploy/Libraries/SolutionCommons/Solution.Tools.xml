@@ -184,6 +184,24 @@
             REQUIRE: DocumentFormat.OpenXml
             </summary>
         </member>
+        <member name="T:Solution.Tools.Utilities.PdfUtil">
+            <summary>
+            Utility to manage pdf using ItextSharp
+            REQUIRE: iTextSharp
+            </summary>
+        </member>
+        <member name="M:Solution.Tools.Utilities.PdfUtil.ExtractImagesInfo(System.String)">
+            <summary>
+            Extracts all images (of types that iTextSharp knows how to decode) from a PDF file.
+            </summary>
+            <param name="fileName">Full path to pdf file</param>
+            <returns></returns>
+        </member>
+        <member name="T:Solution.Tools.Utilities.ImageInfo">
+            <summary>
+            Class containing all the metadata extracted from image
+            </summary>
+        </member>
         <member name="T:Solution.Tools.Utilities.PostgreSQLUtil">
             <summary>
             Utility generate SQL statements (compatible with PostgreSQL) from CLR objects
