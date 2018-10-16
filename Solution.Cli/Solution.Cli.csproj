@@ -93,7 +93,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="log4net.config" />
+    <None Include="log4net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -106,5 +108,23 @@
       <Name>Solution.Tools</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Deploy\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>if $(ConfigurationName) == Release (
+mkdir "$(ProjectDir)Deploy\$(ProjectName)\WorkDirectory"
+
+copy "$(TargetDir)*.dll" "$(ProjectDir)\Deploy\$(ProjectName)"
+copy "$(TargetDir)*.exe" "$(ProjectDir)Deploy\$(ProjectName)"
+copy "$(TargetDir)*.config" "$(ProjectDir)Deploy\$(ProjectName)"
+
+del "$(ProjectDir)Deploy\$(ProjectName).zip" /Q
+7z.exe a  "$(ProjectDir)Deploy\$(ProjectName).zip"  "$(ProjectDir)Deploy\$(ProjectName)"
+rmdir /S /Q "$(ProjectDir)\Deploy\$(ProjectName)"
+) ELSE (
+  echo Skip deploy in debug.
+)</PostBuildEvent>
+  </PropertyGroup>
 </Project>
