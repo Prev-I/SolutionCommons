@@ -162,6 +162,21 @@
             Utility to encrypt/decrypt using AES and generate hash using SHA256
             </summary>
         </member>
+        <member name="T:Solution.Core.Utilities.CryptoUtil.HashFunction">
+            <summary>
+            Enum to indicate hash function 
+            </summary>
+        </member>
+        <member name="F:Solution.Core.Utilities.CryptoUtil.HashFunction.MD5">
+            <summary>
+            Use MD5 function
+            </summary>
+        </member>
+        <member name="F:Solution.Core.Utilities.CryptoUtil.HashFunction.SHA256">
+            <summary>
+            Use SHA256 function
+            </summary>
+        </member>
         <member name="M:Solution.Core.Utilities.CryptoUtil.EncryptString(System.String,System.Int32,System.String)">
             <summary>
             Function to encrypt a string using rsa crypto
@@ -200,11 +215,12 @@
             <param name="salt">Salt used in combination with password to create the key</param>
             <returns></returns>
         </member>
-        <member name="M:Solution.Core.Utilities.CryptoUtil.HashFile(System.IO.FileInfo)">
+        <member name="M:Solution.Core.Utilities.CryptoUtil.HashFile(System.IO.FileInfo,Solution.Core.Utilities.CryptoUtil.HashFunction)">
             <summary>
             Function to hash a file using SHA256 algoritm
             </summary>
             <param name="inputFile">Input file to be hashed</param>
+            <param name="function">Specify with function to use in generating hash</param>
             <returns>Return the file hash encoded in Base64</returns>
         </member>
         <member name="T:Solution.Core.Utilities.CsvUtil">

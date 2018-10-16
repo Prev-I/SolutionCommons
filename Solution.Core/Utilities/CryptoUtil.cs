@@ -20,6 +20,21 @@ namespace Solution.Core.Utilities
         private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private const int SizeOfBuffer = 8192;
 
+        /// <summary>
+        /// Enum to indicate hash function 
+        /// </summary>
+        public enum HashFunction
+        {
+            /// <summary>
+            /// Use MD5 function
+            /// </summary>
+            MD5 = 0,
+            /// <summary>
+            /// Use SHA256 function
+            /// </summary>
+            SHA256 = 1
+        }
+
 
         /// <summary>
         /// Function to encrypt a string using rsa crypto
@@ -197,21 +212,30 @@ namespace Solution.Core.Utilities
         /// Function to hash a file using SHA256 algoritm
         /// </summary>
         /// <param name="inputFile">Input file to be hashed</param>
+        /// <param name="function">Specify with function to use in generating hash</param>
         /// <returns>Return the file hash encoded in Base64</returns>
-        public static string HashFile(FileInfo inputFile)
+        public static string HashFile(FileInfo inputFile, HashFunction function = HashFunction.SHA256)
         {
             try
             {
-                byte[] hashValue;
+                byte[] hashValue = new byte[0];
 
                 if (!inputFile.Exists)
                     throw new FileNotFoundException(inputFile.Name);
 
-                using (var hasher = SHA256Managed.Create())
-                using (var input = new FileStream(inputFile.FullName, FileMode.Open, FileAccess.Read))
+                if(function == HashFunction.SHA256)
                 {
-                    input.Position = 0;
-                    hashValue = hasher.ComputeHash(input);
+                    using (var sha256Hash = SHA256.Create())
+                    {
+                        hashValue = sha256Hash.ComputeHash(inputFile.OpenRead());
+                    }
+                }
+                else if (function == HashFunction.MD5)
+                {
+                    using (var md5Hash = MD5.Create())
+                    {
+                        hashValue = md5Hash.ComputeHash(inputFile.OpenRead());
+                    }
                 }
                 return Convert.ToBase64String(hashValue);
             }
