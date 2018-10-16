@@ -204,6 +204,13 @@
             <param name="inputFiles">Array of full path of input files</param>
             <param name="destinationFile">Path of where to create 7z archive</param>
         </member>
+        <member name="M:Solution.Tools.Utilities.SevenZipUtil.Compress(System.IO.DirectoryInfo,System.String)">
+            <summary>
+            Compress al inputFiles to destination sevenZip archive
+            </summary>
+            <param name="inputDir">DirectoryInfo of a folder to be compressed</param>
+            <param name="destinationFile">Path of where to create 7z archive</param>
+        </member>
         <member name="M:Solution.Tools.Utilities.SevenZipUtil.Decompress(System.String,System.String)">
             <summary>
             Decompress file contained in inputFile inside a destinationDir

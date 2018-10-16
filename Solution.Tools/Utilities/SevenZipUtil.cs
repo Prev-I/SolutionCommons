@@ -49,6 +49,31 @@ namespace Solution.Tools.Utilities
         }
 
         /// <summary>
+        /// Compress al inputFiles to destination sevenZip archive
+        /// </summary>
+        /// <param name="inputDir">DirectoryInfo of a folder to be compressed</param>
+        /// <param name="destinationFile">Path of where to create 7z archive</param>
+        public static void Compress(DirectoryInfo inputDir, string destinationFile)
+        {
+            SevenZipWorking wrk = new SevenZipWorking();
+
+            try
+            {
+                wrk.CompressDirectory(inputDir.FullName, destinationFile);
+            }
+            catch (Exception e)
+            {
+                log.Error(e.Message, e);
+                throw new Exception("Escalated exception", e);
+            }
+            finally
+            {
+                wrk = null;
+                GC.Collect();
+            }
+        }
+
+        /// <summary>
         /// Decompress file contained in inputFile inside a destinationDir
         /// </summary>
         /// <param name="inputFile">Path to 7z archive</param>
@@ -60,7 +85,7 @@ namespace Solution.Tools.Utilities
 
             try
             {
-                return wrk.Extract(inputFile, destinationDir);
+                return wrk.ExtractFile(inputFile, destinationDir);
             }
             catch (Exception e)
             {
@@ -104,7 +129,7 @@ namespace Solution.Tools.Utilities
             SevenZipBase.SetLibraryPath(dllPath);
         }
 
-        public bool Extract(string inputFile, string destinationDir)
+        public bool ExtractFile(string inputFile, string destinationDir)
         {
             SevenZipExtractor extractor = new SevenZipExtractor(inputFile);
             extractor.FileExists += new EventHandler<FileOverwriteEventArgs>(ZipExtractor_FileExists);
@@ -137,12 +162,33 @@ namespace Solution.Tools.Utilities
                 CompressionMethod = CompressionMethod.Lzma2,
                 CompressionMode = CompressionMode.Create,
                 DirectoryStructure = true,
-                EncryptHeaders = true,
+                //EncryptHeaders = true,
                 DefaultItemName = outputfile
             };
             using (FileStream archive = new FileStream(outputfile, FileMode.Create, FileAccess.ReadWrite))
             {
                 szc.CompressFiles(archive, inputFiles);
+            }
+        }
+
+        public void CompressDirectory(string inputDir, string outputfile)
+        {
+            if (File.Exists(outputfile))
+                File.Delete(outputfile);
+
+            SevenZipCompressor szc = new SevenZipCompressor
+            {
+                CompressionLevel = CompressionLevel.Normal,
+                ArchiveFormat = OutArchiveFormat.SevenZip,
+                CompressionMethod = CompressionMethod.Lzma2,
+                CompressionMode = CompressionMode.Create,
+                DirectoryStructure = true,
+                //EncryptHeaders = true,
+                DefaultItemName = outputfile
+            };
+            using (FileStream archive = new FileStream(outputfile, FileMode.Create, FileAccess.ReadWrite))
+            {
+                szc.CompressDirectory(inputDir, archive);
             }
         }
 
