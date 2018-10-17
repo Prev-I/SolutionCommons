@@ -116,12 +116,31 @@
             <param name="command">Command to be executed</param>
             <returns>Return the exit code of executed command</returns>
         </member>
+        <member name="M:Solution.Core.Utilities.CmdUtil.ExecuteCommandCmd(System.String,System.String@,System.String@)">
+            <summary>
+            Executed a command inside an external instance of CMD
+            </summary>
+            <param name="command">Command to be executed</param>
+            <param name="output">Standard output of the executed command</param>
+            <param name="error">Standard error of the executed command</param>
+            <returns>Return the exit code of executed command</returns>
+        </member>
         <member name="M:Solution.Core.Utilities.CmdUtil.ExecuteCommand(System.String,System.String)">
             <summary>
             Executed a command registered to the system passing specified parameter
             </summary>
             <param name="command">Command to be executed</param>
             <param name="parameter">Parameter passed to the executed command</param>
+            <returns>Return the exit code of executed command</returns>
+        </member>
+        <member name="M:Solution.Core.Utilities.CmdUtil.ExecuteCommand(System.String,System.String,System.String@,System.String@)">
+            <summary>
+            Executed a command registered to the system passing specified parameter
+            </summary>
+            <param name="command">Command to be executed</param>
+            <param name="parameter">Parameter passed to the executed command</param>
+            <param name="output">Standard output of the executed command</param>
+            <param name="error">Standard error of the executed command</param>
             <returns>Return the exit code of executed command</returns>
         </member>
         <member name="T:Solution.Core.Utilities.ConfigUtil">
