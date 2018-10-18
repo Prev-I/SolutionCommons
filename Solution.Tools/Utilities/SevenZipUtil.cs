@@ -51,15 +51,23 @@ namespace Solution.Tools.Utilities
         /// <summary>
         /// Compress al inputFiles to destination sevenZip archive
         /// </summary>
-        /// <param name="inputDir">DirectoryInfo of a folder to be compressed</param>
+        /// <param name="inputPath">Full path of a folder to be compressed</param>
         /// <param name="destinationFile">Path of where to create 7z archive</param>
-        public static void Compress(DirectoryInfo inputDir, string destinationFile)
+        public static void Compress(string inputPath, string destinationFile)
         {
             SevenZipWorking wrk = new SevenZipWorking();
 
             try
             {
-                wrk.CompressDirectory(inputDir.FullName, destinationFile);
+                if (Directory.Exists(inputPath))
+                {
+                    wrk.CompressDirectory(inputPath, destinationFile);
+                }
+                if (File.Exists(inputPath))
+                {
+                    var file = new string[1] { inputPath };
+                    wrk.CompressFiles(file, destinationFile);
+                }
             }
             catch (Exception e)
             {
