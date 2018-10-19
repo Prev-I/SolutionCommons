@@ -435,5 +435,20 @@ namespace Solution.Core.Utilities
 
         #endregion
 
+
+        #region ViewState
+
+        //public T GetViewStateData<T>(string name)
+        //{
+        //    return (T)ViewState[name];
+        //}
+
+        //public void SetViewStateData<T>(T data, string name)
+        //{
+        //    ViewState[name] = data;
+        //}
+
+        #endregion
+
     }
 }
