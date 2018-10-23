@@ -107,7 +107,7 @@ namespace Solution.Core.Utilities
 
                     foreach (FileInfo file in source.GetFiles(searchPattern))
                     {
-                        tmpFiles.Add(file.CopyTo(Path.Combine(target.FullName, file.Name + ".tmp"), overwrite));
+                        tmpFiles.Add(file.CopyTo(Path.Combine(target.FullName, file.Name + ".tmp"), true));
                     }
                     foreach (FileInfo file in tmpFiles)
                     {
