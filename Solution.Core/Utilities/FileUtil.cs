@@ -292,12 +292,30 @@ namespace Solution.Core.Utilities
         public static bool IsFileSizeChanging(FileInfo file, int mSecInterval = 1000)
         {
             if (!file.Exists)
-                throw new FileNotFoundException();
+                throw new FileNotFoundException(file.FullName);
 
             long lenght = file.Length;
             Thread.Sleep(mSecInterval);
             file.Refresh();
             return !((file.Length - lenght) == 0);
+        }
+
+        /// <summary>
+        /// Check if element count inside a folder change during an interval
+        /// </summary>
+        /// <param name="target">DirectoryInfo that point to directory to be checked</param>
+        /// <param name="mSecInterval">how many milliseconds wait before picking the file length again</param>
+        /// <exception cref="DirectoryNotFoundException">Thrown when directory doesn't exist</exception>
+        /// <returns>True if the Directory count is chaning, false otherwise</returns>
+        public static bool IsDirCountChanging(DirectoryInfo target, int mSecInterval = 1000)
+        {
+            if (!target.Exists)
+                throw new DirectoryNotFoundException(target.FullName);
+
+            long count = target.EnumerateFileSystemInfos().Count();
+            Thread.Sleep(mSecInterval);
+            target.Refresh();
+            return !((target.EnumerateFileSystemInfos().Count() - count) == 0);
         }
 
         /// <summary>
