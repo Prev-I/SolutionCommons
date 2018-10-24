@@ -65,7 +65,7 @@ namespace Solution.Core.Utilities
         /// <param name="wrapper">Custom field wrapper, default "</param>
         /// <param name="csvContainHeaders">Specify if the first row contains header or actual table data</param>
         /// <returns>DataTable of the loaded CSV</returns>
-        public static DataTable LoadDataTable(FileInfo csvFile, char separator = ';', string wrapper = "\"", bool csvContainHeaders = true)
+        public static DataTable LoadDataTable(FileInfo csvFile, string separator = ";", string wrapper = "\"", bool csvContainHeaders = true)
         {
             try
             {
@@ -75,8 +75,8 @@ namespace Solution.Core.Utilities
                 {
                     using (StreamReader sr = new StreamReader(csvFile.FullName))
                     {
-                        string[] headers = sr.ReadLine().Split(separator);
-
+                        //string[] headers = sr.ReadLine().Split(separator);
+                        string[] headers = sr.ReadLine().Split(new string[] { separator }, StringSplitOptions.None);
                         for (int i = 0; i < headers.Length; i++)
                         {
                             if (csvContainHeaders)
@@ -103,7 +103,8 @@ namespace Solution.Core.Utilities
                         }
                         while (!sr.EndOfStream)
                         {
-                            string[] rows = sr.ReadLine().Split(separator);
+                            //string[] rows = sr.ReadLine().Split(separator);
+                            string[] rows = sr.ReadLine().Split(new string[] { separator }, StringSplitOptions.None);
                             DataRow dr = dt.NewRow();
                             for (int i = 0; i < headers.Length; i++)
                             {
@@ -125,7 +126,7 @@ namespace Solution.Core.Utilities
             }
             catch (Exception e)
             {
-                log.Error(e.Message, e);
+                log.Error(e.ToString());
                 throw new Exception("Escalated exception", e);
             }
         }

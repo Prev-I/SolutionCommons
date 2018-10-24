@@ -257,7 +257,7 @@
             <param name="addHeadersFromTable">Specify if the first row serialized has to be the header row</param>
             <returns>String containing the CSV file</returns>
         </member>
-        <member name="M:Solution.Core.Utilities.CsvUtil.LoadDataTable(System.IO.FileInfo,System.Char,System.String,System.Boolean)">
+        <member name="M:Solution.Core.Utilities.CsvUtil.LoadDataTable(System.IO.FileInfo,System.String,System.String,System.Boolean)">
             <summary>
             Load a CSV file inside a datatable using different format for parsing
             </summary>
@@ -366,6 +366,15 @@
             <param name="mSecInterval">how many milliseconds wait before picking the file length again</param>
             <exception cref="T:System.IO.FileNotFoundException">Thrown when file doesn't exist</exception>
             <returns>True if the file size is chaning, false otherwise</returns>
+        </member>
+        <member name="M:Solution.Core.Utilities.FileUtil.IsDirCountChanging(System.IO.DirectoryInfo,System.Int32)">
+            <summary>
+            Check if element count inside a folder change during an interval
+            </summary>
+            <param name="target">DirectoryInfo that point to directory to be checked</param>
+            <param name="mSecInterval">how many milliseconds wait before picking the file length again</param>
+            <exception cref="T:System.IO.DirectoryNotFoundException">Thrown when directory doesn't exist</exception>
+            <returns>True if the Directory count is chaning, false otherwise</returns>
         </member>
         <member name="M:Solution.Core.Utilities.FileUtil.AddNetworkShare(System.String,System.String,System.String,System.String)">
             <summary>
