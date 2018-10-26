@@ -100,12 +100,12 @@ namespace Solution.Core.Utilities
                 {
                     Directory.CreateDirectory(target.FullName);
                 }
-                // Copy each file into it’s new directory.
+                // Copy each file to target directory
                 if (useTmpFile)
                 {
                     List<FileInfo> tmpFiles = new List<FileInfo>();
 
-                    foreach (FileInfo file in source.GetFiles(searchPattern))
+                    foreach (FileInfo file in source.EnumerateFiles(searchPattern))
                     {
                         tmpFiles.Add(file.CopyTo(Path.Combine(target.FullName, file.Name + ".tmp"), true));
                     }
@@ -122,16 +122,16 @@ namespace Solution.Core.Utilities
                 }
                 else
                 {
-                    foreach (FileInfo file in source.GetFiles(searchPattern))
+                    foreach (FileInfo file in source.EnumerateFiles(searchPattern))
                     {
                         file.CopyTo(Path.Combine(target.ToString(), file.Name), overwrite);
                     }
                 }
                 // Copy each subdirectory using recursion.
-                foreach (DirectoryInfo diSourceSubDir in source.GetDirectories())
+                foreach (DirectoryInfo diSourceSubDir in source.EnumerateDirectories())
                 {
                     DirectoryInfo nextTargetSubDir = target.CreateSubdirectory(diSourceSubDir.Name);
-                    CopyAll(diSourceSubDir, nextTargetSubDir, overwrite);
+                    CopyMatch(diSourceSubDir, nextTargetSubDir, searchPattern, overwrite, useTmpFile);
                 }
             }
             catch (Exception e)
