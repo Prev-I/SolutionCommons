@@ -285,6 +285,29 @@ namespace Solution.Tools.Utilities
             return sqlCommand;
         }
 
+        public static string PaginateSelect(string mainQuery, string overOrderByColumn, int pageNumber, int pageSize, string orderBy)
+        {
+            int pageIndex = pageNumber - 1;
+            int rowStart = pageSize * pageIndex + 1;
+            int rowEnd = pageSize * (pageIndex + 1);
+            string sql = string.Format(@"
+                SELECT  * 
+                FROM    (
+                            SELECT  ROW_NUMBER()
+                            OVER    (ORDER BY MAINQUERY.{0} {1}) 
+                            AS      [rowIndex], *
+                            FROM    ( {2} ) as MAINQUERY
+                        ) AS T
+                WHERE   T.rowIndex BETWEEN {3} AND {4}",
+                overOrderByColumn.Trim(),
+                orderBy.ToUpper(),
+                mainQuery,
+                rowStart.ToString(),
+                rowEnd.ToString()
+            );
+            return sql;
+        }
+
         #endregion
 
     }
