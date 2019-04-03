@@ -50,6 +50,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\DataTableExt.cs" />
+    <Compile Include="Extensions\DateTimeExt.cs" />
+    <Compile Include="Extensions\DecimalExt.cs" />
+    <Compile Include="Extensions\StaticExt.cs" />
+    <Compile Include="Extensions\StringExt.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\BitmapUtil.cs" />
     <Compile Include="Utilities\CmdUtil.cs" />
