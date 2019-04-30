@@ -4,6 +4,162 @@
         <name>Solution.Core</name>
     </assembly>
     <members>
+        <member name="M:Solution.Core.Extensions.DataTableExt.HasRows(System.Data.DataTable)">
+            <summary>
+            Check if the datatable is not null and contains rows
+            </summary>
+        </member>
+        <member name="M:Solution.Core.Extensions.DataTableExt.HasRows(System.Data.DataTable,System.Int32)">
+            <summary>
+            Check if the datatable is not null and contain less than maxRow rows
+            </summary>
+        </member>
+        <member name="M:Solution.Core.Extensions.DataTableExt.HasRows(System.Data.DataSet)">
+            <summary>
+            Check if the DataSet is not null and contains at least one DataTable with one DataRow
+            </summary>
+        </member>
+        <member name="M:Solution.Core.Extensions.DataTableExt.HasRows(System.Data.DataSet,System.Int32)">
+            <summary>
+            Check if the DataSet is not null and contains at least one DataTable with less than maxRow rows
+            </summary>
+        </member>
+        <member name="M:Solution.Core.Extensions.DataTableExt.ConvertToList``1(System.Data.DataTable)">
+            <summary>
+            Convert generic DataTable to T object matching columns names with properties names
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dt"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Solution.Core.Extensions.DataTableExt.ConvertToDataTable``1(System.Collections.Generic.IList{``0})">
+            <summary>
+            Convert generic List T objects to new DataTable matching properties names with columns names
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Solution.Core.Extensions.DataTableExt.GetItem``1(System.Data.DataRow)">
+            <summary>
+            Convert single DataRow to a specified Object T
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dr"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Solution.Core.Extensions.DateTimeExt">
+            <summary>
+            Static Extensions on DateTime type
+            </summary>
+        </member>
+        <member name="M:Solution.Core.Extensions.DateTimeExt.ToStringOrDefault(System.Nullable{System.DateTime},System.String)">
+            <summary>
+            
+            </summary>
+            <param name="source"></param>
+            <param name="format"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Solution.Core.Extensions.DateTimeExt.ToStringOrDefault(System.Nullable{System.DateTime},System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="source"></param>
+            <param name="format"></param>
+            <param name="defaultValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Solution.Core.Extensions.DateTimeExt.IsBetween(System.DateTime,System.DateTime,System.DateTime)">
+            <summary>
+            Check if the "source" date is between "dtFrom" and "dtTo"
+            </summary>
+        </member>
+        <member name="T:Solution.Core.Extensions.DecimalExt">
+            <summary>
+            Static Extensions on Decimal type
+            </summary>
+        </member>
+        <member name="M:Solution.Core.Extensions.DecimalExt.ToStringOrDefault(System.Nullable{System.Decimal},System.String)">
+            <summary>
+            
+            </summary>
+            <param name="source"></param>
+            <param name="format"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Solution.Core.Extensions.DecimalExt.ToStringOrDefault(System.Nullable{System.Decimal},System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="source"></param>
+            <param name="format"></param>
+            <param name="defaultValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Solution.Core.Extensions.StaticExt.IsValid(System.Object)">
+            <summary>
+            Verify that an object expose a .ToString() method
+            </summary>
+        </member>
+        <member name="M:Solution.Core.Extensions.StringExt.Truncate(System.String,System.Int32)">
+            <summary>
+            Tronca una stringa a limit caratteri
+            </summary>
+        </member>
+        <member name="M:Solution.Core.Extensions.StringExt.SliceEnd(System.String,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="source"></param>
+            <param name="len"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Solution.Core.Extensions.StringExt.JoinToString(System.Char[],System.Int32,System.Int32)">
+            <summary>
+            Esegue la Join di un char array dalla pasizione start per la lunghezza length
+            </summary>
+        </member>
+        <member name="M:Solution.Core.Extensions.StringExt.CharString(System.Char,System.Int32)">
+            <summary>
+            Crea una stringa ripetendo length volte "c"
+            </summary>
+        </member>
+        <member name="M:Solution.Core.Extensions.StringExt.UnPadLeft(System.String,System.Char)">
+            <summary>
+            Rimuove il padding a sinistra di una stringa
+            </summary>
+        </member>
+        <member name="M:Solution.Core.Extensions.StringExt.UnPadRight(System.String,System.Char)">
+            <summary>
+            Rimuove il padding a destra di una stringa
+            </summary>
+        </member>
+        <member name="M:Solution.Core.Extensions.StringExt.PadLeft(System.String,System.Char,System.Int32,System.Boolean)">
+            <summary>
+            Aggiunge padding a sinistra fino a length: 1 -> 0001. Opzionalmente spezza la stringa se piu lunga.
+            </summary>
+        </member>
+        <member name="M:Solution.Core.Extensions.StringExt.PadRight(System.String,System.Char,System.Int32,System.Boolean)">
+            <summary>
+            Aggiunge padding a destra fino a length: 1 -> 1000. Opzionalmente spezza la stringa se piu lunga.
+            </summary>
+        </member>
+        <member name="M:Solution.Core.Extensions.StringExt.HourIsBetween(System.String,System.String,System.String)">
+            <summary>
+            Verifica che l'ora "source" sia compresa fra gli orari "hourFrom" e "hourTo" (Converte in int).
+            </summary>
+        </member>
+        <member name="M:Solution.Core.Utilities.BinaryUtil.ToBigEndian_Reverse(System.UInt16)">
+            <summary>
+            Converts the given unsigned short to big endian. 
+            If the host machine is big endian no convertion is being performed.
+            </summary>
+            <param name="u"></param>
+            <returns></returns>
+        </member>
+        <!-- Commento XML in formato non corretto ignorato per il membro 'M:Solution.Core.Utilities.BinaryUtil.ToBigEndian(System.UInt16)' -->
+        <!-- Commento XML in formato non corretto ignorato per il membro 'M:Solution.Core.Utilities.BinaryUtil.ToBigEndian(System.UInt32)' -->
         <member name="T:Solution.Core.Utilities.BitmapUtil">
             <summary>
             Utility to resize and crop BMP image format
@@ -589,40 +745,6 @@
             </summary>
             <typeparam name="T"></typeparam>
             <param name="obj"></param>
-            <param name="defaultValue"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Solution.Core.Utilities.StringUtil.ToStringOrDefault(System.Nullable{System.Decimal},System.String)">
-            <summary>
-            
-            </summary>
-            <param name="source"></param>
-            <param name="format"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Solution.Core.Utilities.StringUtil.ToStringOrDefault(System.Nullable{System.Decimal},System.String,System.String)">
-            <summary>
-            
-            </summary>
-            <param name="source"></param>
-            <param name="format"></param>
-            <param name="defaultValue"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Solution.Core.Utilities.StringUtil.ToStringOrDefault(System.Nullable{System.DateTime},System.String)">
-            <summary>
-            
-            </summary>
-            <param name="source"></param>
-            <param name="format"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Solution.Core.Utilities.StringUtil.ToStringOrDefault(System.Nullable{System.DateTime},System.String,System.String)">
-            <summary>
-            
-            </summary>
-            <param name="source"></param>
-            <param name="format"></param>
             <param name="defaultValue"></param>
             <returns></returns>
         </member>
