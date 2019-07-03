@@ -4,6 +4,11 @@
         <name>Solution.Core</name>
     </assembly>
     <members>
+        <member name="T:Solution.Core.Extensions.DataTableExt">
+            <summary>
+            Extensions to DataTable type
+            </summary>
+        </member>
         <member name="M:Solution.Core.Extensions.DataTableExt.HasRows(System.Data.DataTable)">
             <summary>
             Check if the datatable is not null and contains rows
@@ -150,6 +155,11 @@
             Verifica che l'ora "source" sia compresa fra gli orari "hourFrom" e "hourTo" (Converte in int).
             </summary>
         </member>
+        <member name="T:Solution.Core.Utilities.BinaryUtil">
+            <summary>
+            Utilities to handle endianess conversions
+            </summary>
+        </member>
         <member name="M:Solution.Core.Utilities.BinaryUtil.ToBigEndian_Reverse(System.UInt16)">
             <summary>
             Converts the given unsigned short to big endian. 
@@ -158,8 +168,22 @@
             <param name="u"></param>
             <returns></returns>
         </member>
-        <!-- Commento XML in formato non corretto ignorato per il membro 'M:Solution.Core.Utilities.BinaryUtil.ToBigEndian(System.UInt16)' -->
-        <!-- Commento XML in formato non corretto ignorato per il membro 'M:Solution.Core.Utilities.BinaryUtil.ToBigEndian(System.UInt32)' -->
+        <member name="M:Solution.Core.Utilities.BinaryUtil.ToBigEndian(System.UInt16)">
+            <summary>
+            Converts the given unsigned short to big endian. 
+            If the host machine is big endian no convertion is being performed.
+            </summary>
+            <param name="source">The unsigned short to convert.</param>
+            <returns>The converted unsigned short.</returns>
+        </member>
+        <member name="M:Solution.Core.Utilities.BinaryUtil.ToBigEndian(System.UInt32)">
+            <summary>
+            Converts the given unsigned int to big endian. 
+            If the host machine is big endian no convertion is being performed.
+            </summary>
+            <param name="source">The unsigned int to convert.</param>
+            <returns>The converted unsigned int.</returns>
+        </member>
         <member name="T:Solution.Core.Utilities.BitmapUtil">
             <summary>
             Utility to resize and crop BMP image format

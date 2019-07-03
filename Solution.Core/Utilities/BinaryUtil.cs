@@ -9,6 +9,9 @@ using log4net;
 
 namespace Solution.Core.Utilities
 {
+    /// <summary>
+    /// Utilities to handle endianess conversions
+    /// </summary>
     public static class BinaryUtil
     {
         private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
@@ -33,7 +36,7 @@ namespace Solution.Core.Utilities
         /// <summary>
         /// Converts the given unsigned short to big endian. 
         /// If the host machine is big endian no convertion is being performed.
-        /// <summary>
+        /// </summary>
         /// <param name="source">The unsigned short to convert.</param>
         /// <returns>The converted unsigned short.</returns>
         public static ushort ToBigEndian(ushort source)
@@ -48,7 +51,7 @@ namespace Solution.Core.Utilities
         /// <summary>
         /// Converts the given unsigned int to big endian. 
         /// If the host machine is big endian no convertion is being performed.
-        /// <summary>
+        /// </summary>
         /// <param name="source">The unsigned int to convert.</param>
         /// <returns>The converted unsigned int.</returns>
         public static uint ToBigEndian(uint source)

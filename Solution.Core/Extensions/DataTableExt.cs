@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace Solution.Core.Extensions
 {
+    /// <summary>
+    /// Extensions to DataTable type
+    /// </summary>
     public static class DataTableExt
     {
         /// <summary>
