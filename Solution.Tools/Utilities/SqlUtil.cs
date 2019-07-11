@@ -10,7 +10,7 @@ using System.IO;
 using System.Globalization;
 
 using log4net;
-
+using System.ComponentModel;
 
 namespace Solution.Tools.Utilities
 {
@@ -26,6 +26,15 @@ namespace Solution.Tools.Utilities
 
 
         #region single connection per query
+
+        public static void BulkInsert<T>(string connectionString, string destinationTable, IList<T> list, bool retryQuery = false)
+        {
+            using (SqlConnection sqlConn = new SqlConnection(connectionString))
+            {
+                sqlConn.Open();
+                BulkInsert<T>(sqlConn, destinationTable, list, null, retryQuery);
+            }
+        }
 
         public static object ExecuteScalar(string connectionString, string sqlCommand, SqlParameter[] parameters, bool retryQuery = false)
         {
@@ -67,6 +76,70 @@ namespace Solution.Tools.Utilities
 
 
         #region Shared connection for queries
+
+        public static void BulkInsert<T>(SqlConnection connection, string destinationTable, IList<T> list, SqlTransaction transaction, bool retryQuery = false)
+        {
+            int count = 0;
+
+            while (!retryQuery || (retryQuery && count < MaxRetry))
+            {
+                try
+                {
+                    using (var bulkCopy = new SqlBulkCopy(connection, SqlBulkCopyOptions.KeepIdentity, transaction))
+                    {
+                        try
+                        {
+                            bulkCopy.BatchSize = list.Count;
+                            bulkCopy.DestinationTableName = destinationTable;
+
+                            //Dirty hack to make sure we only have system data types  
+                            //i.e. filter out the relationships/collections 
+                            var props = TypeDescriptor.GetProperties(typeof(T))
+                                                        .Cast<PropertyDescriptor>()
+                                                        .Where(propertyInfo => propertyInfo.PropertyType.Namespace.Equals("System"))
+                                                        .ToArray();
+                            var values = new object[props.Length];
+                            var table = new DataTable();
+
+                            foreach (var propertyInfo in props)
+                            {
+                                bulkCopy.ColumnMappings.Add(propertyInfo.Name, propertyInfo.Name);
+                                table.Columns.Add(propertyInfo.Name, Nullable.GetUnderlyingType(propertyInfo.PropertyType) ?? propertyInfo.PropertyType);
+                            }
+                            foreach (var item in list)
+                            {
+                                for (var i = 0; i < values.Length; i++)
+                                {
+                                    values[i] = props[i].GetValue(item);
+                                }
+                                table.Rows.Add(values);
+                            }
+                            bulkCopy.WriteToServer(table);
+                        }
+                        catch (Exception e)
+                        {
+                            if (transaction != null)
+                                transaction.Rollback();
+                            throw e;
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    log.Error(e.Message, e);
+
+                    if (retryQuery && count < MaxRetry)
+                    {
+                        Thread.Sleep(SleepRetry);
+                        count++;
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+            }
+        }
 
         public static object ExecuteScalar(SqlConnection connection, string sqlCommand, SqlParameter[] parameters, SqlTransaction transaction, bool retryQuery = false)
         {
@@ -115,7 +188,7 @@ namespace Solution.Tools.Utilities
                     }
                     else
                     {
-                        throw new Exception("Escalated exception", e);
+                        throw;
                     }
                 }
             }
@@ -169,7 +242,7 @@ namespace Solution.Tools.Utilities
                     }
                     else
                     {
-                        throw new Exception("Escalated exception", e);
+                        throw;
                     }
                 }
             }
@@ -226,7 +299,7 @@ namespace Solution.Tools.Utilities
                     }
                     else
                     {
-                        throw new Exception("Escalated exception", e);
+                        throw;
                     }
                 }
             }
@@ -256,7 +329,7 @@ namespace Solution.Tools.Utilities
             catch (Exception e)
             {
                 log.Error(e.Message, e);
-                throw new Exception("Escalated exception", e);
+                throw;
             }
         }
 

@@ -108,7 +108,7 @@ namespace Solution.Tools.Utilities
             {
                 File.Delete(Path.Combine(localDir, localFileName));
                 log.Error(e.Message, e);
-                throw new Exception("Escalated exception", e);
+                throw;
             }
         }
 
@@ -132,7 +132,7 @@ namespace Solution.Tools.Utilities
             catch (Exception e)
             {
                 log.Error(e.Message, e);
-                throw new Exception("Escalated exception", e);
+                throw;
             }
         }
 
@@ -148,7 +148,7 @@ namespace Solution.Tools.Utilities
             catch (Exception e)
             {
                 log.Error(e.Message, e);
-                throw new Exception("Escalated exception", e);
+                throw;
             }
         }
 
@@ -164,7 +164,7 @@ namespace Solution.Tools.Utilities
             catch (Exception e)
             {
                 log.Error(e.Message, e);
-                throw new Exception("Escalated exception", e);
+                throw;
             }
         }
 
@@ -177,7 +177,7 @@ namespace Solution.Tools.Utilities
             catch (Exception e)
             {
                 log.Error(e.Message, e);
-                throw new Exception("Escalated exception", e);
+                throw;
             }
         }
 
@@ -190,7 +190,7 @@ namespace Solution.Tools.Utilities
             catch (Exception e)
             {
                 log.Error(e.Message, e);
-                throw new Exception("Escalated exception", e);
+                throw;
             }
         }
 
@@ -203,7 +203,7 @@ namespace Solution.Tools.Utilities
             catch (Exception e)
             {
                 log.Error(e.Message, e);
-                throw new Exception("Escalated exception", e);
+                throw;
             }
         }
 
@@ -245,7 +245,7 @@ namespace Solution.Tools.Utilities
             catch (Exception e)
             {
                 log.Error(e.Message, e);
-                throw new Exception("Escalated exception", e);
+                throw;
             }
         }
 

@@ -48,7 +48,7 @@ namespace Solution.Tools.Utilities
             catch (Exception e)
             {
                 log.Error(e.Message, e);
-                throw new Exception("Escalated exception", e);
+                throw;
             }
         }
 
@@ -79,7 +79,7 @@ namespace Solution.Tools.Utilities
             catch (Exception e)
             {
                 log.Error(e.Message, e);
-                throw new Exception("Escalated exception", e);
+                throw;
             }
         }
 

@@ -49,7 +49,7 @@ namespace Solution.Core.Utilities
             catch (Exception e)
             {
                 log.Error(e.Message, e);
-                throw new Exception("Escalated exception", e);
+                throw;
             }
         }
 
@@ -137,7 +137,7 @@ namespace Solution.Core.Utilities
             catch (Exception e)
             {
                 log.Error(e.Message, e);
-                throw new Exception("Escalated exception", e);
+                throw;
             }
         }
 
@@ -166,7 +166,7 @@ namespace Solution.Core.Utilities
             catch (Exception e)
             {
                 log.Error(e.Message, e);
-                throw new Exception("Escalated exception", e);
+                throw;
             }
         }
 
@@ -193,7 +193,7 @@ namespace Solution.Core.Utilities
             catch (Exception e)
             {
                 log.Error(e.Message, e);
-                throw new Exception("Escalated exception", e);
+                throw;
             }
         }
 
@@ -231,7 +231,7 @@ namespace Solution.Core.Utilities
             catch (Exception e)
             {
                 log.Error(e.Message, e);
-                throw new Exception("Escalated exception", e);
+                throw;
             }
         }
 
