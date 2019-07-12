@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Solution.Core.Extensions
 {
-    public static class StaticExt
+    public static class ObjectExt
     {
         ///<summary>
         ///Verify that an object expose a .ToString() method

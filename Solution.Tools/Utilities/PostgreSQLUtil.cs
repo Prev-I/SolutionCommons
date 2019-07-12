@@ -53,7 +53,7 @@ namespace Solution.Tools.Utilities
         }
 
 
-        public static string CreateSqlInsert(string tableName, DataRow values, List<string> existingRows, List<string> excludeRows)
+        public static string CreateSqlInsert(string tableName, DataRow values, IList<string> existingRows = null, IList<string> excludeRows = null)
         {
             string queryInsert = "INSERT INTO \"" + tableName + "\" (";
             string querySelect = " SELECT ";
@@ -89,7 +89,7 @@ namespace Solution.Tools.Utilities
             return queryInsert + querySelect + queryCondition;
         }
 
-        public static string CreateSqlInsert(string tableName, Dictionary<string, string> values, List<string> existingRows, List<string> excludeRows)
+        public static string CreateSqlInsert(string tableName, IDictionary<string, string> values, IList<string> existingRows = null, IList<string> excludeRows = null)
         {
             string queryInsert = "INSERT INTO \"" + tableName + "\" (";
             string querySelect = " SELECT ";
@@ -126,7 +126,7 @@ namespace Solution.Tools.Utilities
         }
 
 
-        public static string CreateSqlUpdate(string tableName, DataRow values, List<string> existingRows, List<string> excludeRows)
+        public static string CreateSqlUpdate(string tableName, DataRow values, IList<string> existingRows = null, IList<string> excludeRows = null)
         {
             string queryUpdate = "UPDATE \"" + tableName + "\" SET ";
             string queryCondition = " WHERE";
@@ -159,7 +159,7 @@ namespace Solution.Tools.Utilities
             return queryUpdate + queryCondition;
         }
 
-        public static string CreateSqlUpdate(string tableName, Dictionary<string, string> values, List<string> existingRows, List<string> excludeRows)
+        public static string CreateSqlUpdate(string tableName, IDictionary<string, string> values, IList<string> existingRows = null, IList<string> excludeRows = null)
         {
             string queryUpdate = "UPDATE \"" + tableName + "\" SET ";
             string queryCondition = " WHERE";
@@ -197,7 +197,7 @@ namespace Solution.Tools.Utilities
 
         #region parameters 
 
-        public static List<NpgsqlParameter> GetParameters(DataRow values, List<string> excludeRows)
+        public static List<NpgsqlParameter> GetParameters(DataRow values, IList<string> excludeRows = null)
         {
             List<NpgsqlParameter> parameters = new List<NpgsqlParameter>();
 
@@ -211,7 +211,7 @@ namespace Solution.Tools.Utilities
             return parameters;
         }
 
-        public static List<NpgsqlParameter> GetParameters(Dictionary<string, string> values, List<string> excludeRows)
+        public static List<NpgsqlParameter> GetParameters(IDictionary<string, string> values, IList<string> excludeRows = null)
         {
             List<NpgsqlParameter> parameters = new List<NpgsqlParameter>();
 
