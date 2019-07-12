@@ -4,6 +4,28 @@
         <name>Solution.Tools</name>
     </assembly>
     <members>
+        <member name="T:Solution.Tools.Extensions.ObjectExt">
+            <summary>
+            Utility to handle serializzation and deserializzation of POCO
+            REQUIRE: Newtonsoft.Json
+            </summary>
+        </member>
+        <member name="M:Solution.Tools.Extensions.ObjectExt.ToStringXml(System.Object,System.Boolean)">
+            <summary>
+            Serialize a generic object to an XML string
+            </summary>
+            <param name="value">Any DotNet object</param>
+            <param name="indent"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Solution.Tools.Extensions.ObjectExt.ToStringJson(System.Object,Newtonsoft.Json.Formatting)">
+            <summary>
+            Serialize a generic object to a JSON string
+            </summary>
+            <param name="value">Any DotNet object</param>
+            <param name="jsonFormat"></param>
+            <returns></returns>
+        </member>
         <member name="T:Solution.Tools.Utilities.AesCryptUtil">
             <summary>
             Class to handle the load and save from AES Crypt file format
