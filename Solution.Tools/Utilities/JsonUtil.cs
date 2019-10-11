@@ -29,10 +29,11 @@ namespace Solution.Tools.Utilities
         {
             try
             {
-                MemoryStream resultStream;
+                //NOTE: using leaveOpen on StreamWriter we could prevent useless stream copy
+                Stream resultStream = new MemoryStream();
 
-                using (var jsonStream = new MemoryStream())
-                using (var writer = new StreamWriter(jsonStream))
+                //using (var jsonStream = new MemoryStream())
+                using (var writer = new StreamWriter(resultStream, new UTF8Encoding(false), 2048, true))
                 using (var jsonWriter = new JsonTextWriter(writer))
                 {
                     JsonSerializer jsonSerializer = new JsonSerializer
@@ -41,7 +42,7 @@ namespace Solution.Tools.Utilities
                     };
                     jsonSerializer.Serialize(jsonWriter, value);
                     jsonWriter.Flush();
-                    resultStream = new MemoryStream(jsonStream.ToArray());
+                    //resultStream = new MemoryStream(jsonStream.ToArray());
                 }
                 return resultStream;
             }
