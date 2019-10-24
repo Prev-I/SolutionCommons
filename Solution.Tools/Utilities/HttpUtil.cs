@@ -16,6 +16,7 @@ namespace Solution.Tools.Utilities
 {
     /// <summary>
     /// Utility class to use Dot.Net HttpClient in memory efficient way
+    /// Based on: https://johnthiriet.com/efficient-api-calls , https://github.com/johnthiriet/EfficientHttpClient
     /// REQUIRE: Newtonsoft.Json
     /// </summary>
     public static class HttpUtil
