@@ -110,6 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\ObjectExt.cs" />
+    <Compile Include="Converters\ParseStringConv.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\AesCryptUtil.cs" />
     <Compile Include="Utilities\HttpUtil.cs" />

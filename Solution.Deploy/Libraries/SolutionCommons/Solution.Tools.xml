@@ -97,7 +97,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:Solution.Tools.Utilities.HttpUtil.PostAsync(System.Net.Http.HttpClient,System.Uri,System.Object,System.Threading.CancellationToken)">
+        <member name="M:Solution.Tools.Utilities.HttpUtil.PostAsync``1(System.Net.Http.HttpClient,System.Uri,System.Object,System.Threading.CancellationToken)">
             <summary>
             Execute a POST request as async operation storing the content inside a stream before sending
             </summary>
@@ -117,7 +117,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:Solution.Tools.Utilities.HttpUtil.PostAsyncBasic(System.Net.Http.HttpClient,System.Uri,System.Object,System.Threading.CancellationToken)">
+        <member name="M:Solution.Tools.Utilities.HttpUtil.PostAsyncBasic``1(System.Net.Http.HttpClient,System.Uri,System.Object,System.Threading.CancellationToken)">
             <summary>
             Execute a POST request as async operation storing the content inside a string before sending
             </summary>
@@ -143,6 +143,22 @@
             <param name="content"></param>
             <returns></returns>
         </member>
+        <member name="M:Solution.Tools.Utilities.HttpUtil.GetResult``1(System.Net.Http.HttpResponseMessage)">
+            <summary>
+            Extract a generic object T from JSON inside an HttpResponseMessage unsing stream
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="response"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Solution.Tools.Utilities.HttpUtil.GetResultBasic``1(System.Net.Http.HttpResponseMessage)">
+            <summary>
+            Extract a generic object T from JSON inside an HttpResponseMessage using string
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="response"></param>
+            <returns></returns>
+        </member>
         <member name="T:Solution.Tools.Utilities.ApiException">
             <summary>
             Exception on remote endpoint failed operations
@@ -151,6 +167,11 @@
         <member name="P:Solution.Tools.Utilities.ApiException.StatusCode">
             <summary>
             HTTP status code
+            </summary>
+        </member>
+        <member name="P:Solution.Tools.Utilities.ApiException.ErrorMessage">
+            <summary>
+            HTTP error message
             </summary>
         </member>
         <member name="P:Solution.Tools.Utilities.ApiException.Content">

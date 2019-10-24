@@ -102,7 +102,7 @@
             <param name="defaultValue"></param>
             <returns></returns>
         </member>
-        <member name="M:Solution.Core.Extensions.StaticExt.IsValid(System.Object)">
+        <member name="M:Solution.Core.Extensions.ObjectExt.IsValid(System.Object)">
             <summary>
             Verify that an object expose a .ToString() method
             </summary>

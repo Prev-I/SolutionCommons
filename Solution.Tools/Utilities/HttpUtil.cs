@@ -40,13 +40,8 @@ namespace Solution.Tools.Utilities
                 .SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationToken)
                 .ConfigureAwait(false))
             {
-                var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
-
-                if (response.IsSuccessStatusCode)
-                    return JsonUtil.Deserialize<T>(stream);
-
-                var content = await JsonUtil.StreamToStringAsync(stream).ConfigureAwait(false);
-                throw new ApiException { StatusCode = (int)response.StatusCode, Content = content };
+                //response.EnsureSuccessStatusCode();
+                return await GetResult<T>(response);
             }
         }
 
@@ -58,7 +53,7 @@ namespace Solution.Tools.Utilities
         /// <param name="content"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static async Task PostAsync(HttpClient client, Uri uri, object content, CancellationToken cancellationToken)
+        public static async Task<T> PostAsync<T>(HttpClient client, Uri uri, object content, CancellationToken cancellationToken)
         {
             using (var request = new HttpRequestMessage(HttpMethod.Post, uri))
             using (var httpContent = CreateHttpContent(content))
@@ -69,7 +64,8 @@ namespace Solution.Tools.Utilities
                     .SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationToken)
                     .ConfigureAwait(false))
                 {
-                    response.EnsureSuccessStatusCode();
+                    //response.EnsureSuccessStatusCode();
+                    return await GetResult<T>(response);
                 }
             }
         }
@@ -94,9 +90,8 @@ namespace Solution.Tools.Utilities
                 .SendAsync(request, cancellationToken)
                 .ConfigureAwait(false))
             {
-                response.EnsureSuccessStatusCode();
-                var content = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                return JsonConvert.DeserializeObject<T>(content);
+                //response.EnsureSuccessStatusCode();
+                return await GetResultBasic<T>(response);
             }
         }
 
@@ -108,7 +103,7 @@ namespace Solution.Tools.Utilities
         /// <param name="content"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        private static async Task PostAsyncBasic(HttpClient client, Uri uri, object content, CancellationToken cancellationToken)
+        private static async Task<T> PostAsyncBasic<T>(HttpClient client, Uri uri, object content, CancellationToken cancellationToken)
         {
             using (var request = new HttpRequestMessage(HttpMethod.Post, uri))
             {
@@ -121,7 +116,8 @@ namespace Solution.Tools.Utilities
                         .SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationToken)
                         .ConfigureAwait(false))
                     {
-                        response.EnsureSuccessStatusCode();
+                        //response.EnsureSuccessStatusCode();
+                        return await GetResultBasic<T>(response);
                     }
                 }
             }
@@ -165,6 +161,39 @@ namespace Solution.Tools.Utilities
             return httpContent;
         }
 
+        /// <summary>
+        /// Extract a generic object T from JSON inside an HttpResponseMessage unsing stream
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="response"></param>
+        /// <returns></returns>
+        public static async Task<T> GetResult<T>(HttpResponseMessage response)
+        {
+            var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+
+            if (response.IsSuccessStatusCode)
+                return JsonUtil.Deserialize<T>(stream);
+
+            var content = await JsonUtil.StreamToStringAsync(stream).ConfigureAwait(false);
+            throw new ApiException { StatusCode = (int)response.StatusCode, ErrorMessage = response.ReasonPhrase, Content = content };
+        }
+
+        /// <summary>
+        /// Extract a generic object T from JSON inside an HttpResponseMessage using string
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="response"></param>
+        /// <returns></returns>
+        public static async Task<T> GetResultBasic<T>(HttpResponseMessage response)
+        {
+            var content = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+
+            if (response.IsSuccessStatusCode)
+                return JsonConvert.DeserializeObject<T>(content);
+
+            throw new ApiException { StatusCode = (int)response.StatusCode, ErrorMessage = response.ReasonPhrase, Content = content };
+        }
+
         #endregion
 
     }
@@ -178,6 +207,11 @@ namespace Solution.Tools.Utilities
         /// HTTP status code
         /// </summary>
         public int StatusCode { get; set; }
+
+        /// <summary>
+        /// HTTP error message
+        /// </summary>
+        public string ErrorMessage { get; set; }
 
         /// <summary>
         /// Content of the failed method
