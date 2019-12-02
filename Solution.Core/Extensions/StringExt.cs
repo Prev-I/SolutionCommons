@@ -163,6 +163,41 @@ namespace Solution.Core.Extensions
         }
 
         /// <summary>
+        /// Riduce tutti gli spazi duplicati portandoli ad un solo spazio
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static string ReduceWhitespace(this string value)
+        {
+            if (string.IsNullOrEmpty(value))
+                return string.Empty;
+
+            int current = 0;
+            char[] output = new char[value.Length];
+            bool skipped = false;
+
+            foreach (char c in value.ToCharArray())
+            {
+                if (char.IsWhiteSpace(c))
+                {
+                    if (!skipped)
+                    {
+                        if (current > 0)
+                            output[current++] = ' ';
+
+                        skipped = true;
+                    }
+                }
+                else
+                {
+                    skipped = false;
+                    output[current++] = c;
+                }
+            }
+            return new string(output, 0, current);
+        }
+
+        /// <summary>
         /// Verifica che l'ora "source" sia compresa fra gli orari "hourFrom" e "hourTo" (Converte in int).
         /// </summary>
         public static bool HourIsBetween(this string source, string hourFrom, string hourTo)
